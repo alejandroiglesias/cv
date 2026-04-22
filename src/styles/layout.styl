@@ -15,9 +15,14 @@
     text-align center
 
 .sidebar
+  max-width 420px
+
   +from-width($screen-sm-breakpoint)
     lost-column 1/3
     absolute top bottom
+
+  @media print
+    max-width none
 
   +has(footer)
     padding 20px 20px
@@ -26,7 +31,8 @@
       display none
 
     @media print
-      text-align center
+      display: flex;
+      text-align: left;
 
 .footer,
 .content
