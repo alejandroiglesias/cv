@@ -9,6 +9,8 @@ import lost from 'lost'
 import poststylus from 'poststylus'
 import rucksack from 'rucksack-css'
 import rupture from 'rupture'
+import rev from 'gulp-rev'
+import revReplace from 'gulp-rev-replace'
 
 const $ = gulpLoadPlugins()
 const reload = browserSync.reload
@@ -74,11 +76,28 @@ gulp.task(
       .src(['src/*.html', '.tmp/*.html'])
       .pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
       .pipe($.if('*.js', $.terser()))
-      .pipe($.if('*.css', $.minifyCss({ compatibility: '*' })))
+      .pipe($.if('*.css', $.cleanCss({ compatibility: '*' })))
       .pipe($.if('*.html', $.minifyHtml({ conditionals: true, loose: true })))
       .pipe(gulp.dest('public'))
   })
 )
+
+gulp.task('revision', () => {
+  return gulp
+    .src(['public/styles/*.css', 'public/scripts/*.js'], { base: 'public' })
+    .pipe(rev())
+    .pipe(gulp.dest('public'))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest('public'))
+})
+
+gulp.task('revreplace', () => {
+  const manifest = gulp.src('public/rev-manifest.json')
+  return gulp
+    .src('public/index.html')
+    .pipe(revReplace({ manifest }))
+    .pipe(gulp.dest('public'))
+})
 
 gulp.task('images', () => {
   return gulp
@@ -208,7 +227,7 @@ gulp.task('wiredep', () => {
 
 gulp.task(
   'build',
-  gulp.series('lint', 'html', 'images', 'fonts', 'extras', () => {
+  gulp.series('lint', 'html', 'images', 'fonts', 'extras', 'revision', 'revreplace', () => {
     return gulp.src('public/**/*').pipe($.size({ title: 'build', gzip: true }))
   })
 )
