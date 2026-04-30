@@ -182,11 +182,7 @@ body {
   }
 
   #experience .space-y-8 > article:nth-of-type(4) {
-    background-image: linear-gradient(hsl(var(--border)), hsl(var(--border)));
-    background-position: left 0.6in;
-    background-repeat: no-repeat;
-    background-size: 2px calc(100% - 0.6in);
-    border-left-color: transparent !important;
+    background-image: none !important;
     break-before: page;
     page-break-before: always;
     padding-top: 0.6in !important;
