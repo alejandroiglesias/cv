@@ -24,7 +24,7 @@ export function OlderRoles({ roles }: OlderRolesProps) {
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger
-        className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex w-full items-center justify-center gap-2 rounded-md py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         aria-expanded={open}
       >
         <ChevronDown

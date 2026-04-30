@@ -48,7 +48,7 @@ export function Experience({ resume }: ExperienceProps) {
       </div>
 
       {historical.length > 0 && (
-        <div className="mt-8 border-t border-border pt-6">
+        <div className="mt-8 border-y border-border">
           <OlderRoles roles={historical} />
         </div>
       )}

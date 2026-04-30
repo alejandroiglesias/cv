@@ -31,7 +31,7 @@ export function StickyHeader({ name }: { name: string }) {
           data-print="hidden"
         >
           <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
-            <span className="font-display text-base font-bold text-foreground">{name}</span>
+            <span className="font-display text-lg font-bold text-foreground">{name}</span>
             <ThemeToggle />
           </div>
         </motion.div>
