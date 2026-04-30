@@ -47,7 +47,7 @@ export function Hero({ resume }: HeroProps) {
           <div>
             <h1
               id="hero-name"
-              className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
+              className="font-display text-4xl tracking-tight text-foreground sm:text-5xl"
             >
               {resume.name}
             </h1>

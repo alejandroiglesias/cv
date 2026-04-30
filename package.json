@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "@fontsource/dm-serif-display": "^5.2.8",
-    "@fontsource/fraunces": "^5.2.9",
-    "@fontsource/instrument-serif": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-slot": "^1.2.4",

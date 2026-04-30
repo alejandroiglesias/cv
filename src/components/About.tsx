@@ -20,7 +20,7 @@ export function About({ resume }: AboutProps) {
     >
       <h2
         id="about-heading"
-        className="mb-4 font-display text-2xl font-bold text-foreground"
+        className="mb-4 font-display text-2xl text-foreground"
       >
         About
       </h2>

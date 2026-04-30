@@ -21,7 +21,7 @@ export function Skills({ resume }: SkillsProps) {
     >
       <h2
         id="skills-heading"
-        className="mb-4 font-display text-2xl font-bold text-foreground"
+        className="mb-4 font-display text-2xl text-foreground"
       >
         Skills
       </h2>

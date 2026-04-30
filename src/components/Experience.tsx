@@ -26,7 +26,7 @@ export function Experience({ resume }: ExperienceProps) {
       <div className="mb-6 flex items-baseline justify-between">
         <h2
           id="experience-heading"
-          className="font-display text-2xl font-bold text-foreground"
+          className="font-display text-2xl text-foreground"
         >
           Experience
         </h2>
