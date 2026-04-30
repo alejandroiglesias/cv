@@ -24,7 +24,7 @@ export function Experience({ resume }: ExperienceProps) {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className="mb-6 flex items-baseline justify-between">
-        <h2 id="experience-heading" className="font-display text-2xl text-foreground">
+        <h2 id="experience-heading" className="font-display text-3xl text-foreground">
           Experience
         </h2>
         <Button
