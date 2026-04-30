@@ -1,10 +1,10 @@
-import { Github, Linkedin, Globe, StackOverflow, Twitter } from './icons'
+import { Github, Linkedin, Globe, Mail, StackOverflow, Twitter } from './icons'
 import { ObfuscatedEmail } from './ObfuscatedEmail'
 import type { ContactLink } from '@/types/resume'
 import { cn } from '@/lib/utils'
 
 const iconMap = {
-  email: null,
+  email: Mail,
   site: Globe,
   linkedin: Linkedin,
   github: Github,

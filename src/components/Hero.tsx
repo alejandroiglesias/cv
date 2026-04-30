@@ -18,7 +18,7 @@ export function Hero({ resume }: HeroProps) {
   }
 
   return (
-    <header className="relative overflow-hidden pb-16 pt-20" data-print="layout">
+    <header className="relative overflow-hidden pb-16 pt-16" data-print="layout" id="hero">
       {/* Warm accent glow — decorative */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 bg-gradient-to-b from-accent/8 to-transparent"
@@ -32,19 +32,35 @@ export function Hero({ resume }: HeroProps) {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="flex items-center gap-5"
         >
-          <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-3.5 w-3.5 shrink-0" />
-            <span>{resume.location}</span>
+          {/* Profile avatar */}
+          <img
+            src="/cv/profile-picture.jpg"
+            alt="Alejandro García Iglesias"
+            width={72}
+            height={72}
+            className="h-[72px] w-[72px] shrink-0 rounded-full object-cover ring-2 ring-border"
+            data-print="hidden"
+          />
+
+          <div>
+            <h1
+              id="hero-name"
+              className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
+            >
+              {resume.name}
+            </h1>
+
+            <p className="mt-1 font-mono text-sm uppercase tracking-widest text-accent">
+              {resume.title}
+            </p>
+
+            <div className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+              <MapPin className="h-3.5 w-3.5 shrink-0" />
+              <span>{resume.location}</span>
+            </div>
           </div>
-
-          <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            {resume.name}
-          </h1>
-
-          <p className="mt-2 font-mono text-sm uppercase tracking-widest text-accent">
-            {resume.title}
-          </p>
         </motion.div>
 
         <motion.div

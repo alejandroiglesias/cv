@@ -1,6 +1,15 @@
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
 
+// jsdom doesn't implement IntersectionObserver
+class MockIntersectionObserver {
+  observe = vi.fn()
+  unobserve = vi.fn()
+  disconnect = vi.fn()
+  constructor(_cb: IntersectionObserverCallback, _opts?: IntersectionObserverInit) {}
+}
+global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver
+
 // jsdom doesn't implement matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

@@ -12,7 +12,7 @@ export function Footer({ resume }: FooterProps) {
         <p className="text-sm text-muted-foreground">
           <strong className="text-foreground">Interested in working together?</strong>
           <br />
-          I'm available for full-time or freelance opportunities. Get in touch:
+          I'm available for full-time or contract opportunities. Get in touch:
         </p>
         <ContactList contacts={resume.contacts} />
       </div>
