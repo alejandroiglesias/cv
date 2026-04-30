@@ -9,7 +9,6 @@ export const resume: Resume = {
     'Senior Frontend Engineer with 19+ years of experience building product-focused web applications, with a strong focus on frontend architecture, UI systems, and cross-functional collaboration.',
     'I work beyond implementation, helping shape how products are built, improving architecture, creating reusable UI patterns, and simplifying complexity to help teams move faster.',
     "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product decisions.",
-    'Interests:',
   ],
 
   interests: [

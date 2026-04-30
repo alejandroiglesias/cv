@@ -40,7 +40,7 @@ export function Experience({ resume }: ExperienceProps) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Full history →
+            Full history on LinkedIn →
           </a>
         </Button>
       </div>

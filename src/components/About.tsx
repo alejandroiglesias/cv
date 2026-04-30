@@ -28,7 +28,11 @@ export function About({ resume }: AboutProps) {
         ))}
       </div>
 
-      <ul className="mt-4 space-y-1 text-sm text-muted-foreground">
+      <p className="mt-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        Interests
+      </p>
+
+      <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
         {resume.interests.map((item) => (
           <li key={item} className="flex items-start gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />

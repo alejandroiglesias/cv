@@ -23,7 +23,7 @@ export function Role({ role, index = 0 }: RoleProps) {
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h3
           id={`role-${role.company.toLowerCase().replace(/\s+/g, '-')}`}
-          className="font-semibold text-foreground"
+          className="text-lg font-semibold leading-snug text-foreground"
         >
           {role.company}
         </h3>

@@ -11,6 +11,8 @@ interface HeroProps {
 
 export function Hero({ resume }: HeroProps) {
   const reduced = useReducedMotion()
+  const [primaryTitle, ...rest] = resume.title.split('|')
+  const tagline = rest.join('|').trim()
 
   const fadeUp = {
     hidden: { opacity: 0, y: reduced ? 0 : 16 },
@@ -44,11 +46,12 @@ export function Hero({ resume }: HeroProps) {
               {resume.name}
             </h1>
 
-            <p className="mt-4 max-w-full break-words font-mono text-xs uppercase tracking-widest text-accent">
-              {resume.title}
+            <p className="mt-4 font-mono text-sm uppercase tracking-widest text-accent">
+              {primaryTitle.trim()}
             </p>
+            {tagline && <p className="text-sm text-muted-foreground">{tagline}</p>}
 
-            <div className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+            <div className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
               <MapPin className="h-3.5 w-3.5 shrink-0" />
               <span>{resume.location}</span>
             </div>
