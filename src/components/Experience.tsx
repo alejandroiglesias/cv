@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Role } from './Role'
 import { OlderRoles } from './OlderRoles'
+import { Linkedin } from './icons'
 import { Button } from '@/components/ui/button'
 import type { Resume } from '@/types/resume'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -51,9 +52,21 @@ export function Experience({ resume }: ExperienceProps) {
       </div>
 
       {historical.length > 0 && (
-        <div className="mt-8 border-y border-border">
-          <OlderRoles roles={historical} />
-        </div>
+        <>
+          <div className="mt-8 border-y border-border" data-print="hidden">
+            <OlderRoles roles={historical} />
+          </div>
+          <div
+            className="mt-8 hidden border-y border-border py-5 text-center text-sm font-medium text-muted-foreground"
+            data-print="only"
+          >
+            <span>See my full experience on LinkedIn: </span>
+            <span className="inline-flex items-center gap-1.5 text-foreground">
+              <Linkedin className="h-3.5 w-3.5" aria-hidden />
+              in/alegarciaiglesias
+            </span>
+          </div>
+        </>
       )}
     </motion.section>
   )

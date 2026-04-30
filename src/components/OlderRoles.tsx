@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Role } from './Role'
 import { ChevronDown } from './icons'
 import type { Role as RoleType } from '@/types/resume'
@@ -24,22 +20,16 @@ export function OlderRoles({ roles }: OlderRolesProps) {
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger
-        className="flex w-full items-center justify-center gap-2 rounded-md py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex w-full items-center justify-center gap-2 rounded-md py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
         aria-expanded={open}
       >
         <ChevronDown
-          className={cn(
-            'h-4 w-4 transition-transform duration-200',
-            open && 'rotate-180'
-          )}
+          className={cn('h-4 w-4 transition-transform duration-200', open && 'rotate-180')}
         />
         {open ? 'Show less' : `Show ${roles.length} earlier roles`}
       </CollapsibleTrigger>
 
-      <CollapsibleContent
-        data-print="expand"
-        className="overflow-hidden"
-      >
+      <CollapsibleContent className="overflow-hidden">
         <AnimatePresence>
           {open && (
             <motion.div

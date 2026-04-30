@@ -2,7 +2,7 @@ import type { Resume } from '@/types/resume'
 
 export const resume: Resume = {
   name: 'Alejandro García Iglesias',
-  title: 'Senior Frontend Engineer',
+  title: 'Senior Frontend Engineer | Frontend Architecture | System Design & Product Thinking',
   location: 'Buenos Aires, Argentina',
 
   summary: [
@@ -45,6 +45,11 @@ export const resume: Resume = {
       label: 'ale.garciaiglesias@gmail.com',
       href: 'mailto:ale.garciaiglesias@gmail.com',
       obfuscated: 'ale.garciaiglesias,gmail.com',
+    },
+    {
+      kind: 'site',
+      label: 'alejandroiglesias.github.io/cv',
+      href: 'https://alejandroiglesias.github.io/cv/',
     },
     {
       kind: 'linkedin',

@@ -41,7 +41,6 @@ export function Hero({ resume }: HeroProps) {
             width={144}
             height={144}
             className="h-36 w-36 shrink-0 rounded-full object-cover ring-2 ring-border"
-            data-print="hidden"
           />
 
           <div>
@@ -52,7 +51,7 @@ export function Hero({ resume }: HeroProps) {
               {resume.name}
             </h1>
 
-            <p className="mt-1 font-mono text-sm uppercase tracking-widest text-accent">
+            <p className="mt-1.5 font-mono text-sm uppercase tracking-widest text-accent">
               {resume.title}
             </p>
 
@@ -82,11 +81,7 @@ export function Hero({ resume }: HeroProps) {
           data-print="hidden"
         >
           <Button asChild size="sm" variant="outline">
-            <a
-              href="/cv/alejandro-garcia-iglesias-cv.pdf"
-              download
-              className="gap-2"
-            >
+            <a href="/cv/alejandro-garcia-iglesias-cv.pdf" download className="gap-2">
               <Download className="h-3.5 w-3.5" />
               Download PDF
             </a>

@@ -102,46 +102,119 @@ body {
 
 /* ─── Print ─────────────────────────────────────────────────── */
 
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
 @media print {
   :root,
   :root.dark {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
-    --muted-foreground: 0 0% 40%;
-    --border: 0 0% 85%;
-    --accent: 14 78% 40%;
+    --background: 40 30% 97%;
+    --foreground: 24 15% 12%;
+    --muted: 30 8% 55%;
+    --muted-foreground: 30 8% 42%;
+    --border: 30 12% 88%;
+    --input: 30 12% 88%;
+    --accent: 14 78% 54%;
+    --accent-foreground: 0 0% 100%;
+    --accent-subtle: 14 78% 94%;
+    --card: 40 25% 99%;
+    --card-foreground: 24 15% 12%;
+    --primary: 14 78% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 15% 93%;
+    --secondary-foreground: 24 15% 20%;
+    --ring: 14 78% 54%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   body {
-    font-size: 10pt;
-    line-height: 1.4;
-    background: white !important;
-    color: #111 !important;
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  #root,
+  .min-h-screen {
+    min-height: auto !important;
+    background-color: hsl(var(--background)) !important;
+  }
+
+  .min-h-screen {
+    padding: 0.6in 0.75in !important;
+  }
+
+  main,
+  main.mx-auto,
+  .mx-auto.max-w-3xl {
+    max-width: none !important;
+    padding-inline: 0 !important;
+  }
+
+  #hero {
+    padding-top: 0 !important;
+  }
+
+  #experience {
+    padding-top: 0.6in !important;
   }
 
   [data-print='hidden'] {
     display: none !important;
   }
 
-  [data-print='expand'] {
+  [data-print='only'] {
     display: block !important;
-    height: auto !important;
-    overflow: visible !important;
+  }
+
+  #experience [data-print='only'] {
+    margin-top: 2rem !important;
+    padding-block: 1rem !important;
+  }
+
+  #experience .space-y-8 > article:nth-of-type(4) {
+    background-image: linear-gradient(hsl(var(--border)), hsl(var(--border)));
+    background-position: left 0.6in;
+    background-repeat: no-repeat;
+    background-size: 2px calc(100% - 0.6in);
+    border-left-color: transparent !important;
+    break-before: page;
+    page-break-before: always;
+    padding-top: 0.6in !important;
+  }
+
+  section,
+  header,
+  article,
+  section *,
+  header * {
     opacity: 1 !important;
+    transform: none !important;
   }
 
-  [data-print='layout'] {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-
+  h1,
+  h2,
   h3 {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  article,
   li {
     break-inside: avoid;
     page-break-inside: avoid;
