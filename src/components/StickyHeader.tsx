@@ -31,7 +31,14 @@ export function StickyHeader({ name }: { name: string }) {
         >
           <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
             <span className="font-display text-lg text-foreground">{name}</span>
-            <ThemeToggle />
+            <div className="flex items-center gap-5">
+              <nav className="hidden items-center gap-5 sm:flex" aria-label="Page sections">
+                <a href="#about" className="text-sm text-muted-foreground transition-colors hover:text-foreground">About</a>
+                <a href="#skills" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Skills</a>
+                <a href="#experience" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Experience</a>
+              </nav>
+              <ThemeToggle />
+            </div>
           </div>
         </motion.div>
       )}

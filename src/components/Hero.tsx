@@ -25,7 +25,7 @@ export function Hero({ resume }: HeroProps) {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="flex items-center gap-5"
+          className="flex flex-col items-start gap-5 sm:flex-row sm:items-center"
         >
           {/* Profile avatar */}
           <img
@@ -36,15 +36,15 @@ export function Hero({ resume }: HeroProps) {
             className="h-36 w-36 shrink-0 rounded-full object-cover ring-2 ring-border"
           />
 
-          <div>
+          <div className="min-w-0 max-w-full">
             <h1
               id="hero-name"
-              className="font-display text-4xl tracking-tight text-foreground sm:text-5xl"
+              className="max-w-full break-words font-display text-4xl tracking-tight text-foreground sm:text-5xl"
             >
               {resume.name}
             </h1>
 
-            <p className="mt-4 font-mono text-xs uppercase tracking-widest text-accent">
+            <p className="mt-4 max-w-full break-words font-mono text-xs uppercase tracking-widest text-accent">
               {resume.title}
             </p>
 

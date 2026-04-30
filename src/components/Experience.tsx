@@ -45,7 +45,7 @@ export function Experience({ resume }: ExperienceProps) {
         </Button>
       </div>
 
-      <div className="space-y-8">
+      <div>
         {featured.map((role, i) => (
           <Role key={`${role.company}-${role.start}`} role={role} index={i} />
         ))}

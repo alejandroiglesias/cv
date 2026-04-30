@@ -6,6 +6,10 @@ interface FooterProps {
 }
 
 export function Footer({ resume }: FooterProps) {
+  const footerContacts = resume.contacts.filter(
+    (c) => c.kind === 'email' || c.kind === 'linkedin',
+  )
+
   return (
     <footer className="py-12" data-print="hidden">
       <div className="space-y-4">
@@ -14,7 +18,7 @@ export function Footer({ resume }: FooterProps) {
           <br />
           I'm available for full-time or contract opportunities. Get in touch:
         </p>
-        <ContactList contacts={resume.contacts} />
+        <ContactList contacts={footerContacts} />
       </div>
     </footer>
   )

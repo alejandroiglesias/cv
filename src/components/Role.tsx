@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import type { Role as RoleType } from '@/types/resume'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { cn } from '@/lib/utils'
 
 interface RoleProps {
   role: RoleType
@@ -17,7 +18,7 @@ export function Role({ role, index = 0 }: RoleProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
-      className="border-l-2 border-border pl-4 transition-colors hover:border-accent"
+      className={cn(index > 0 && 'mt-6 border-t border-border/40 pt-6')}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h3

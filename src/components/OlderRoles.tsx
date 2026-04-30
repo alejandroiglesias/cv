@@ -37,7 +37,7 @@ export function OlderRoles({ roles }: OlderRolesProps) {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: reduced ? 0 : 0.3, ease: 'easeInOut' }}
-              className="space-y-8 py-8"
+              className="py-8"
             >
               {roles.map((role, i) => (
                 <Role key={`${role.company}-${role.start}`} role={role} index={i} />
