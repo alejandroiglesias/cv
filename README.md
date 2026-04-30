@@ -1,56 +1,43 @@
 # cv
 
-My personal online resume — a static site built with a Gulp pipeline, Pug templates, and Stylus.
+Personal online resume — [alejandroiglesias.github.io/cv](https://alejandroiglesias.github.io/cv/)
 
 ---
 
-## Tech stack
+## Stack
 
 | Layer | Tool |
 |---|---|
-| Templates | [Pug](https://pugjs.org) (formerly Jade) |
-| Styles | [Stylus](https://stylus-lang.com) + [Lost Grid](https://github.com/peterramsing/lost) + [Rupture](https://github.com/jescalan/rupture) + [Rucksack](https://www.rucksackcss.org) |
-| Scripts | ES6 via [Babel](https://babeljs.io) |
-| Build | [Gulp 4](https://gulpjs.com) |
-| Dev server | [BrowserSync](https://browsersync.io) with live reload |
-| Icons | Font Awesome (via Bower) |
+| Framework | React 19 + TypeScript (strict) |
+| Build | Vite |
+| Styles | Tailwind CSS v4 + semantic CSS tokens |
+| Components | shadcn/ui (Radix primitives, copy-in owned) |
+| Motion | Framer Motion (entrance fades, reduced-motion aware) |
+| Fonts | Inter + Fraunces (self-hosted via @fontsource) |
+| Icons | Inline SVGs (zero runtime) |
+| Tests | Vitest + React Testing Library |
+| Deploy | GitHub Actions → GitHub Pages |
 
 ---
 
 ## Getting started
 
-### Prerequisites
-
-- Node.js
-- npm
-
-### Install
-
 ```bash
 npm install
-npx bower install
+npm run dev        # http://localhost:5173/cv/
 ```
-
-> `bower install` is needed for Font Awesome, which is managed separately from npm packages.
-
-### Run locally
-
-```bash
-npx gulp serve
-```
-
-Opens at **http://localhost:9000** with live reload — the browser refreshes automatically as you edit `.jade` or `.styl` files.
 
 ---
 
-## Available tasks
+## Available scripts
 
 | Command | Description |
 |---|---|
-| `npx gulp serve` | Start dev server with live reload |
-| `npx gulp build` | Compile and optimize everything into `public/` |
-| `npx gulp deploy` | Deploy `public/` to GitHub Pages |
-| `npx gulp clean` | Delete `.tmp/` and `public/` |
+| `npm run dev` | Dev server with HMR at `/cv/` |
+| `npm run build` | Type-check + Vite production build → `dist/` |
+| `npm run preview` | Preview production build locally |
+| `npm test` | Run Vitest test suite |
+| `npm run lint` | ESLint |
 
 ---
 
@@ -58,47 +45,60 @@ Opens at **http://localhost:9000** with live reload — the browser refreshes au
 
 ```
 src/
-├── index.jade        # Resume content and markup
-├── styles/
-│   └── main.styl     # Styles (imports vendor libs via bower:styl block)
-├── scripts/          # JavaScript
-├── images/           # Static images
-└── fonts/            # Custom fonts
-
-public/               # Production build output (git-ignored)
-.tmp/                 # Dev build output (git-ignored)
-bower_components/     # Bower-managed frontend deps (git-ignored)
+├── data/resume.ts          # Single source of truth — all content lives here
+├── types/resume.ts         # TypeScript types for resume data
+├── components/
+│   ├── ui/                 # shadcn-style primitives (Button, Badge, Collapsible)
+│   ├── Hero.tsx
+│   ├── About.tsx
+│   ├── Skills.tsx
+│   ├── Experience.tsx
+│   ├── Role.tsx
+│   ├── OlderRoles.tsx      # collapsible "Show more" for historical roles
+│   ├── ContactList.tsx
+│   ├── ObfuscatedEmail.tsx # anti-scraper email reveal
+│   ├── ThemeToggle.tsx
+│   └── Footer.tsx
+├── hooks/
+│   ├── useTheme.ts         # light/dark/system, persisted to localStorage
+│   └── useReducedMotion.ts
+├── lib/
+│   ├── analytics.ts        # GA4, lazy-loaded after idle, DNT-aware
+│   └/utils.ts             # cn() helper (clsx + tailwind-merge)
+└── __tests__/
+    ├── smoke.test.tsx
+    ├── Experience.test.tsx
+    └── ObfuscatedEmail.test.tsx
 ```
 
 ---
 
-## Publishing to GitHub Pages
+## Updating content
 
-Changes to `src/` are not automatically live — you need to build and deploy explicitly.
+All resume content is typed and centralized in [`src/data/resume.ts`](src/data/resume.ts).
 
-```bash
-# 1. Make your changes in src/
-# 2. Commit them to master
-git add .
-git commit -m "your message"
-
-# 3. Build the production bundle
-npx gulp build
-
-# 4. Push the build to the gh-pages branch
-npx gulp deploy
-```
-
-`gulp deploy` pushes the contents of `public/` to the `gh-pages` branch of the repo. GitHub Pages serves from that branch, so the site goes live within seconds.
-
-> **Note:** always run `gulp build` before `gulp deploy` — deploying without rebuilding will publish whatever was last compiled to `public/`, which may be stale.
+- **Add a new role**: append to the `roles` array. Set `featured: true` to show it by default, `false` to put it behind "Show more".
+- **Update skills**: edit the `skills` array.
+- **Update contacts**: edit the `contacts` array.
 
 ---
 
-## How the build works
+## Theming
 
-1. **Pug** compiles `src/index.jade` → `.tmp/index.html`
-2. **Stylus** compiles `src/styles/main.styl` → `.tmp/styles/main.css`, using Lost for the grid, Rupture for breakpoints, and Axis + Rucksack for utilities
-3. **Babel** transpiles `src/scripts/**/*.js` → `.tmp/scripts/`
-4. **BrowserSync** serves from `.tmp/` and `src/`, watching for changes
-5. On `gulp build`, everything is minified and written to `public/`
+Semantic CSS tokens in `src/index.css`. Both light and dark sets are defined — the active class is toggled on `<html>` by `useTheme`. No Tailwind config file needed (Tailwind v4 reads from `@theme inline` in the CSS).
+
+---
+
+## Deploy
+
+Pushing to `main` triggers the GitHub Actions workflow at `.github/workflows/deploy.yml`, which builds the site and deploys `dist/` to GitHub Pages via the [Actions + Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) integration.
+
+**One-time GitHub setup** (already done): set Pages source to "GitHub Actions" in the repo Settings → Pages.
+
+---
+
+## PDF
+
+A curated PDF lives at `public/alejandro-garcia-iglesias-cv.pdf` and is served at `/cv/alejandro-garcia-iglesias-cv.pdf`. The page also has `@media print` styles — print-to-PDF from the browser works as a fallback.
+
+> Future improvement: generate the PDF at build time via Playwright so it's always in sync with the web content.

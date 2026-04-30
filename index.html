@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Alejandro García Iglesias · Senior Frontend Engineer</title>
+    <meta
+      name="description"
+      content="Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and cross-functional collaboration. Based in Buenos Aires, open to remote opportunities."
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/cv/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Alejandro García Iglesias · Senior Frontend Engineer" />
+    <meta
+      property="og:description"
+      content="Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and cross-functional collaboration."
+    />
+    <meta property="og:url" content="https://alejandroiglesias.github.io/cv/" />
+    <meta property="og:image" content="https://alejandroiglesias.github.io/cv/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aiglesias_" />
+    <meta name="twitter:title" content="Alejandro García Iglesias · Senior Frontend Engineer" />
+    <meta
+      name="twitter:description"
+      content="Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and cross-functional collaboration."
+    />
+    <meta name="twitter:image" content="https://alejandroiglesias.github.io/cv/og-image.png" />
+
+    <!-- Theme color (matches --accent coral) -->
+    <meta name="theme-color" content="#e05c37" />
+
+    <!-- Inline theme init to prevent flash of wrong theme -->
+    <script>
+      ;(function () {
+        try {
+          var t = localStorage.getItem('theme')
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+          if (t === 'dark' || (!t && prefersDark)) {
+            document.documentElement.classList.add('dark')
+          }
+        } catch (_) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

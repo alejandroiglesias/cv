@@ -1,0 +1,150 @@
+@import 'tailwindcss';
+
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/fraunces/400.css';
+@import '@fontsource/fraunces/700.css';
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+
+:root {
+  --background: 40 30% 97%;
+  --foreground: 24 15% 12%;
+  --muted: 30 8% 55%;
+  --muted-foreground: 30 8% 42%;
+  --border: 30 12% 88%;
+  --input: 30 12% 88%;
+  --accent: 14 78% 54%;
+  --accent-foreground: 0 0% 100%;
+  --accent-subtle: 14 78% 94%;
+  --card: 40 25% 99%;
+  --card-foreground: 24 15% 12%;
+  --primary: 14 78% 54%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 30 15% 93%;
+  --secondary-foreground: 24 15% 20%;
+  --ring: 14 78% 54%;
+  --radius: 0.5rem;
+}
+
+:root.dark {
+  --background: 24 8% 8%;
+  --foreground: 30 15% 92%;
+  --muted: 30 6% 22%;
+  --muted-foreground: 30 8% 60%;
+  --border: 24 6% 18%;
+  --input: 24 6% 18%;
+  --accent: 14 78% 60%;
+  --accent-foreground: 24 8% 8%;
+  --accent-subtle: 14 30% 15%;
+  --card: 24 8% 11%;
+  --card-foreground: 30 15% 92%;
+  --primary: 14 78% 60%;
+  --primary-foreground: 24 8% 8%;
+  --secondary: 24 6% 16%;
+  --secondary-foreground: 30 15% 92%;
+  --ring: 14 78% 60%;
+}
+
+/* ─── Tailwind v4 Theme ─────────────────────────────────────── */
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-subtle: hsl(var(--accent-subtle));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-ring: hsl(var(--ring));
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ─── Print ─────────────────────────────────────────────────── */
+
+@media print {
+  :root,
+  :root.dark {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
+    --muted-foreground: 0 0% 40%;
+    --border: 0 0% 85%;
+    --accent: 14 78% 40%;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.4;
+    background: white !important;
+    color: #111 !important;
+  }
+
+  [data-print='hidden'] {
+    display: none !important;
+  }
+
+  [data-print='expand'] {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+  }
+
+  [data-print='layout'] {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  h3 {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
