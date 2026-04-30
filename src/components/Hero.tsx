@@ -20,7 +20,7 @@ export function Hero({ resume }: HeroProps) {
   }
 
   return (
-    <header className="pb-16 pt-16" data-print="layout" id="hero">
+    <header className="pb-16 pt-8 sm:pt-16" data-print="layout" id="hero">
       <div data-print="main">
         <motion.div
           variants={fadeUp}
@@ -41,12 +41,12 @@ export function Hero({ resume }: HeroProps) {
           <div className="min-w-0 max-w-full">
             <h1
               id="hero-name"
-              className="max-w-full break-words font-display text-4xl tracking-tight text-foreground sm:text-5xl"
+              className="max-w-full break-words font-display text-[2rem] tracking-tight text-foreground sm:text-5xl"
             >
               {resume.name}
             </h1>
 
-            <p className="mt-4 font-mono text-sm uppercase tracking-widest text-accent">
+            <p className="mt-2 sm:mt-4 font-mono text-sm uppercase tracking-widest text-accent">
               {primaryTitle.trim()}
             </p>
             {tagline && <p className="text-sm text-muted-foreground">{tagline}</p>}

@@ -4,6 +4,7 @@ import { OlderRoles } from './OlderRoles'
 import { Linkedin } from './icons'
 import { Button } from '@/components/ui/button'
 import type { Resume } from '@/types/resume'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface ExperienceProps {
@@ -12,6 +13,8 @@ interface ExperienceProps {
 
 export function Experience({ resume }: ExperienceProps) {
   const reduced = useReducedMotion()
+  const isMobile = useMediaQuery('(max-width: 639px)')
+  const viewportMargin = isMobile ? '0px 0px 120px 0px' : '-80px'
   const featured = resume.roles.filter((r) => r.featured)
   const historical = resume.roles.filter((r) => !r.featured)
 
@@ -21,7 +24,7 @@ export function Experience({ resume }: ExperienceProps) {
       aria-labelledby="experience-heading"
       initial={{ opacity: 0, y: reduced ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, margin: viewportMargin }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className="mb-6 flex items-baseline justify-between">
