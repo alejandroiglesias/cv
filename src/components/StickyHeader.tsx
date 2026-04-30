@@ -27,7 +27,7 @@ export function StickyHeader({ name }: { name: string }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduced ? 0 : -8 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm"
+          className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-sm"
           data-print="hidden"
         >
           <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
