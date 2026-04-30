@@ -18,7 +18,7 @@ export function Hero({ resume }: HeroProps) {
   }
 
   return (
-    <header className="relative overflow-hidden pb-16 pt-16" data-print="layout" id="hero">
+    <header className="relative pb-16 pt-16" data-print="layout" id="hero">
       {/* Warm accent glow — decorative */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 bg-gradient-to-b from-accent/8 to-transparent"
