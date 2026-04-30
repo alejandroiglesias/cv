@@ -97,7 +97,9 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* ─── Print ─────────────────────────────────────────────────── */
@@ -150,7 +152,7 @@ body {
   }
 
   .min-h-screen {
-    padding: 0.6in 0.75in !important;
+    padding: 0.8in 0.8in !important;
   }
 
   main,

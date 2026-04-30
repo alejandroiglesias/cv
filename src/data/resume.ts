@@ -2,41 +2,42 @@ import type { Resume } from '@/types/resume'
 
 export const resume: Resume = {
   name: 'Alejandro García Iglesias',
-  title: 'Senior Frontend Engineer | Frontend Architecture | System Design & Product Thinking',
+  title: 'Senior Frontend Engineer | Frontend Architecture, System Design & Product Thinking',
   location: 'Buenos Aires, Argentina',
 
   summary: [
-    'Senior Frontend Engineer with 19+ years of experience building and evolving web applications, with a strong focus on frontend architecture, system design, and developer experience.',
-    'My work has gradually expanded beyond implementation into shaping how systems are built — improving UI architecture, standardizing patterns, and collaborating closely with product, design, and backend teams.',
-    'I enjoy taking ownership of a technical domain: simplifying complexity, improving workflows, and helping teams move faster with better structure.',
+    'Senior Frontend Engineer with 19+ years of experience building product-focused web applications, with a strong focus on frontend architecture, UI systems, and cross-functional collaboration.',
+    'I work beyond implementation, helping shape how products are built, improving architecture, creating reusable UI patterns, and simplifying complexity to help teams move faster.',
+    "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product decisions.",
+    'Interests:',
   ],
 
   interests: [
-    'frontend architecture and system design',
-    'close collaboration with product and design',
-    'improving systems and workflows',
-    'integrating AI into development processes and products',
+    'Product-focused frontend engineering',
+    'Frontend architecture & system design',
+    'Design systems & reusable UI patterns',
+    'AI-assisted development workflows',
+    'Senior or Lead frontend roles with strong product and technical impact',
   ],
 
   skills: [
     'Frontend Architecture',
     'System Design',
+    'Technical Leadership',
+    'Product Thinking',
     'JavaScript',
     'TypeScript',
+    'AI-assisted Development & Workflows',
     'React',
     'Vue.js',
     'Angular',
     'Node.js',
-    'CSS / Tailwind',
     'Design Systems',
-    'UI Development',
-    'Technical Leadership',
+    'CSS / Tailwind CSS',
     'Developer Experience (DX)',
     'Code Quality & Refactoring',
     'API Integration',
     'Microservices',
-    'Cross-functional Collaboration',
-    'Product Thinking',
   ],
 
   contacts: [
@@ -117,7 +118,7 @@ export const resume: Resume = {
       end: 'Dec 2019',
       featured: true,
       bullets: [
-        'Influenced the adoption of Vue.js over AngularJS for a full product rewrite.',
+        'Helped evaluate and introduce Vue.js for a full product rewrite, modernizing the frontend architecture with a focus on simplicity and long-term maintainability.',
         'Led the frontend implementation of the redesigned application from scratch.',
         'Built a component-based architecture using Vue and Vuex.',
         'Designed reusable UI components, improving scalability and maintainability.',
@@ -140,42 +141,18 @@ export const resume: Resume = {
         'Collaborated in distributed cross-functional teams.',
       ],
     },
-
-    // ─── Historical roles (shown via "Show more") ─────────────────
     {
-      company: 'UpLabs',
-      title: 'Front-end Developer',
-      location: 'Remote',
-      start: '2016',
-      end: '2016',
-      featured: false,
-      bullets: [
-        'Developed the Angular.js app UI and built new components.',
-        'Migrated components to React and applied design changes in Sass and Rails templates.',
-      ],
-    },
-    {
-      company: 'Lendsnap',
-      title: 'Front-end Developer',
-      location: 'Remote',
-      start: '2016',
-      end: '2016',
-      featured: false,
-      bullets: [
-        'Developed the app UI in Angular.js.',
-        'Helped establish coding standards on the front-end team, refactored old code, and wrote unit tests.',
-      ],
-    },
-    {
-      company: 'iSolutions Pro',
-      title: 'Front-end Developer',
+      company: 'Independent contractor',
+      title: 'Frontend / JavaScript Developer (Short-term engagements)',
       location: 'Remote',
       start: '2013',
-      end: '2013',
-      featured: false,
+      end: '2016',
+      featured: true,
       bullets: [
-        'Worked on the real-time interaction of the web app version of a bidding game.',
-        'Learned communication and coordination with a distributed team in my first remote role.',
+        'Worked on short-term frontend projects across different teams and products.',
+        'Built and improved UI using JavaScript and Angular-based applications.',
+        'Adapted quickly to different codebases and development environments.',
+        'Gained exposure to diverse workflows and engineering practices.',
       ],
     },
     {
@@ -184,13 +161,17 @@ export const resume: Resume = {
       location: 'Buenos Aires, AR',
       start: '2012',
       end: '2013',
-      featured: false,
+      featured: true,
       bullets: [
-        'Introduced Sass, Compass, modular CSS architecture, Responsive Web Design, and Mobile First practices.',
-        'Delivered a wide variety of JavaScript projects: Node.js scripts, embeddable third-party widgets, and a D3.js data visualization app.',
-        'Incorporated a build process into the team workflow.',
+        'Primary frontend developer across multiple projects.',
+        'Introduced modern CSS tooling (Sass, Less, Compass), improving maintainability and structure of styles.',
+        'Built data visualization interfaces using D3.js.',
+        'Developed self-contained embeddable widgets.',
+        'Collaborated closely with design.',
       ],
     },
+
+    // ─── Historical roles (shown via "Show more") ─────────────────
     {
       company: 'Yanma Solutions',
       title: 'Full-stack Developer',

@@ -18,10 +18,7 @@ export function About({ resume }: AboutProps) {
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <h2
-        id="about-heading"
-        className="mb-4 font-display text-3xl text-foreground"
-      >
+      <h2 id="about-heading" className="mb-4 font-display text-3xl text-foreground">
         About
       </h2>
 
@@ -34,16 +31,16 @@ export function About({ resume }: AboutProps) {
       <ul className="mt-4 space-y-1 text-sm text-muted-foreground">
         {resume.interests.map((item) => (
           <li key={item} className="flex items-start gap-2">
-            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
             {item}
           </li>
         ))}
       </ul>
 
-      <p className="mt-4 text-sm text-muted-foreground">
+      {/* <p className="mt-4 text-sm text-muted-foreground">
         Currently exploring opportunities as a Tech Lead or Senior Engineer with strong ownership
         over frontend architecture and system direction.
-      </p>
+      </p> */}
     </motion.section>
   )
 }

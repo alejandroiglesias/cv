@@ -18,14 +18,7 @@ export function Hero({ resume }: HeroProps) {
   }
 
   return (
-    <header className="relative pb-16 pt-16" data-print="layout" id="hero">
-      {/* Warm accent glow — decorative */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 bg-gradient-to-b from-accent/8 to-transparent"
-        aria-hidden="true"
-        data-print="hidden"
-      />
-
+    <header className="pb-16 pt-16" data-print="layout" id="hero">
       <div data-print="main">
         <motion.div
           variants={fadeUp}
@@ -51,7 +44,7 @@ export function Hero({ resume }: HeroProps) {
               {resume.name}
             </h1>
 
-            <p className="mt-1.5 font-mono text-sm uppercase tracking-widest text-accent">
+            <p className="mt-4 font-mono text-xs uppercase tracking-widest text-accent">
               {resume.title}
             </p>
 

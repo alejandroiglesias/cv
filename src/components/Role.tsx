@@ -41,7 +41,7 @@ export function Role({ role, index = 0 }: RoleProps) {
       <ul className="space-y-1.5">
         {role.bullets.map((bullet, i) => (
           <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-border" aria-hidden />
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
             {bullet}
           </li>
         ))}
