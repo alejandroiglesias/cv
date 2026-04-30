@@ -1,4 +1,4 @@
-const GA4_ID = 'G-XXXXXXXXXX' // TODO: replace with real GA4 measurement ID
+const GA4_ID = 'G-W53LE90EMV'
 
 declare global {
   interface Window {
