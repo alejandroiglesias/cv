@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import type { Resume } from '@/types/resume'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useRevealViewport } from '@/hooks/useRevealViewport'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface AboutProps {
@@ -9,8 +9,7 @@ interface AboutProps {
 
 export function About({ resume }: AboutProps) {
   const reduced = useReducedMotion()
-  const isMobile = useMediaQuery('(max-width: 639px)')
-  const viewportMargin = isMobile ? '0px 0px 120px 0px' : '-80px'
+  const viewport = useRevealViewport()
 
   return (
     <motion.section
@@ -18,7 +17,7 @@ export function About({ resume }: AboutProps) {
       aria-labelledby="about-heading"
       initial={{ opacity: 0, y: reduced ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: viewportMargin }}
+      viewport={viewport}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <h2 id="about-heading" className="mb-4 font-display text-3xl text-foreground">
@@ -44,10 +43,6 @@ export function About({ resume }: AboutProps) {
         ))}
       </ul>
 
-      {/* <p className="mt-4 text-sm text-muted-foreground">
-        Currently exploring opportunities as a Tech Lead or Senior Engineer with strong ownership
-        over frontend architecture and system direction.
-      </p> */}
     </motion.section>
   )
 }

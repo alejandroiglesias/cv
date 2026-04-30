@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import type { Resume } from '@/types/resume'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useRevealViewport } from '@/hooks/useRevealViewport'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface SkillsProps {
@@ -10,8 +10,7 @@ interface SkillsProps {
 
 export function Skills({ resume }: SkillsProps) {
   const reduced = useReducedMotion()
-  const isMobile = useMediaQuery('(max-width: 639px)')
-  const viewportMargin = isMobile ? '0px 0px 120px 0px' : '-80px'
+  const viewport = useRevealViewport()
 
   return (
     <motion.section
@@ -19,7 +18,7 @@ export function Skills({ resume }: SkillsProps) {
       aria-labelledby="skills-heading"
       initial={{ opacity: 0, y: reduced ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: viewportMargin }}
+      viewport={viewport}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <h2

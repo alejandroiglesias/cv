@@ -6,19 +6,22 @@ import { cn } from '@/lib/utils'
 interface RoleProps {
   role: RoleType
   index?: number
+  printBreakBefore?: boolean
+  isLast?: boolean
 }
 
-export function Role({ role, index = 0 }: RoleProps) {
+export function Role({ role, index = 0, printBreakBefore = false, isLast = false }: RoleProps) {
   const reduced = useReducedMotion()
 
   return (
     <motion.article
       aria-labelledby={`role-${role.company.toLowerCase().replace(/\s+/g, '-')}`}
+      data-print-break-before={printBreakBefore ? 'true' : undefined}
       initial={{ opacity: 0, y: reduced ? 0 : 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
-      className={cn(index > 0 && 'mt-6 border-t border-border/40 pt-6')}
+      className={cn(index > 0 && 'mt-6', !isLast && 'border-b border-border/40 pb-6')}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h3

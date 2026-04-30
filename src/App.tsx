@@ -16,11 +16,9 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Scroll-triggered sticky header — hidden until hero name scrolls past */}
       <StickyHeader name={resume.name} />
 
       <main className="mx-auto max-w-3xl px-6 pb-8">
-        {/* Inline theme toggle — not sticky, lives at the top of the page */}
         <div className="flex justify-end py-3" data-print="hidden">
           <ThemeToggle />
         </div>

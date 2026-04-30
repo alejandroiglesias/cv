@@ -20,7 +20,10 @@ export function OlderRoles({ roles }: OlderRolesProps) {
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger
-        className="flex w-full items-center justify-center gap-2 rounded-md py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+        className={cn(
+          'flex w-full cursor-pointer items-center justify-center gap-2 rounded-md py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+          open && 'border-b border-border',
+        )}
         aria-expanded={open}
       >
         <ChevronDown
@@ -40,7 +43,12 @@ export function OlderRoles({ roles }: OlderRolesProps) {
               className="py-8"
             >
               {roles.map((role, i) => (
-                <Role key={`${role.company}-${role.start}`} role={role} index={i} />
+                <Role
+                  key={`${role.company}-${role.start}`}
+                  role={role}
+                  index={i}
+                  isLast={i === roles.length - 1}
+                />
               ))}
             </motion.div>
           )}

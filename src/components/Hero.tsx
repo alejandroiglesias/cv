@@ -29,7 +29,6 @@ export function Hero({ resume }: HeroProps) {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="flex flex-col items-start gap-5 sm:flex-row sm:items-center"
         >
-          {/* Profile avatar */}
           <img
             src="/cv/profile-picture.jpg"
             alt="Alejandro García Iglesias"

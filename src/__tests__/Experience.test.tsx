@@ -8,8 +8,12 @@ import { resume } from '../data/resume'
 vi.mock('framer-motion', () => {
   const make = (tag: string) =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ({ children, initial, animate, whileInView, viewport, transition, ...rest }: any) =>
-      React.createElement(tag, rest, children)
+    ({ children, ...rest }: any) => {
+      for (const key of ['initial', 'animate', 'whileInView', 'viewport', 'transition']) {
+        delete rest[key]
+      }
+      return React.createElement(tag, rest, children)
+    }
 
   return {
     motion: new Proxy({} as Record<string, unknown>, { get: (_, key) => make(String(key)) }),

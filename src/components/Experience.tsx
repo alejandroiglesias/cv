@@ -4,7 +4,7 @@ import { OlderRoles } from './OlderRoles'
 import { Linkedin } from './icons'
 import { Button } from '@/components/ui/button'
 import type { Resume } from '@/types/resume'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useRevealViewport } from '@/hooks/useRevealViewport'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface ExperienceProps {
@@ -13,8 +13,7 @@ interface ExperienceProps {
 
 export function Experience({ resume }: ExperienceProps) {
   const reduced = useReducedMotion()
-  const isMobile = useMediaQuery('(max-width: 639px)')
-  const viewportMargin = isMobile ? '0px 0px 120px 0px' : '-80px'
+  const viewport = useRevealViewport()
   const featured = resume.roles.filter((r) => r.featured)
   const historical = resume.roles.filter((r) => !r.featured)
 
@@ -24,7 +23,7 @@ export function Experience({ resume }: ExperienceProps) {
       aria-labelledby="experience-heading"
       initial={{ opacity: 0, y: reduced ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: viewportMargin }}
+      viewport={viewport}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className="mb-6 flex items-baseline justify-between">
@@ -50,23 +49,29 @@ export function Experience({ resume }: ExperienceProps) {
 
       <div>
         {featured.map((role, i) => (
-          <Role key={`${role.company}-${role.start}`} role={role} index={i} />
+          <Role
+            key={`${role.company}-${role.start}`}
+            role={role}
+            index={i}
+            printBreakBefore={i === 3}
+            isLast={historical.length === 0 && i === featured.length - 1}
+          />
         ))}
       </div>
 
       {historical.length > 0 && (
         <>
-          <div className="mt-8 border-y border-border" data-print="hidden">
+          <div className="border-b border-border" data-print="hidden">
             <OlderRoles roles={historical} />
           </div>
           <div
-            className="mt-8 hidden border-y border-border py-5 text-center text-sm font-medium text-muted-foreground"
+            className="hidden border-b border-border py-2 text-center text-sm font-medium text-muted-foreground"
             data-print="only"
           >
-            <span>See my full experience on LinkedIn: </span>
-            <span className="inline-flex items-center gap-1.5 text-foreground">
-              <Linkedin className="h-3.5 w-3.5" aria-hidden />
-              in/alegarciaiglesias
+            <span className="inline-flex items-center gap-1.5 leading-none">
+              <span>See my full experience on LinkedIn:</span>
+              <Linkedin className="h-3.5 w-3.5 text-foreground" aria-hidden />
+              <span className="text-foreground">in/alegarciaiglesias</span>
             </span>
           </div>
         </>
