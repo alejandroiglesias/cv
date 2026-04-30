@@ -38,9 +38,9 @@ export function Hero({ resume }: HeroProps) {
           <img
             src="/cv/profile-picture.jpg"
             alt="Alejandro García Iglesias"
-            width={128}
-            height={128}
-            className="h-32 w-32 shrink-0 rounded-full object-cover ring-2 ring-border"
+            width={144}
+            height={144}
+            className="h-36 w-36 shrink-0 rounded-full object-cover ring-2 ring-border"
             data-print="hidden"
           />
 

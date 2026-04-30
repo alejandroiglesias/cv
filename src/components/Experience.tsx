@@ -24,13 +24,16 @@ export function Experience({ resume }: ExperienceProps) {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className="mb-6 flex items-baseline justify-between">
-        <h2
-          id="experience-heading"
-          className="font-display text-2xl text-foreground"
-        >
+        <h2 id="experience-heading" className="font-display text-2xl text-foreground">
           Experience
         </h2>
-        <Button asChild variant="link" size="sm" className="text-muted-foreground" data-print="hidden">
+        <Button
+          asChild
+          variant="link"
+          size="sm"
+          className="text-muted-foreground"
+          data-print="hidden"
+        >
           <a
             href="https://www.linkedin.com/in/alegarciaiglesias"
             target="_blank"

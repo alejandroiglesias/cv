@@ -7,7 +7,7 @@ interface FooterProps {
 
 export function Footer({ resume }: FooterProps) {
   return (
-    <footer className="border-t border-border py-12" data-print="hidden">
+    <footer className="py-12" data-print="hidden">
       <div className="space-y-4">
         <p className="text-sm text-muted-foreground">
           <strong className="text-foreground">Interested in working together?</strong>
