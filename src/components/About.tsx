@@ -25,8 +25,8 @@ export function About({ resume }: AboutProps) {
       </h2>
 
       <div className="space-y-3 text-muted-foreground">
-        {resume.summary.map((para, i) => (
-          <p key={i}>{para}</p>
+        {resume.summary.map((para) => (
+          <p key={para}>{para}</p>
         ))}
       </div>
 
