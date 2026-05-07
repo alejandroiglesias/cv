@@ -35,6 +35,7 @@ export function Hero({ resume }: HeroProps) {
             width={144}
             height={144}
             className="h-36 w-36 shrink-0 rounded-full object-cover ring-2 ring-border"
+            fetchPriority="high"
           />
 
           <div className="min-w-0 max-w-full">
