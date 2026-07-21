@@ -2,11 +2,11 @@ import type { Resume } from '@/types/resume'
 
 export const resume: Resume = {
   name: 'Alejandro García Iglesias',
-  title: 'Senior Frontend Engineer | Frontend Architecture, System Design & Product Thinking',
+  title: 'Senior Frontend / Product Engineer | Frontend Architecture, System Design & Product Thinking',
   location: 'Buenos Aires, Argentina',
 
   summary: [
-    'Senior Frontend Engineer with 19+ years of experience building product-focused web applications, with a strong focus on frontend architecture, UI systems, and cross-functional collaboration.',
+    'Senior Frontend and Product Engineer with 19+ years of experience building product-focused web applications, combining frontend architecture, UI systems, and product thinking to turn complex problems into clear, effective user experiences.',
     'I work beyond implementation, helping shape how products are built, improving architecture, creating reusable UI patterns, and simplifying complexity to help teams move faster.',
     "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product decisions.",
   ],
