@@ -87,7 +87,7 @@ export const resume: Resume = {
         'Partnered with Juana Casa, an architecture studio, to identify how AI could improve access to project and operational knowledge; built an initial assistant prototype with React/Next.js, Mastra, RAG, and the Vercel AI SDK.',
         "Adapted the solution to the studio's preferred workflows by implementing specialized OpenAI Workspace Agents accessible through Slack and WhatsApp, with permission-aware Google Drive access and human approval boundaries; currently developing an MCP/RAG server to improve documentation retrieval.",
         'Investigated whether deliberation across multiple AI models could support a more useful and transparent second-opinion experience; built a React/Next.js and TypeScript prototype orchestrating a three-stage protocol—independent responses, cross-model debate, and final synthesis—with agreement and dissent made visible to the user.',
-        'Systematically evaluated and refined AI-assisted development workflows using Codex, Claude Code, Cursor, and agent-orchestration tooling, applying them across product discovery, implementation, testing, and code review while maintaining explicit human verification checkpoints.',
+        'Systematically evaluated and refined AI-assisted product design and development workflows using coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, UI exploration, prototyping, implementation, testing, and code review, with explicit human verification throughout.',
       ],
     },
     {
