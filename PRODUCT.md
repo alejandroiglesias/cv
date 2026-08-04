@@ -6,7 +6,7 @@ A personal CV/resume site that IS the portfolio piece. Recruiters and hiring man
 
 ## Users
 
-**Primary**: Engineering managers, tech leads, and recruiters at product companies evaluating Alejandro for Senior Frontend Engineer or Frontend Lead roles. They spend 30–90 seconds scanning; they also open DevTools.
+**Primary**: Engineering managers, tech leads, and recruiters at product companies evaluating Alejandro for Senior Frontend/Product Engineer or Frontend Lead roles. They spend 30–90 seconds scanning; they also open DevTools.
 
 **Secondary**: Peers and collaborators in the frontend/product community.
 
