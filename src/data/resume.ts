@@ -78,7 +78,7 @@ export const resume: Resume = {
     // ─── Featured roles ──────────────────────────────────────────
     {
       company: 'Independent Product R&D & AI Consulting',
-      title: 'Senior Frontend / Product Engineer',
+      title: 'Senior Frontend/Product Engineer',
       start: 'Apr 2026',
       end: 'Present',
       featured: true,
