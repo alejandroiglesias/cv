@@ -2,7 +2,8 @@ import type { Resume } from '@/types/resume'
 
 export const resume: Resume = {
   name: 'Alejandro García Iglesias',
-  title: 'Senior Frontend/Product Engineer | Frontend Architecture, System Design & Product Thinking',
+  title:
+    'Senior Frontend/Product Engineer | Frontend Architecture, System Design & Product Thinking',
   location: 'Buenos Aires, Argentina',
 
   summary: [
@@ -76,6 +77,20 @@ export const resume: Resume = {
   roles: [
     // ─── Featured roles ──────────────────────────────────────────
     {
+      company: 'Independent Product R&D & AI Consulting',
+      title: 'Senior Frontend / Product Engineer',
+      start: 'Apr 2026',
+      end: 'Present',
+      featured: true,
+      bullets: [
+        'Designed, built, and launched <a href="https://tulanding.page/">TuLanding</a>, a subscription product testing whether custom landing-page development can become a repeatable, productized service through AI and automation; implemented the create → preview → subscribe journey with Astro/React and Cloudflare.',
+        'Partnered with Juana Casa, an architecture studio, to identify how AI could improve access to project and operational knowledge; built an initial assistant prototype with React/Next.js, Mastra, RAG, and the Vercel AI SDK.',
+        "Adapted the solution to the studio's preferred workflows by implementing specialized OpenAI Workspace Agents accessible through Slack and WhatsApp, with permission-aware Google Drive access and human approval boundaries; currently developing an MCP/RAG server to improve documentation retrieval.",
+        'Investigated whether deliberation across multiple AI models could support a more useful and transparent second-opinion experience; built a React/Next.js and TypeScript prototype orchestrating a three-stage protocol—independent responses, cross-model debate, and final synthesis—with agreement and dissent made visible to the user.',
+        'Systematically evaluated and refined AI-assisted development workflows using Codex, Claude Code, Cursor, and agent-orchestration tooling, applying them across product discovery, implementation, testing, and code review while maintaining explicit human verification checkpoints.',
+      ],
+    },
+    {
       company: 'Rotunda Software',
       title: 'Senior Frontend Engineer',
       location: 'Remote',
@@ -99,8 +114,9 @@ export const resume: Resume = {
       start: 'Mar 2020',
       end: 'Mar 2022',
       featured: true,
+      printBreakBefore: true,
       bullets: [
-        "Worked on Pinterest's Experiments team, implementing and testing UI variations in the core consumer product to support product experimentation.",
+        "Worked on Pinterest's Experiments team, implementing and testing React UI variations in the core consumer product to support product experimentation.",
         'Developed and owned the UI layer of internal advertising reporting tools, defining their information architecture and data presentation.',
         'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features end to end.',
         'Collaborated in distributed teams and participated in code reviews and testing.',
@@ -132,6 +148,7 @@ export const resume: Resume = {
         'Contributed to frontend structure improvements and CSS organization.',
         'Participated in Style Guide development.',
         'Collaborated in distributed cross-functional teams.',
+        'After AppNexus, built a React-based administration UI for corporate security policies for another client engagement.',
       ],
     },
     {
@@ -148,13 +165,14 @@ export const resume: Resume = {
         'Gained exposure to diverse workflows and engineering practices.',
       ],
     },
+    // ─── Historical roles (shown via "Show more") ─────────────────
     {
       company: 'Vulsai',
       title: 'Front-end Developer',
       location: 'Buenos Aires, AR',
       start: '2012',
       end: '2013',
-      featured: true,
+      featured: false,
       bullets: [
         'Primary frontend developer across multiple projects.',
         'Introduced modern CSS tooling (Sass, Less, Compass), improving maintainability and structure of styles.',
@@ -163,8 +181,6 @@ export const resume: Resume = {
         'Collaborated closely with design.',
       ],
     },
-
-    // ─── Historical roles (shown via "Show more") ─────────────────
     {
       company: 'Yanma Solutions',
       title: 'Full-stack Developer',

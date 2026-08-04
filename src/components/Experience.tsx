@@ -53,7 +53,6 @@ export function Experience({ resume }: ExperienceProps) {
             key={`${role.company}-${role.start}`}
             role={role}
             index={i}
-            printBreakBefore={i === 3}
             isLast={historical.length === 0 && i === featured.length - 1}
           />
         ))}

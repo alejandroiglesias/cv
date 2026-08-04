@@ -163,7 +163,7 @@ body {
   }
 
   .min-h-screen {
-    padding: 0.8in 0.75in !important;
+    padding: 0.8in 0.75in 0 !important;
   }
 
   main,
@@ -171,6 +171,7 @@ body {
   .mx-auto.max-w-3xl {
     max-width: none !important;
     padding-inline: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   #hero {
@@ -231,7 +232,11 @@ body {
     widows: 3;
   }
 
-  article,
+  #experience [data-print='role-header'] {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
   li {
     break-inside: avoid;
     page-break-inside: avoid;

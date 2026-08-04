@@ -31,7 +31,7 @@ export function App() {
         </div>
       </main>
 
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-3xl px-6" data-print="hidden">
         <Footer resume={resume} />
       </div>
     </div>

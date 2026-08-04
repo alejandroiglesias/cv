@@ -1,10 +1,4 @@
-export type ContactKind =
-  | 'email'
-  | 'site'
-  | 'linkedin'
-  | 'github'
-  | 'stackoverflow'
-  | 'x'
+export type ContactKind = 'email' | 'site' | 'linkedin' | 'github' | 'stackoverflow' | 'x'
 
 export interface ContactLink {
   kind: ContactKind
@@ -17,12 +11,14 @@ export interface ContactLink {
 export interface Role {
   company: string
   title: string
-  location: string
+  location?: string
   start: string
   end: string
   bullets: string[]
   /** true = shown by default; false = hidden behind "Show more" */
   featured: boolean
+  /** true = force a page break before this role when printing */
+  printBreakBefore?: boolean
 }
 
 export interface Resume {
