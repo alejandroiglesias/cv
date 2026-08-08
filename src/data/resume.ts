@@ -83,11 +83,11 @@ export const resume: Resume = {
       end: 'Present',
       featured: true,
       bullets: [
-        'Designed, built, and launched <a href="https://tulanding.page/">TuLanding</a>, a subscription product testing whether custom landing-page development can become a repeatable, productized service through AI and automation; implemented the create → preview → subscribe journey with Astro/React and Cloudflare.',
-        'Partnered with Juana Casa, an architecture studio, to identify how AI could improve access to project and operational knowledge; built an initial assistant prototype with React/Next.js, Mastra, RAG, and the Vercel AI SDK.',
-        "Adapted the solution to the studio's preferred workflows by implementing specialized OpenAI Workspace Agents accessible through Slack and WhatsApp, with permission-aware Google Drive access and human approval boundaries; currently developing an MCP/RAG server to improve documentation retrieval.",
-        'Investigated whether deliberation across multiple AI models could support a more useful and transparent second-opinion experience; built a React/Next.js and TypeScript prototype orchestrating a three-stage protocol—independent responses, cross-model debate, and final synthesis—with agreement and dissent made visible to the user.',
-        'Systematically evaluated and refined AI-assisted product design and development workflows using coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, UI exploration, prototyping, implementation, testing, and code review, with explicit human verification throughout.',
+        'Designed, built, and launched <a href="https://tulanding.page/">TuLanding</a>, a subscription product based on the hypothesis that custom landing-page development can become a repeatable service through AI and automation; implemented its create → preview → subscribe journey with Astro/React and Cloudflare.',
+        'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js assistant with Mastra and RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
+        'Extended the knowledge-access work beyond Juana Casa into a broader product direction; currently developing a reusable knowledge-intelligence layer with grounded RAG and an authenticated MCP server that gives AI assistants and agents source-backed access to company documents and structured operational data.',
+        'Investigated whether deliberation across multiple AI models could support a more useful and transparent second-opinion experience; built a React/Next.js and TypeScript prototype with a three-stage protocol (independent responses, cross-model debate, and final synthesis) surfacing agreement and dissent to the user.',
+        'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
       ],
     },
     {
@@ -152,7 +152,7 @@ export const resume: Resume = {
       ],
     },
     {
-      company: 'Independent contractor',
+      company: 'Independent Contractor',
       title: 'Frontend / JavaScript Developer (Short-term engagements)',
       location: 'Remote',
       start: '2013',
