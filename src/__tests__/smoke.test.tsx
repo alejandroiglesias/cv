@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { App } from '../App'
+import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
 
 vi.mock('framer-motion', () => {
   const make = (tag: string) =>
@@ -41,5 +42,22 @@ describe('App', () => {
     expect(screen.getByText('BairesDev')).toBeInTheDocument()
     expect(screen.getByText('Mapme')).toBeInTheDocument()
     expect(screen.getByText('Deviget')).toBeInTheDocument()
+  })
+
+  it('renders the Technical Project / AI Systems variant with its own PDF', () => {
+    render(<App resume={technicalProjectAiSystemsResume} />)
+
+    expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
+    expect(screen.getByText('Technical Product, AI Systems & Delivery')).toBeInTheDocument()
+    expect(screen.getByText('Technical Product & AI Systems Consultant')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute(
+      'href',
+      '/cv/alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf',
+    )
+    expect(
+      screen.getByRole('link', {
+        name: 'alejandroiglesias.github.io/cv',
+      }),
+    ).toHaveAttribute('href', 'https://alejandroiglesias.github.io/cv/technical-project-ai-systems/')
   })
 })

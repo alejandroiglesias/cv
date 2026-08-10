@@ -8,31 +8,36 @@ import { StickyHeader } from '@/components/StickyHeader'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { resume } from '@/data/resume'
 import { initAnalytics } from '@/lib/analytics'
+import type { Resume } from '@/types/resume'
 
-export function App() {
+interface AppProps {
+  resume?: Resume
+}
+
+export function App({ resume: selectedResume = resume }: AppProps) {
   useEffect(() => {
     initAnalytics()
   }, [])
 
   return (
     <div className="min-h-screen bg-background">
-      <StickyHeader name={resume.name} />
+      <StickyHeader name={selectedResume.name} />
 
       <main className="mx-auto max-w-3xl px-6 pb-8">
         <div className="flex justify-end py-3" data-print="hidden">
           <ThemeToggle />
         </div>
 
-        <Hero resume={resume} />
+        <Hero resume={selectedResume} />
         <div className="space-y-16">
-          <About resume={resume} />
-          <Skills resume={resume} />
-          <Experience resume={resume} />
+          <About resume={selectedResume} />
+          <Skills resume={selectedResume} />
+          <Experience resume={selectedResume} />
         </div>
       </main>
 
       <div className="mx-auto max-w-3xl px-6" data-print="hidden">
-        <Footer resume={resume} />
+        <Footer resume={selectedResume} />
       </div>
     </div>
   )

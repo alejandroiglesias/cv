@@ -21,10 +21,19 @@ export interface Role {
   printBreakBefore?: boolean
 }
 
+export interface ResumeSeo {
+  title: string
+  description: string
+  canonicalPath: string
+}
+
 export interface Resume {
+  id: string
   name: string
   title: string
   location: string
+  pdfPath: string
+  seo: ResumeSeo
   summary: string[]
   interests: string[]
   skills: string[]

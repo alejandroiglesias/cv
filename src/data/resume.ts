@@ -1,10 +1,18 @@
 import type { Resume } from '@/types/resume'
 
 export const resume: Resume = {
+  id: 'frontend-product',
   name: 'Alejandro García Iglesias',
   title:
     'Senior Frontend/Product Engineer | Frontend Architecture, System Design & Product Thinking',
   location: 'Buenos Aires, Argentina',
+  pdfPath: '/cv/alejandro-garcia-iglesias-cv.pdf',
+  seo: {
+    title: 'Alejandro García Iglesias · Senior Frontend/Product Engineer',
+    description:
+      'Senior Frontend/Product Engineer with 19+ years of experience in frontend architecture, design systems, and cross-functional collaboration. Based in Buenos Aires, open to remote opportunities.',
+    canonicalPath: '/cv/',
+  },
 
   summary: [
     'Senior Frontend/Product Engineer with 19+ years of experience building product-focused web applications, combining frontend architecture, UI systems, and product thinking to turn complex problems into clear, effective user experiences.',
@@ -232,4 +240,11 @@ export const resume: Resume = {
       ],
     },
   ],
+}
+
+export const sharedResumeFacts = {
+  name: resume.name,
+  location: resume.location,
+  contacts: resume.contacts,
+  roles: resume.roles,
 }

@@ -77,7 +77,7 @@ export function Hero({ resume }: HeroProps) {
           data-print="hidden"
         >
           <Button asChild size="sm" variant="outline">
-            <a href="/cv/alejandro-garcia-iglesias-cv.pdf" download className="gap-2">
+            <a href={resume.pdfPath} download className="gap-2">
               <Download className="h-3.5 w-3.5" />
               Download PDF
             </a>
