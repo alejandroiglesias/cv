@@ -60,13 +60,8 @@ async function findChrome() {
   )
 }
 
-function closePreview(server) {
-  return new Promise((resolve, reject) => {
-    server.httpServer.close((error) => {
-      if (error) reject(error)
-      else resolve()
-    })
-  })
+async function closePreview(server) {
+  await server.close()
 }
 
 async function waitForStableFile(filePath) {
