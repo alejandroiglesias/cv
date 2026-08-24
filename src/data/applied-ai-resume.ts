@@ -1,4 +1,4 @@
-import { sharedResumeFacts } from '@/data/resume'
+import { sharedResumeFacts } from '@/data/frontend-resume'
 import type { Resume, Role } from '@/types/resume'
 
 const appliedAiContacts = sharedResumeFacts.contacts.map((contact) =>
@@ -16,8 +16,8 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Applied AI',
       bullets: [
-        'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js assistant with Mastra and source-backed RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
-        'The knowledge-access problem identified with Juana Casa inspired Ground, an independent product currently in development with the goal of implementing it at the studio; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
+        'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js AI assistant with Mastra and source-backed RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
+        'The knowledge-access problem identified with Juana Casa inspired an independent knowledge-intelligence product currently in development, with the goal of implementing it at the studio; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
         'Developing Quorum, an adaptive multi-model research system built with LangGraph; implemented 14 distinct multi-model workflows across multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began exploratory evaluation with AA-Omniscience under practical cost and latency constraints.',
         'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
       ],

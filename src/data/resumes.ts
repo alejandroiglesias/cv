@@ -1,18 +1,14 @@
 import { appliedAiResume } from '@/data/applied-ai-resume'
+import { frontendResume } from '@/data/frontend-resume'
 import { productResume } from '@/data/product-resume'
-import { resume } from '@/data/resume'
 import { technicalProjectAiSystemsResume } from '@/data/technical-project-ai-systems-resume'
 import type { Resume } from '@/types/resume'
 
 export const resumes = {
-  frontend: resume,
+  frontend: frontendResume,
   product: productResume,
   ai: appliedAiResume,
-  'applied-ai': appliedAiResume,
   tpm: technicalProjectAiSystemsResume,
-  // Compatibility keys retained for callers that used the previous IDs.
-  'frontend-product': resume,
-  'technical-project-ai-systems': technicalProjectAiSystemsResume,
 } satisfies Record<string, Resume>
 
 export function getResumeForPath(pathname: string): Resume {

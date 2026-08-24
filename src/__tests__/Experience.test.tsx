@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import { Experience } from '../components/Experience'
-import { resume } from '../data/resume'
+import { frontendResume } from '../data/frontend-resume'
 
 vi.mock('framer-motion', () => {
   const make = (tag: string) =>
@@ -23,18 +23,18 @@ vi.mock('framer-motion', () => {
 
 describe('Experience', () => {
   it('renders all featured roles by default', () => {
-    render(<Experience resume={resume} />)
-    const featured = resume.roles.filter((r) => r.featured)
+    render(<Experience resume={frontendResume} />)
+    const featured = frontendResume.roles.filter((r) => r.featured)
     for (const role of featured) {
       expect(screen.getByText(role.company)).toBeInTheDocument()
     }
-    expect(screen.getByText(resume.earlierExperienceSummary)).toBeInTheDocument()
+    expect(screen.getByText(frontendResume.earlierExperienceSummary)).toBeInTheDocument()
   })
 
   it('keeps the earlier-experience summary and print LinkedIn note in one group', () => {
-    render(<Experience resume={resume} />)
+    render(<Experience resume={frontendResume} />)
 
-    const summary = screen.getByText(resume.earlierExperienceSummary)
+    const summary = screen.getByText(frontendResume.earlierExperienceSummary)
     const linkedIn = screen.getByText('in/alegarciaiglesias')
     const summaryGroup = summary.closest('[data-print-group="experience-summary-linkedin"]')
 
@@ -44,8 +44,8 @@ describe('Experience', () => {
   })
 
   it('does not render historical roles until expanded', () => {
-    render(<Experience resume={resume} />)
-    const historical = resume.roles.filter((r) => !r.featured)
+    render(<Experience resume={frontendResume} />)
+    const historical = frontendResume.roles.filter((r) => !r.featured)
     for (const role of historical) {
       expect(screen.queryByText(role.company)).not.toBeInTheDocument()
     }
@@ -53,12 +53,12 @@ describe('Experience', () => {
 
   it('reveals historical roles after clicking Show more', async () => {
     const user = userEvent.setup()
-    render(<Experience resume={resume} />)
+    render(<Experience resume={frontendResume} />)
 
     const trigger = screen.getByRole('button', { name: 'Show 4 earlier full-stack roles' })
     await user.click(trigger)
 
-    const historical = resume.roles.filter((r) => !r.featured)
+    const historical = frontendResume.roles.filter((r) => !r.featured)
     for (const role of historical) {
       expect(await screen.findByText(role.company)).toBeInTheDocument()
     }

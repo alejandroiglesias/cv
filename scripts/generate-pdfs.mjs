@@ -14,7 +14,7 @@ const host = '127.0.0.1'
 const pdfs = [
   {
     route: '/cv/',
-    filename: 'alejandro-garcia-iglesias-cv.pdf',
+    filename: 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
   },
   {
     route: '/cv/product/',

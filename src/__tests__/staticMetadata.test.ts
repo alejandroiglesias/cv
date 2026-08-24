@@ -100,7 +100,7 @@ describe('static metadata and indexing', () => {
   it('generates four canonical PDFs and copies the legacy TPM filename', () => {
     const generator = readProjectFile('scripts/generate-pdfs.mjs')
     const expectedPdfs = [
-      ["route: '/cv/'", 'alejandro-garcia-iglesias-cv.pdf'],
+      ["route: '/cv/'", 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
       ["route: '/cv/product/'", 'alejandro-garcia-iglesias-product-engineer-cv.pdf'],
       ["route: '/cv/ai/'", 'alejandro-garcia-iglesias-applied-ai-cv.pdf'],
       ["route: '/cv/tpm/'", 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
@@ -121,7 +121,7 @@ describe('static metadata and indexing', () => {
 
   it('keeps generated PDF artifacts and the legacy TPM copy in sync', () => {
     const canonicalPdfs = [
-      'alejandro-garcia-iglesias-cv.pdf',
+      'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
       'alejandro-garcia-iglesias-product-engineer-cv.pdf',
       'alejandro-garcia-iglesias-applied-ai-cv.pdf',
       'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',

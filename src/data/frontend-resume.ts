@@ -1,11 +1,11 @@
 import type { Resume } from '@/types/resume'
 
-export const resume: Resume = {
+export const frontendResume: Resume = {
   id: 'frontend',
   name: 'Alejandro García Iglesias',
   title: 'Senior Frontend Engineer',
   location: 'Buenos Aires, Argentina',
-  pdfPath: '/cv/alejandro-garcia-iglesias-cv.pdf',
+  pdfPath: '/cv/alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
   seo: {
     title: 'Alejandro García Iglesias · Senior Frontend Engineer',
     description:
@@ -14,7 +14,7 @@ export const resume: Resume = {
   },
 
   summary: [
-    'Senior Frontend Engineer with 19+ years of experience, combining a full-stack foundation with deep frontend specialization, UI architecture, and product proximity to turn complex problems into clear, effective user experiences.',
+    'Senior Frontend Engineer with 19+ years of experience building product-focused web applications, combining a full-stack foundation with deep frontend specialization, UI architecture, and product thinking to turn complex problems into clear, effective user experiences.',
     'I work beyond implementation, helping define product and technical solutions, improving architecture, creating reusable UI patterns, and simplifying complexity to help teams move faster.',
     "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product, UX, and technical decisions.",
   ],
@@ -94,8 +94,8 @@ export const resume: Resume = {
       end: 'Present',
       featured: true,
       bullets: [
-        "Built and iterated a React/Next.js knowledge assistant for Juana Casa, working directly with the studio's two founding partners and team members to translate project and operational knowledge needs into clear product flows backed by Mastra and RAG.",
-        'The knowledge-access problem identified with Juana Casa inspired Ground, an independent product currently in development with the goal of implementing it at the studio; I am combining frontend and product engineering with a reusable knowledge-intelligence layer, source-backed RAG, and authenticated MCP access to company data.',
+        "Built and iterated a React/Next.js AI knowledge assistant for Juana Casa, working directly with the studio's two founding partners and team members to translate project and operational knowledge needs into clear product flows backed by Mastra and RAG.",
+        'The knowledge-access problem identified with Juana Casa inspired an independent knowledge-intelligence product currently in development, with the goal of implementing it at the studio; I am combining frontend and product engineering with a reusable layer, source-backed RAG, and authenticated MCP access to company data.',
         'Evaluated and refined AI-assisted product design and frontend development workflows, combining coding agents, design tools, and agent orchestration across prototyping, implementation, testing, and review with explicit human verification.',
       ],
     },
@@ -230,12 +230,9 @@ export const resume: Resume = {
 }
 
 export const sharedResumeFacts = {
-  name: resume.name,
-  location: resume.location,
-  contacts: resume.contacts,
-  earlierExperienceSummary: resume.earlierExperienceSummary,
-  roles: resume.roles,
+  name: frontendResume.name,
+  location: frontendResume.location,
+  contacts: frontendResume.contacts,
+  earlierExperienceSummary: frontendResume.earlierExperienceSummary,
+  roles: frontendResume.roles,
 }
-
-/** Named Frontend alias for callers that prefer explicit variant names. */
-export const frontendResume = resume

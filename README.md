@@ -116,7 +116,7 @@ Compatibility aliases are also built as static pages: `/cv/frontend/` points can
 
 The four canonical PDFs are generated automatically during `npm run build` and committed under `public/`:
 
-- Main CV: `alejandro-garcia-iglesias-cv.pdf`
+- Frontend CV: `alejandro-garcia-iglesias-frontend-engineer-cv.pdf`
 - Product Engineer: `alejandro-garcia-iglesias-product-engineer-cv.pdf`
 - Applied AI: `alejandro-garcia-iglesias-applied-ai-cv.pdf`
 - Technical Project Manager: `alejandro-garcia-iglesias-technical-project-manager-cv.pdf`
