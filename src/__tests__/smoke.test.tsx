@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { App } from '../App'
+import { generalResume } from '../data/general-resume'
 import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
 
 vi.mock('framer-motion', () => {
@@ -42,6 +43,16 @@ describe('App', () => {
     expect(screen.getByText('BairesDev')).toBeInTheDocument()
     expect(screen.getByText('Mapme')).toBeInTheDocument()
     expect(screen.getByText('Deviget')).toBeInTheDocument()
+  })
+
+  it('renders the General resume by default with its own PDF', () => {
+    render(<App />)
+
+    expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute(
+      'href',
+      generalResume.pdfPath,
+    )
   })
 
   it('renders the Technical Project / AI Systems variant with its own PDF', () => {

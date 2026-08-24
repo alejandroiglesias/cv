@@ -1,10 +1,12 @@
 import { appliedAiResume } from '@/data/applied-ai-resume'
 import { frontendResume } from '@/data/frontend-resume'
+import { generalResume } from '@/data/general-resume'
 import { productResume } from '@/data/product-resume'
 import { technicalProjectAiSystemsResume } from '@/data/technical-project-ai-systems-resume'
 import type { Resume } from '@/types/resume'
 
 export const resumes = {
+  general: generalResume,
   frontend: frontendResume,
   product: productResume,
   ai: appliedAiResume,
@@ -15,7 +17,6 @@ export function getResumeForPath(pathname: string): Resume {
   const normalizedPath = pathname.split(/[?#]/, 1)[0].replace(/\/+$/, '') || '/'
 
   switch (normalizedPath) {
-    case '/cv':
     case '/cv/frontend':
       return resumes.frontend
     case '/cv/product':
@@ -26,7 +27,9 @@ export function getResumeForPath(pathname: string): Resume {
     case '/cv/technical-project-ai-systems':
     case '/technical-project-ai-systems':
       return resumes.tpm
+    case '/cv':
+    case '/cv/general':
     default:
-      return resumes.frontend
+      return resumes.general
   }
 }

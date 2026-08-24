@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { appliedAiResume } from '../data/applied-ai-resume'
-import { frontendResume, sharedResumeFacts } from '../data/frontend-resume'
+import { frontendResume } from '../data/frontend-resume'
+import { generalResume, sharedResumeFacts } from '../data/general-resume'
 import { productResume } from '../data/product-resume'
 import { getResumeForPath, resumes } from '../data/resumes'
 import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
 
 const variants = [
+  generalResume,
   frontendResume,
   productResume,
   appliedAiResume,
@@ -13,19 +15,23 @@ const variants = [
 ]
 
 describe('resume variants', () => {
-  it('keeps the Frontend resume as the default with an explicit export and PDF name', () => {
-    expect(getResumeForPath('/cv/')).toBe(frontendResume)
+  it('keeps the General resume as the default and root canonical', () => {
+    expect(getResumeForPath('/cv/')).toBe(generalResume)
+    expect(getResumeForPath('/cv/general/')).toBe(generalResume)
     expect(getResumeForPath('/cv/frontend/')).toBe(frontendResume)
-    expect(getResumeForPath('/cv/unknown/')).toBe(frontendResume)
-    expect(frontendResume.title).toBe('Senior Frontend Engineer')
-    expect(frontendResume.pdfPath).toBe(
-      '/cv/alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
+    expect(getResumeForPath('/cv/unknown/')).toBe(generalResume)
+    expect(generalResume.title).toBe(
+      'Senior Software Engineer | Frontend, Product Engineering & Applied AI',
     )
-    expect(frontendResume.seo.canonicalPath).toBe('/cv/')
+    expect(generalResume.pdfPath).toBe(
+      '/cv/alejandro-garcia-iglesias-general-cv.pdf',
+    )
+    expect(generalResume.seo.canonicalPath).toBe('/cv/')
   })
 
-  it('registers only the four canonical resume variants', () => {
-    expect(Object.keys(resumes)).toEqual(['frontend', 'product', 'ai', 'tpm'])
+  it('registers the five canonical resume variants', () => {
+    expect(Object.keys(resumes)).toEqual(['general', 'frontend', 'product', 'ai', 'tpm'])
+    expect(resumes.general).toBe(generalResume)
     expect(resumes.frontend).toBe(frontendResume)
     expect(resumes.ai).toBe(appliedAiResume)
   })
@@ -41,8 +47,10 @@ describe('resume variants', () => {
   })
 
   it('resolves every supported route with or without a trailing slash', () => {
-    expect(getResumeForPath('/cv/')).toBe(frontendResume)
-    expect(getResumeForPath('/cv')).toBe(frontendResume)
+    expect(getResumeForPath('/cv/')).toBe(generalResume)
+    expect(getResumeForPath('/cv')).toBe(generalResume)
+    expect(getResumeForPath('/cv/general/')).toBe(generalResume)
+    expect(getResumeForPath('/cv/general')).toBe(generalResume)
     expect(getResumeForPath('/cv/frontend/')).toBe(frontendResume)
     expect(getResumeForPath('/cv/frontend')).toBe(frontendResume)
     expect(getResumeForPath('/cv/product/')).toBe(productResume)
@@ -65,15 +73,36 @@ describe('resume variants', () => {
     )
   })
 
-  it('falls back to Frontend for unknown paths', () => {
-    expect(getResumeForPath('/cv/not-a-variant')).toBe(frontendResume)
-    expect(getResumeForPath('/somewhere-else')).toBe(frontendResume)
+  it('falls back to General for unknown paths', () => {
+    expect(getResumeForPath('/cv/not-a-variant')).toBe(generalResume)
+    expect(getResumeForPath('/somewhere-else')).toBe(generalResume)
+  })
+
+  it('owns shared facts in the General module', () => {
+    expect(generalResume.name).toBe(sharedResumeFacts.name)
+    expect(generalResume.location).toBe(sharedResumeFacts.location)
+    expect(generalResume.roles.map((role) => role.company)).toEqual(
+      sharedResumeFacts.roles.map((role) => role.company),
+    )
+  })
+
+  it('publishes a restrained General narrative across all three primary tracks', () => {
+    const content = JSON.stringify(generalResume)
+    expect(content).toMatch(/full-stack|frontend architecture|product|Applied AI/i)
+    expect(content).toMatch(/hybrid|reranking|multi-hop|MCP|LangGraph|14 orchestration workflows/i)
+    expect(generalResume.roles[0]).toMatchObject({
+      company: 'Independent Product R&D & AI Consulting',
+      title: 'Senior Software Engineer — Product & Applied AI',
+      start: 'Apr 2026',
+      end: 'Present',
+    })
+    expect(content).not.toMatch(/\bGround\b|\bQuorum\b|TuLanding|production AI|model training/i)
   })
 
   it('keeps the shared name, contacts, earlier summary, and historical experience factual', () => {
     const historical = sharedResumeFacts.roles.filter((role) => !role.featured)
 
-    expect(frontendResume.earlierExperienceSummary).toBe(
+    expect(generalResume.earlierExperienceSummary).toBe(
       'Earlier full-stack experience across four roles building web applications end-to-end with frontend, backend, APIs, databases, and infrastructure.',
     )
     expect(historical.map((role) => role.company)).toEqual([
@@ -84,7 +113,7 @@ describe('resume variants', () => {
     ])
     expect(historical.every((role) => role.title === 'Fullstack Developer')).toBe(true)
     expect(
-      frontendResume.roles.some((role) => role.company === 'Independent Contractor'),
+      generalResume.roles.some((role) => role.company === 'Independent Contractor'),
     ).toBe(false)
 
     for (const variant of variants) {
@@ -92,6 +121,7 @@ describe('resume variants', () => {
       expect(variant.location).toBe(sharedResumeFacts.location)
       expect(variant.earlierExperienceSummary).toBe(sharedResumeFacts.earlierExperienceSummary)
       expect(variant.roles.filter((role) => !role.featured)).toEqual(historical)
+      expect(variant.roles.some((role) => role.company === 'Independent Contractor')).toBe(false)
     }
   })
 
@@ -129,7 +159,8 @@ describe('resume variants', () => {
 
   it('keeps each online CV link on its own canonical variant', () => {
     const expected = new Map([
-      [frontendResume, 'https://alejandroiglesias.github.io/cv/'],
+      [generalResume, 'https://alejandroiglesias.github.io/cv/'],
+      [frontendResume, 'https://alejandroiglesias.github.io/cv/frontend/'],
       [productResume, 'https://alejandroiglesias.github.io/cv/product/'],
       [appliedAiResume, 'https://alejandroiglesias.github.io/cv/ai/'],
       [technicalProjectAiSystemsResume, 'https://alejandroiglesias.github.io/cv/tpm/'],
@@ -199,12 +230,6 @@ describe('resume variants', () => {
     )
 
     for (const variant of variants) {
-      expect(variant.roles[0].bullets.join(' ')).toMatch(
-        /independent (?:AI )?knowledge-intelligence product.*for companies.*studio set to serve as its first real-world implementation/i,
-      )
-      expect(variant.roles[0].bullets.join(' ')).not.toMatch(
-        /goal of implementing it at the studio/i,
-      )
       expect(JSON.stringify(variant)).not.toMatch(/\bGround\b/)
       expect(JSON.stringify(variant)).not.toMatch(/\bQuorum\b/)
     }

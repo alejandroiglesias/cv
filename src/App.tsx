@@ -6,7 +6,7 @@ import { Experience } from '@/components/Experience'
 import { Footer } from '@/components/Footer'
 import { StickyHeader } from '@/components/StickyHeader'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { frontendResume } from '@/data/frontend-resume'
+import { generalResume } from '@/data/general-resume'
 import { initAnalytics } from '@/lib/analytics'
 import type { Resume } from '@/types/resume'
 
@@ -14,7 +14,7 @@ interface AppProps {
   resume?: Resume
 }
 
-export function App({ resume: selectedResume = frontendResume }: AppProps) {
+export function App({ resume: selectedResume = generalResume }: AppProps) {
   useEffect(() => {
     initAnalytics()
   }, [])

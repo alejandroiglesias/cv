@@ -1,6 +1,6 @@
 import type { Resume, Role } from '@/types/resume'
 
-import { sharedResumeFacts } from '@/data/frontend-resume'
+import { sharedResumeFacts } from '@/data/general-resume'
 
 const appliedAiContacts = sharedResumeFacts.contacts.map((contact) =>
   contact.kind === 'site'
