@@ -36,7 +36,7 @@ npm run dev        # http://localhost:5173/cv/
 | `npm run dev` | Dev server with HMR at `/cv/` |
 | `npm run build` | Type-check + Vite build + automatic PDF generation → `dist/` |
 | `npm run build:web` | Type-check + Vite production build without regenerating PDFs |
-| `npm run pdf:generate` | Regenerate both PDFs from an existing production build |
+| `npm run pdf:generate` | Regenerate the four canonical PDFs from an existing production build |
 | `npm run preview` | Preview production build locally |
 | `npm test` | Run Vitest test suite |
 | `npm run lint` | ESLint |
@@ -48,7 +48,7 @@ npm run dev        # http://localhost:5173/cv/
 ```
 src/
 ├── data/resume.ts          # Main CV and shared factual work history
-├── data/resumes.ts         # URL-to-variant registry
+├── data/resumes.ts         # URL-to-variant registry and aliases
 ├── data/technical-project-ai-systems-resume.ts
 ├── types/resume.ts         # TypeScript types for resume data
 ├── components/
@@ -84,7 +84,7 @@ Shared factual content is centralized in [`src/data/resume.ts`](src/data/resume.
 - **Add a new role**: append to the `roles` array. Set `featured: true` to show it by default, `false` to put it behind "Show more".
 - **Update skills**: edit the `skills` array.
 - **Update contacts**: edit the `contacts` array.
-- **Update the Technical Project / AI Systems variant**: edit [`src/data/technical-project-ai-systems-resume.ts`](src/data/technical-project-ai-systems-resume.ts).
+- **Update a role-specific variant**: edit the corresponding module (`product-resume.ts`, `applied-ai-resume.ts`, or `technical-project-ai-systems-resume.ts`).
 - **Add a new web variant**: register its data in `src/data/resumes.ts` and add a static HTML entry to Vite so direct GitHub Pages URLs resolve correctly.
 
 ---
@@ -101,15 +101,26 @@ Pushing to `main` triggers the GitHub Actions workflow at `.github/workflows/dep
 
 **One-time GitHub setup** (already done): set Pages source to "GitHub Actions" in the repo Settings → Pages.
 
-Both resume pages use `index, follow`, self-referencing canonical URLs, and are listed in `public/sitemap.xml`. Because this project is hosted below `/cv/`, an effective `robots.txt` would need to be published by the root `alejandroiglesias.github.io` site rather than this repository.
+The four canonical resume pages use `index, follow`, self-referencing canonical URLs, and are listed in `public/sitemap.xml`:
+
+- Frontend: `/cv/`
+- Product: `/cv/product/`
+- Applied AI: `/cv/ai/`
+- Technical Product / AI Systems / Delivery: `/cv/tpm/`
+
+Compatibility aliases are also built as static pages: `/cv/frontend/` points canonically to `/cv/`, and `/cv/technical-project-ai-systems/` points canonically to `/cv/tpm/`. Aliases are intentionally excluded from the sitemap. Because this project is hosted below `/cv/`, an effective `robots.txt` would need to be published by the root `alejandroiglesias.github.io` site rather than this repository.
 
 ---
 
 ## PDFs
 
-Both PDFs are generated automatically during `npm run build` and committed under `public/`:
+The four canonical PDFs are generated automatically during `npm run build` and committed under `public/`:
 
 - Main CV: `alejandro-garcia-iglesias-cv.pdf`
-- Technical Project / AI Systems: `alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf`
+- Product Engineer: `alejandro-garcia-iglesias-product-engineer-cv.pdf`
+- Applied AI: `alejandro-garcia-iglesias-applied-ai-cv.pdf`
+- Technical Project Manager: `alejandro-garcia-iglesias-technical-project-manager-cv.pdf`
+
+The legacy filename `alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf` remains available as a byte-identical copy of the Technical Project Manager PDF in both `public/` and `dist/`; it is not printed separately.
 
 The generator builds the site, serves `dist/` locally, and uses Chrome's native headless print-to-PDF support. It detects Google Chrome on macOS and common Chrome/Chromium locations on Linux; set `CHROME_PATH` when the executable lives elsewhere. Generated files are written to both `public/` and `dist/` so the committed assets and deployment artifact stay in sync.

@@ -17,10 +17,20 @@ const pdfs = [
     filename: 'alejandro-garcia-iglesias-cv.pdf',
   },
   {
-    route: '/cv/technical-project-ai-systems/',
-    filename: 'alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf',
+    route: '/cv/product/',
+    filename: 'alejandro-garcia-iglesias-product-engineer-cv.pdf',
+  },
+  {
+    route: '/cv/ai/',
+    filename: 'alejandro-garcia-iglesias-applied-ai-cv.pdf',
+  },
+  {
+    route: '/cv/tpm/',
+    filename: 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
   },
 ]
+
+const legacyTpmFilename = 'alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf'
 
 async function findChrome() {
   const candidates = [
@@ -171,6 +181,21 @@ try {
       console.log(`Generated ${pdf.filename}`)
     }),
   )
+
+  const tpmPdf = pdfs.find((pdf) => pdf.route === '/cv/tpm/')
+  if (!tpmPdf) throw new Error('TPM PDF configuration is missing.')
+
+  await Promise.all([
+    copyFile(
+      path.join(publicDir, tpmPdf.filename),
+      path.join(publicDir, legacyTpmFilename),
+    ),
+    copyFile(
+      path.join(distDir, tpmPdf.filename),
+      path.join(distDir, legacyTpmFilename),
+    ),
+  ])
+  console.log(`Copied ${legacyTpmFilename} from ${tpmPdf.filename}`)
 } finally {
   if (server) await closePreview(server)
   await rm(tempDir, { recursive: true, force: true })
