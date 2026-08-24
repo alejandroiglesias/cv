@@ -12,6 +12,27 @@ describe('resume variants', () => {
     )
   })
 
+  it('keeps the shared experience history factual and normalized', () => {
+    const historical = resume.roles.filter((role) => !role.featured)
+
+    expect(resume.earlierExperienceSummary).toBe(
+      'Earlier full-stack experience across four roles building web applications end-to-end with frontend, backend, APIs, databases, and infrastructure.',
+    )
+    expect(resume.roles.some((role) => role.company === 'Independent Contractor')).toBe(false)
+    expect(historical.map((role) => role.company)).toEqual([
+      'Yanma Solutions',
+      'Freelance',
+      '2mas2 Interactive',
+      'Syxmedia',
+    ])
+    expect(historical.every((role) => role.title === 'Fullstack Developer')).toBe(true)
+    const deprecatedLabel = ['front', 'end'].join('-')
+    expect(JSON.stringify(resume).toLowerCase()).not.toContain(deprecatedLabel)
+    expect(resume.roles.some((role) => role.bullets.some((bullet) => bullet.includes('TuLanding')))).toBe(
+      false,
+    )
+  })
+
   it('selects the Technical Project / AI Systems resume for its static route', () => {
     expect(getResumeForPath('/cv/technical-project-ai-systems/')).toBe(
       technicalProjectAiSystemsResume,

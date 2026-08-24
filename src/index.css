@@ -204,6 +204,11 @@ body {
     line-height: 1 !important;
   }
 
+  #experience [data-print-group='experience-summary-linkedin'] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   #experience [data-print-break-before='true'] {
     break-before: page;
     page-break-before: always;

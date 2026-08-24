@@ -58,22 +58,24 @@ export function Experience({ resume }: ExperienceProps) {
         ))}
       </div>
 
+      <div
+        className="print-experience-summary-linkedin mb-5 text-sm text-muted-foreground"
+        data-print-group="experience-summary-linkedin"
+      >
+        <p>{resume.earlierExperienceSummary}</p>
+        <div className="hidden border-b border-border py-2 text-center" data-print="only">
+          <span className="inline-flex items-center gap-1.5 leading-none">
+            <Linkedin className="h-3.5 w-3.5 text-foreground" aria-hidden />
+            <span>See my full experience on LinkedIn:</span>
+            <span className="text-foreground">in/alegarciaiglesias</span>
+          </span>
+        </div>
+      </div>
+
       {historical.length > 0 && (
-        <>
-          <div className="border-b border-border" data-print="hidden">
-            <OlderRoles roles={historical} />
-          </div>
-          <div
-            className="hidden border-b border-border py-2 text-center text-sm font-medium text-muted-foreground"
-            data-print="only"
-          >
-            <span className="inline-flex items-center gap-1.5 leading-none">
-              <span>See my full experience on LinkedIn:</span>
-              <Linkedin className="h-3.5 w-3.5 text-foreground" aria-hidden />
-              <span className="text-foreground">in/alegarciaiglesias</span>
-            </span>
-          </div>
-        </>
+        <div className="border-b border-border" data-print="hidden">
+          <OlderRoles roles={historical} />
+        </div>
       )}
     </motion.section>
   )

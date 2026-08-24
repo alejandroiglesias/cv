@@ -28,6 +28,19 @@ describe('Experience', () => {
     for (const role of featured) {
       expect(screen.getByText(role.company)).toBeInTheDocument()
     }
+    expect(screen.getByText(resume.earlierExperienceSummary)).toBeInTheDocument()
+  })
+
+  it('keeps the earlier-experience summary and print LinkedIn note in one group', () => {
+    render(<Experience resume={resume} />)
+
+    const summary = screen.getByText(resume.earlierExperienceSummary)
+    const linkedIn = screen.getByText('in/alegarciaiglesias')
+    const summaryGroup = summary.closest('[data-print-group="experience-summary-linkedin"]')
+
+    expect(summaryGroup).toBeInTheDocument()
+    expect(summaryGroup).toHaveClass('print-experience-summary-linkedin')
+    expect(summaryGroup).toContainElement(linkedIn)
   })
 
   it('does not render historical roles until expanded', () => {
@@ -42,7 +55,7 @@ describe('Experience', () => {
     const user = userEvent.setup()
     render(<Experience resume={resume} />)
 
-    const trigger = screen.getByRole('button', { name: /show.*earlier roles/i })
+    const trigger = screen.getByRole('button', { name: 'Show 4 earlier full-stack roles' })
     await user.click(trigger)
 
     const historical = resume.roles.filter((r) => !r.featured)

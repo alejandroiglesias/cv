@@ -20,6 +20,9 @@ export const resume: Resume = {
     "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product, UX, and technical decisions.",
   ],
 
+  earlierExperienceSummary:
+    'Earlier full-stack experience across four roles building web applications end-to-end with frontend, backend, APIs, databases, and infrastructure.',
+
   interests: [
     'Product-focused frontend engineering',
     'Frontend architecture & system design',
@@ -91,7 +94,6 @@ export const resume: Resume = {
       end: 'Present',
       featured: true,
       bullets: [
-        'Designed, built, and launched <a href="https://tulanding.page/">TuLanding</a>, a subscription product based on the hypothesis that custom landing-page development can become a repeatable service through AI and automation; implemented its create → preview → subscribe journey with Astro/React and Cloudflare.',
         'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js assistant with Mastra and RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
         'Extended the knowledge-access work beyond Juana Casa into a broader product direction; currently developing a reusable knowledge-intelligence layer with grounded RAG and an authenticated MCP server that gives AI assistants and agents source-backed access to company documents and structured operational data.',
         'Currently developing an adaptive multi-model AI system investigating whether combining independent models can improve answer quality and factual reliability under practical cost and latency constraints; built a research lab using LangGraph, implementing 14 distinct multi-model workflows with support for multiple AI providers, validated the end-to-end pipeline on a small test run, and began an exploratory evaluation using a public factuality benchmark (AA-Omniscience).',
@@ -145,7 +147,7 @@ export const resume: Resume = {
     },
     {
       company: 'Deviget',
-      title: 'Front-end Developer',
+      title: 'Frontend Developer',
       location: 'Remote',
       start: 'Dec 2013',
       end: 'Apr 2016',
@@ -159,28 +161,14 @@ export const resume: Resume = {
         'After AppNexus, built a React-based administration UI for corporate security policies for another client engagement.',
       ],
     },
-    {
-      company: 'Independent Contractor',
-      title: 'Frontend / JavaScript Developer (Short-term engagements)',
-      location: 'Remote',
-      start: '2013',
-      end: '2016',
-      featured: true,
-      bullets: [
-        'Worked on short-term frontend projects across different teams and products.',
-        'Built and improved UI using JavaScript and Angular-based applications.',
-        'Adapted quickly to different codebases and development environments.',
-        'Gained exposure to diverse workflows and engineering practices.',
-      ],
-    },
     // ─── Historical roles (shown via "Show more") ─────────────────
     {
       company: 'Vulsai',
-      title: 'Front-end Developer',
+      title: 'Frontend Developer',
       location: 'Buenos Aires, AR',
       start: '2012',
       end: '2013',
-      featured: false,
+      featured: true,
       bullets: [
         'Primary frontend developer across multiple projects.',
         'Introduced modern CSS tooling (Sass, Less, Compass), improving maintainability and structure of styles.',
@@ -191,7 +179,7 @@ export const resume: Resume = {
     },
     {
       company: 'Yanma Solutions',
-      title: 'Full-stack Developer',
+      title: 'Fullstack Developer',
       location: 'Buenos Aires, AR',
       start: '2011',
       end: '2012',
@@ -204,7 +192,7 @@ export const resume: Resume = {
     },
     {
       company: 'Freelance',
-      title: 'Full-stack Developer',
+      title: 'Fullstack Developer',
       location: 'Buenos Aires, AR',
       start: '2010',
       end: '2011',
@@ -216,7 +204,7 @@ export const resume: Resume = {
     },
     {
       company: '2mas2 Interactive',
-      title: 'PHP Developer',
+      title: 'Fullstack Developer',
       location: 'Buenos Aires, AR',
       start: '2008',
       end: '2009',
@@ -229,7 +217,7 @@ export const resume: Resume = {
     },
     {
       company: 'Syxmedia',
-      title: 'Web Developer',
+      title: 'Fullstack Developer',
       location: 'Buenos Aires, AR',
       start: '2007',
       end: '2008',
@@ -246,5 +234,6 @@ export const sharedResumeFacts = {
   name: resume.name,
   location: resume.location,
   contacts: resume.contacts,
+  earlierExperienceSummary: resume.earlierExperienceSummary,
   roles: resume.roles,
 }

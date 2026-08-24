@@ -35,6 +35,7 @@ export interface Resume {
   pdfPath: string
   seo: ResumeSeo
   summary: string[]
+  earlierExperienceSummary: string
   interests: string[]
   skills: string[]
   contacts: ContactLink[]

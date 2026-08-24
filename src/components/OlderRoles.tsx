@@ -29,7 +29,7 @@ export function OlderRoles({ roles }: OlderRolesProps) {
         <ChevronDown
           className={cn('h-4 w-4 transition-transform duration-200', open && 'rotate-180')}
         />
-        {open ? 'Show less' : `Show ${roles.length} earlier roles`}
+        {open ? 'Show less' : `Show ${roles.length} earlier full-stack roles`}
       </CollapsibleTrigger>
 
       <CollapsibleContent className="overflow-hidden">
