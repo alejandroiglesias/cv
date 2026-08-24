@@ -14,6 +14,10 @@ const host = '127.0.0.1'
 const pdfs = [
   {
     route: '/cv/',
+    filename: 'alejandro-garcia-iglesias-general-cv.pdf',
+  },
+  {
+    route: '/cv/frontend/',
     filename: 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
   },
   {

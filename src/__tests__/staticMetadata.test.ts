@@ -16,13 +16,20 @@ const staticPages = [
   {
     file: 'index.html',
     canonical: '/',
-    title: 'Alejandro García Iglesias · Senior Frontend Engineer',
+    title: 'Alejandro García Iglesias · Senior Software Engineer',
     description:
-      'Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and product-focused web applications.',
+      'Senior Software Engineer with 19+ years of experience spanning full-stack foundations, deep frontend specialization, product engineering, and current Applied AI systems.',
+  },
+  {
+    file: 'general/index.html',
+    canonical: '/',
+    title: 'Alejandro García Iglesias · Senior Software Engineer',
+    description:
+      'Senior Software Engineer with 19+ years of experience spanning full-stack foundations, deep frontend specialization, product engineering, and current Applied AI systems.',
   },
   {
     file: 'frontend/index.html',
-    canonical: '/',
+    canonical: '/frontend/',
     title: 'Alejandro García Iglesias · Senior Frontend Engineer',
     description:
       'Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and product-focused web applications.',
@@ -81,7 +88,7 @@ describe('static metadata and indexing', () => {
     expect(html).not.toMatch(/noindex/i)
   })
 
-  it('publishes exactly the four canonical pages and excludes aliases', () => {
+  it('publishes exactly the five canonical pages and excludes aliases', () => {
     const sitemap = readProjectFile('public/sitemap.xml')
     const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
       ([, location]) => location,
@@ -89,18 +96,20 @@ describe('static metadata and indexing', () => {
 
     expect(locations).toEqual([
       `${baseUrl}/`,
+      `${baseUrl}/frontend/`,
       `${baseUrl}/product/`,
       `${baseUrl}/ai/`,
       `${baseUrl}/tpm/`,
     ])
-    expect(sitemap).not.toContain('/frontend/')
+    expect(sitemap).not.toContain('/general/')
     expect(sitemap).not.toContain('/technical-project-ai-systems/')
   })
 
-  it('generates four canonical PDFs and copies the legacy TPM filename', () => {
+  it('generates five canonical PDFs and copies the legacy TPM filename', () => {
     const generator = readProjectFile('scripts/generate-pdfs.mjs')
     const expectedPdfs = [
-      ["route: '/cv/'", 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
+      ["route: '/cv/'", 'alejandro-garcia-iglesias-general-cv.pdf'],
+      ["route: '/cv/frontend/'", 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
       ["route: '/cv/product/'", 'alejandro-garcia-iglesias-product-engineer-cv.pdf'],
       ["route: '/cv/ai/'", 'alejandro-garcia-iglesias-applied-ai-cv.pdf'],
       ["route: '/cv/tpm/'", 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
@@ -121,6 +130,7 @@ describe('static metadata and indexing', () => {
 
   it('keeps generated PDF artifacts and the legacy TPM copy in sync', () => {
     const canonicalPdfs = [
+      'alejandro-garcia-iglesias-general-cv.pdf',
       'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
       'alejandro-garcia-iglesias-product-engineer-cv.pdf',
       'alejandro-garcia-iglesias-applied-ai-cv.pdf',
@@ -139,10 +149,11 @@ describe('static metadata and indexing', () => {
     expect(readFileSync(legacyPath)).toEqual(readFileSync(tpmPath!))
   })
 
-  it('keeps all six static HTML entries wired into Vite', () => {
+  it('keeps all seven static HTML entries wired into Vite', () => {
     const viteConfig = readProjectFile('vite.config.ts')
     for (const entry of [
       'index.html',
+      'general/index.html',
       'frontend/index.html',
       'product/index.html',
       'ai/index.html',

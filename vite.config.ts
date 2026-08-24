@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
+        general: path.resolve(__dirname, 'general/index.html'),
         frontend: path.resolve(__dirname, 'frontend/index.html'),
         product: path.resolve(__dirname, 'product/index.html'),
         ai: path.resolve(__dirname, 'ai/index.html'),

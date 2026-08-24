@@ -36,7 +36,7 @@ npm run dev        # http://localhost:5173/cv/
 | `npm run dev` | Dev server with HMR at `/cv/` |
 | `npm run build` | Type-check + Vite build + automatic PDF generation → `dist/` |
 | `npm run build:web` | Type-check + Vite production build without regenerating PDFs |
-| `npm run pdf:generate` | Regenerate the four canonical PDFs from an existing production build |
+| `npm run pdf:generate` | Regenerate the five canonical PDFs from an existing production build |
 | `npm run preview` | Preview production build locally |
 | `npm test` | Run Vitest test suite |
 | `npm run lint` | ESLint |
@@ -47,7 +47,7 @@ npm run dev        # http://localhost:5173/cv/
 
 ```
 src/
-├── data/resume.ts          # Main CV and shared factual work history
+├── data/general-resume.ts  # General CV and shared factual work history
 ├── data/resumes.ts         # URL-to-variant registry and aliases
 ├── data/technical-project-ai-systems-resume.ts
 ├── types/resume.ts         # TypeScript types for resume data
@@ -79,12 +79,12 @@ src/
 
 ## Updating content
 
-Shared factual content is centralized in [`src/data/resume.ts`](src/data/resume.ts). Role-specific variants reuse those facts and apply their own positioning, ordering, and supported wording.
+Shared factual content is centralized in [`src/data/general-resume.ts`](src/data/general-resume.ts). Targeted variants reuse General-owned facts and may override them for role-specific positioning, ordering, and supported wording without changing historical identity.
 
 - **Add a new role**: append to the `roles` array. Set `featured: true` to show it by default, `false` to put it behind "Show more".
 - **Update skills**: edit the `skills` array.
 - **Update contacts**: edit the `contacts` array.
-- **Update a role-specific variant**: edit the corresponding module (`product-resume.ts`, `applied-ai-resume.ts`, or `technical-project-ai-systems-resume.ts`).
+- **Update a role-specific variant**: edit the corresponding module (`frontend-resume.ts`, `product-resume.ts`, `applied-ai-resume.ts`, or `technical-project-ai-systems-resume.ts`).
 - **Add a new web variant**: register its data in `src/data/resumes.ts` and add a static HTML entry to Vite so direct GitHub Pages URLs resolve correctly.
 
 ---
@@ -101,21 +101,23 @@ Pushing to `main` triggers the GitHub Actions workflow at `.github/workflows/dep
 
 **One-time GitHub setup** (already done): set Pages source to "GitHub Actions" in the repo Settings → Pages.
 
-The four canonical resume pages use `index, follow`, self-referencing canonical URLs, and are listed in `public/sitemap.xml`:
+The five canonical resume pages use `index, follow`, self-referencing canonical URLs, and are listed in `public/sitemap.xml`:
 
-- Frontend: `/cv/`
+- General: `/cv/`
+- Frontend: `/cv/frontend/`
 - Product: `/cv/product/`
 - Applied AI: `/cv/ai/`
 - Technical Product / AI Systems / Delivery: `/cv/tpm/`
 
-Compatibility aliases are also built as static pages: `/cv/frontend/` points canonically to `/cv/`, and `/cv/technical-project-ai-systems/` points canonically to `/cv/tpm/`. Aliases are intentionally excluded from the sitemap. Because this project is hosted below `/cv/`, an effective `robots.txt` would need to be published by the root `alejandroiglesias.github.io` site rather than this repository.
+The `/cv/general/` path is a root-canonical alias. The legacy `/cv/technical-project-ai-systems/` path also points canonically to `/cv/tpm/`; aliases are intentionally excluded from the sitemap. Because this project is hosted below `/cv/`, an effective `robots.txt` would need to be published by the root `alejandroiglesias.github.io` site rather than this repository.
 
 ---
 
 ## PDFs
 
-The four canonical PDFs are generated automatically during `npm run build` and committed under `public/`:
+The five canonical PDFs are generated automatically during `npm run build` and committed under `public/`:
 
+- General CV: `alejandro-garcia-iglesias-general-cv.pdf`
 - Frontend CV: `alejandro-garcia-iglesias-frontend-engineer-cv.pdf`
 - Product Engineer: `alejandro-garcia-iglesias-product-engineer-cv.pdf`
 - Applied AI: `alejandro-garcia-iglesias-applied-ai-cv.pdf`
