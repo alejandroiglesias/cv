@@ -80,6 +80,26 @@ describe('resume variants', () => {
     }
   })
 
+  it('derives every non-independent role bullet from the shared factual history', () => {
+    for (const variant of variants) {
+      for (const role of variant.roles.slice(1)) {
+        const sharedRole = sharedResumeFacts.roles.find(
+          (candidate) => candidate.company === role.company,
+        )
+
+        expect(sharedRole).toBeDefined()
+        expect(role.start).toBe(sharedRole?.start)
+        expect(role.end).toBe(sharedRole?.end)
+        expect(role.location).toBe(sharedRole?.location)
+        expect(role.featured).toBe(sharedRole?.featured)
+
+        for (const bullet of role.bullets) {
+          expect(sharedRole?.bullets).toContain(bullet)
+        }
+      }
+    }
+  })
+
   it('keeps each online CV link on its own canonical variant', () => {
     const expected = new Map([
       [resume, 'https://alejandroiglesias.github.io/cv/'],
@@ -101,6 +121,73 @@ describe('resume variants', () => {
     )
     expect(JSON.stringify(technicalProjectAiSystemsResume)).toMatch(
       /business|technical|system design|cross-functional|delivery/i,
+    )
+  })
+
+  it('keeps the recent experience differentiated by target role', () => {
+    const frontendIndependent = resume.roles[0]
+    const productIndependent = productResume.roles[0]
+    const appliedAiIndependent = appliedAiResume.roles[0]
+    const tpmIndependent = technicalProjectAiSystemsResume.roles[0]
+
+    expect(resume.summary.join(' ')).toMatch(/full-stack foundation/i)
+    expect(frontendIndependent.bullets.join(' ')).toMatch(
+      /React\/Next\.js|frontend development|product flows/i,
+    )
+    expect(frontendIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
+
+    expect(productIndependent.bullets.join(' ')).toMatch(
+      /product discovery|clarify what to build|end-to-end product ownership/i,
+    )
+    expect(productIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
+
+    expect(appliedAiIndependent.bullets.join(' ')).toMatch(
+      /Ground|grounded RAG|MCP|Quorum|LangGraph|14 distinct multi-model workflows/i,
+    )
+
+    expect(tpmIndependent.company).toBe('Independent Product R&D & AI Consulting')
+    expect(tpmIndependent.title).toBe(
+      'Senior Software Engineer — Technical Product & AI Systems',
+    )
+    expect(tpmIndependent.bullets.join(' ')).toMatch(
+      /founding partners|stakeholders|requirements|delivery/i,
+    )
+  })
+
+  it('tailors the skills section to each target role', () => {
+    expect(resume.skills.slice(0, 8)).toEqual(
+      expect.arrayContaining([
+        'Frontend Architecture',
+        'UI Engineering',
+        'Component Architecture',
+        'Design Systems',
+      ]),
+    )
+    expect(productResume.skills.slice(0, 8)).toEqual(
+      expect.arrayContaining([
+        'Product Engineering',
+        'Product Discovery',
+        'End-to-end Product Ownership',
+        'Requirements Definition',
+      ]),
+    )
+    expect(appliedAiResume.skills).toEqual(
+      expect.arrayContaining([
+        'Python',
+        'Mastra',
+        'Retrieval Systems',
+        'Model Routing & Orchestration',
+        'AI Evaluation & Benchmarking',
+      ]),
+    )
+    expect(technicalProjectAiSystemsResume.skills.slice(0, 10)).toEqual(
+      expect.arrayContaining([
+        'Technical Delivery',
+        'Stakeholder Collaboration',
+        'Cross-functional Coordination',
+        'Requirements Discovery & Definition',
+        'Architecture Trade-off Analysis',
+      ]),
     )
   })
 

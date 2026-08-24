@@ -49,7 +49,9 @@ describe('App', () => {
 
     expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
     expect(screen.getByText('Technical Product, AI Systems & Delivery')).toBeInTheDocument()
-    expect(screen.getByText('Technical Product & AI Systems Consultant')).toBeInTheDocument()
+    expect(
+      screen.getByText('Senior Software Engineer — Technical Product & AI Systems'),
+    ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute(
       'href',
       '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf',

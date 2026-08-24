@@ -18,7 +18,7 @@ function tailorRole(role: Role): Role {
       bullets: [
         'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js assistant with Mastra and grounded RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
         'The Juana Casa work evolved into Ground, a knowledge-intelligence direction currently in development; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
-        'Currently developing Quorum, an adaptive multi-model AI system investigating whether combining independent models can improve answer quality and factual reliability under practical cost and latency constraints; built a research lab using LangGraph, implementing 14 distinct multi-model workflows with support for multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began an exploratory evaluation using a public factuality benchmark (AA-Omniscience).',
+        'Developing Quorum, an adaptive multi-model research system built with LangGraph; implemented 14 distinct multi-model workflows across multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began exploratory evaluation with AA-Omniscience under practical cost and latency constraints.',
         'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
       ],
     }
@@ -33,8 +33,6 @@ function tailorRole(role: Role): Role {
         role.bullets[2],
         role.bullets[0],
         role.bullets[5],
-        role.bullets[3],
-        role.bullets[4],
       ],
     }
   }
@@ -55,7 +53,7 @@ export const appliedAiResume: Resume = {
     canonicalPath: '/cv/ai/',
   },
   summary: [
-    'Senior Software Engineer with a frontend and full-stack foundation, now focused on applied AI systems that connect software engineering, retrieval, integrations, and agent workflows to concrete operational problems.',
+    'Senior Software Engineer with a frontend and full-stack foundation and a product-engineering perspective, now focused on applied AI systems that connect software engineering, retrieval, integrations, and agent workflows to concrete operational problems.',
     'I have built and investigated systems using React/Next.js, Mastra, grounded RAG, authenticated MCP, specialized agents, and Quorum multi-model orchestration, keeping prototypes, ongoing development, and exploratory evaluation clearly distinct.',
     'My work combines engineering judgment with product context: understanding the source data, defining useful system boundaries, making integrations reliable, and keeping AI-assisted workflows observable and human-verified.',
   ],
@@ -69,14 +67,19 @@ export const appliedAiResume: Resume = {
   skills: [
     'Software Engineering',
     'Applied AI Systems',
+    'Python',
+    'Mastra',
+    'Retrieval Systems',
     'Grounded RAG',
     'AI Agents',
     'MCP Integrations',
     'LangGraph',
+    'Model Routing & Orchestration',
     'Multi-model Workflows',
+    'AI Evaluation & Benchmarking',
     'System Design',
-    'JavaScript',
     'TypeScript',
+    'JavaScript',
     'React',
     'Next.js',
     'Node.js',
