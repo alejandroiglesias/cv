@@ -209,12 +209,6 @@ body {
     page-break-inside: avoid;
   }
 
-  #experience [data-print-break-before='true'] {
-    break-before: page;
-    page-break-before: always;
-    padding-top: 0.4in !important;
-  }
-
   section,
   header,
   article,
