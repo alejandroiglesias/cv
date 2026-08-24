@@ -21,7 +21,7 @@ function tailorRole(role: Role): Role {
         'Extended the knowledge-access work beyond Juana Casa into a broader product direction; currently developing a reusable knowledge-intelligence layer with grounded RAG and an authenticated MCP server that gives AI assistants and agents source-backed access to company documents and structured operational data.',
         'Designed, built, and launched <a href="https://tulanding.page/">TuLanding</a>, taking a subscription product from hypothesis through implementation and release; developed its create → preview → subscribe journey with Astro/React and Cloudflare.',
         'Evaluated and refined AI-assisted product design and development workflows across discovery, prototyping, implementation, testing, and review, combining coding agents, design tools, and agent orchestration with explicit human verification throughout.',
-        'Investigated whether deliberation across multiple AI models could support a more useful and transparent second-opinion experience; built a React/Next.js and TypeScript prototype with independent responses, cross-model debate, and final synthesis surfacing agreement and dissent.',
+        'Currently developing an adaptive multi-model AI system investigating whether combining independent models can improve answer quality and factual reliability under practical cost and latency constraints; built a research lab using LangGraph, implementing 14 distinct multi-model workflows with support for multiple AI providers, validated the end-to-end pipeline on a small test run, and began an exploratory evaluation using a public factuality benchmark (AA-Omniscience).',
       ],
     }
   }
