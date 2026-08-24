@@ -137,12 +137,12 @@ describe('resume variants', () => {
     expect(frontendIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
 
     expect(productIndependent.bullets.join(' ')).toMatch(
-      /product discovery|clarify what to build|end-to-end product ownership/i,
+      /product discovery|clarify what to build|independent product/i,
     )
     expect(productIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
 
     expect(appliedAiIndependent.bullets.join(' ')).toMatch(
-      /Ground|grounded RAG|MCP|Quorum|LangGraph|14 distinct multi-model workflows/i,
+      /Ground|source-backed RAG|MCP|Quorum|LangGraph|14 distinct multi-model workflows/i,
     )
 
     expect(tpmIndependent.company).toBe('Independent Product R&D & AI Consulting')
@@ -152,9 +152,15 @@ describe('resume variants', () => {
     expect(tpmIndependent.bullets.join(' ')).toMatch(
       /founding partners|stakeholders|requirements|delivery/i,
     )
+
+    for (const variant of variants) {
+      expect(variant.roles[0].bullets.join(' ')).toMatch(
+        /Ground.*independent product.*goal of implementing it (?:at Juana Casa|at the studio|in the studio)/i,
+      )
+    }
   })
 
-  it('tailors the skills section to each target role', () => {
+  it('uses concrete, non-redundant skills for each target role', () => {
     expect(resume.skills.slice(0, 8)).toEqual(
       expect.arrayContaining([
         'Frontend Architecture',
@@ -163,32 +169,59 @@ describe('resume variants', () => {
         'Design Systems',
       ]),
     )
-    expect(productResume.skills.slice(0, 8)).toEqual(
+    expect(resume.skills).not.toEqual(
+      expect.arrayContaining(['System Design', 'Full-stack Foundations']),
+    )
+
+    expect(productResume.skills).toEqual(
       expect.arrayContaining([
-        'Product Engineering',
         'Product Discovery',
-        'End-to-end Product Ownership',
         'Requirements Definition',
+        'Prototyping',
+        'UX & Design Collaboration',
       ]),
     )
+    expect(productResume.skills).not.toEqual(
+      expect.arrayContaining([
+        'Product Engineering',
+        'End-to-end Product Ownership',
+        'Product Thinking',
+      ]),
+    )
+
     expect(appliedAiResume.skills).toEqual(
       expect.arrayContaining([
-        'Python',
         'Mastra',
-        'Retrieval Systems',
+        'Retrieval-Augmented Generation (RAG)',
         'Model Routing & Orchestration',
         'AI Evaluation & Benchmarking',
       ]),
     )
-    expect(technicalProjectAiSystemsResume.skills.slice(0, 10)).toEqual(
+    expect(appliedAiResume.skills).not.toEqual(
       expect.arrayContaining([
-        'Technical Delivery',
+        'Software Engineering',
+        'Applied AI Systems',
+        'Python',
+        'Grounded RAG',
+        'System Design',
+      ]),
+    )
+
+    expect(technicalProjectAiSystemsResume.skills).toEqual(
+      expect.arrayContaining([
         'Stakeholder Collaboration',
         'Cross-functional Coordination',
         'Requirements Discovery & Definition',
         'Architecture Trade-off Analysis',
       ]),
     )
+    expect(technicalProjectAiSystemsResume.skills).not.toEqual(
+      expect.arrayContaining(['Technical Delivery', 'AI Systems Delivery']),
+    )
+
+    for (const variant of variants) {
+      expect(JSON.stringify(variant)).not.toMatch(/grounded RAG/i)
+    }
   })
 
   it('keeps TuLanding out of every CV variant', () => {

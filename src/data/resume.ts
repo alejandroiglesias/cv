@@ -35,7 +35,6 @@ export const resume: Resume = {
     'UI Engineering',
     'Component Architecture',
     'Design Systems',
-    'System Design',
     'React',
     'TypeScript',
     'Technical Leadership',
@@ -49,7 +48,6 @@ export const resume: Resume = {
     'CSS / Tailwind CSS',
     'API Integration',
     'Node.js',
-    'Full-stack Foundations',
     'AI-assisted Development Workflows',
   ],
 
@@ -97,7 +95,7 @@ export const resume: Resume = {
       featured: true,
       bullets: [
         "Built and iterated a React/Next.js knowledge assistant for Juana Casa, working directly with the studio's two founding partners and team members to translate project and operational knowledge needs into clear product flows backed by Mastra and RAG.",
-        'Evolved the initial prototype toward Ground, a broader product direction currently in development, combining frontend and product engineering with a reusable knowledge-intelligence layer, grounded RAG, and authenticated MCP access to source-backed company data.',
+        'The knowledge-access problem identified with Juana Casa inspired Ground, an independent product currently in development with the goal of implementing it at the studio; I am combining frontend and product engineering with a reusable knowledge-intelligence layer, source-backed RAG, and authenticated MCP access to company data.',
         'Evaluated and refined AI-assisted product design and frontend development workflows, combining coding agents, design tools, and agent orchestration across prototyping, implementation, testing, and review with explicit human verification.',
       ],
     },

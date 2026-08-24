@@ -17,7 +17,7 @@ function tailorRole(role: Role): Role {
       title: 'Senior Software Engineer — Technical Product & AI Systems',
       bullets: [
         "Worked directly with Juana Casa's two founding partners and members of the studio team as key stakeholders, clarifying operational knowledge-access needs, defining requirements, and translating them into an initial React/Next.js assistant with Mastra and RAG.",
-        'Defined the product and technical direction as the work evolved into Ground, translating stakeholder needs into scope, system boundaries, and an integration approach spanning grounded RAG, authenticated MCP access, and specialized Workspace Agents through Slack and WhatsApp.',
+        'The knowledge-access problem identified with Juana Casa inspired Ground, an independent product currently in development with the goal of implementing it at the studio; I translated that product direction into scope, system boundaries, and an integration approach spanning source-backed RAG, authenticated MCP access, and specialized Workspace Agents through Slack and WhatsApp.',
         'Drove delivery from discovery and prototyping through implementation, testing, and review, using AI-assisted workflows while keeping decisions and outputs explicitly human-verified.',
         'Designed and carried out a staged Quorum research initiative across 14 multi-model workflows and multiple providers, balancing quality hypotheses with cost, latency, integration, and exploratory evaluation constraints.',
       ],
@@ -72,7 +72,6 @@ export const technicalProjectAiSystemsResume: Resume = {
     'Roles combining engineering depth with project and product ownership',
   ],
   skills: [
-    'Technical Delivery',
     'Business-to-Technical Translation',
     'Stakeholder Collaboration',
     'Cross-functional Coordination',
@@ -80,7 +79,6 @@ export const technicalProjectAiSystemsResume: Resume = {
     'Technical Leadership',
     'System Design & Architecture',
     'Architecture Trade-off Analysis',
-    'AI Systems Delivery',
     'API & Systems Integration',
     'Process & Workflow Design',
     'Technical Documentation',

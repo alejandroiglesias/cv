@@ -17,7 +17,7 @@ function tailorRole(role: Role): Role {
       title: 'Senior Product Engineer',
       bullets: [
         "Worked directly with Juana Casa's two founding partners and studio team on product discovery, identifying where AI could improve access to project and operational knowledge, clarifying what to build, and translating those needs into an initial React/Next.js assistant with Mastra and RAG.",
-        'Took end-to-end product ownership as the work evolved into Ground, a broader product direction currently in development; shaped the problem and experience while building a reusable knowledge-intelligence layer with grounded RAG and authenticated MCP access to source-backed company data.',
+        'The knowledge-access problem identified with Juana Casa led me to start developing Ground as an independent product, with the goal of implementing it at the studio; I shaped the product direction and experience while building a reusable knowledge-intelligence layer with source-backed RAG and authenticated MCP access to company data.',
         'Expanded the solution into specialized OpenAI Workspace Agents accessible through Slack and WhatsApp, adapting the experience and integrations to the ways the studio team already worked.',
         'Evaluated and refined AI-assisted product design and development workflows across discovery, prototyping, implementation, testing, and review, combining coding agents, design tools, and agent orchestration with explicit human verification throughout.',
       ],
@@ -73,11 +73,8 @@ export const productResume: Resume = {
     'Senior Product Engineering roles with meaningful product ownership',
   ],
   skills: [
-    'Product Engineering',
     'Product Discovery',
-    'End-to-end Product Ownership',
     'Requirements Definition',
-    'Product Thinking',
     'Prototyping',
     'UX & Design Collaboration',
     'Full-stack Development',
