@@ -40,6 +40,17 @@ describe('Experience', () => {
 
     expect(summaryGroup).toBeInTheDocument()
     expect(summaryGroup).toHaveClass('print-experience-summary-linkedin')
+    expect(summaryGroup).toHaveClass(
+      'mt-3',
+      'mb-0',
+      'px-4',
+      'text-center',
+      'sm:px-16',
+      'md:px-28',
+      'print:border-b',
+      'print:border-border',
+      'print:px-16',
+    )
     expect(summaryGroup).toContainElement(linkedIn)
   })
 

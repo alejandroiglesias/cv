@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion'
-import { Role } from './Role'
-import { OlderRoles } from './OlderRoles'
-import { Linkedin } from './icons'
 import { Button } from '@/components/ui/button'
+import { Linkedin } from './icons'
+import { OlderRoles } from './OlderRoles'
 import type { Resume } from '@/types/resume'
-import { useRevealViewport } from '@/hooks/useRevealViewport'
+import { Role } from './Role'
+import { motion } from 'framer-motion'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useRevealViewport } from '@/hooks/useRevealViewport'
 
 interface ExperienceProps {
   resume: Resume
@@ -59,11 +59,11 @@ export function Experience({ resume }: ExperienceProps) {
       </div>
 
       <div
-        className="print-experience-summary-linkedin mb-5 text-sm text-muted-foreground"
+        className="print-experience-summary-linkedin mt-3 mb-0 px-4 text-center text-sm text-muted-foreground sm:px-16 md:px-28 print:border-b print:border-border print:px-16"
         data-print-group="experience-summary-linkedin"
       >
         <p>{resume.earlierExperienceSummary}</p>
-        <div className="hidden border-b border-border py-2 text-center" data-print="only">
+        <div className="hidden py-2 text-center" data-print="only">
           <span className="inline-flex items-center gap-1.5 leading-none">
             <Linkedin className="h-3.5 w-3.5 text-foreground" aria-hidden />
             <span>See my full experience on LinkedIn:</span>

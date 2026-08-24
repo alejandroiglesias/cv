@@ -44,14 +44,14 @@ const staticPages = [
   {
     file: 'tpm/index.html',
     canonical: '/tpm/',
-    title: 'Alejandro García Iglesias · Technical Product, AI Systems &amp; Delivery',
+    title: 'Alejandro García Iglesias · Senior Software Engineer',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
   },
   {
     file: 'technical-project-ai-systems/index.html',
     canonical: '/tpm/',
-    title: 'Alejandro García Iglesias · Technical Product, AI Systems &amp; Delivery',
+    title: 'Alejandro García Iglesias · Senior Software Engineer',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
   },

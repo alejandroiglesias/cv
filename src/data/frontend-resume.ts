@@ -95,7 +95,7 @@ export const frontendResume: Resume = {
       featured: true,
       bullets: [
         "Built and iterated a React/Next.js AI knowledge assistant for Juana Casa, working directly with the studio's two founding partners and team members to translate project and operational knowledge needs into clear product flows backed by Mastra and RAG.",
-        'The knowledge-access problem identified with Juana Casa inspired an independent knowledge-intelligence product currently in development, with the goal of implementing it at the studio; I am combining frontend and product engineering with a reusable layer, source-backed RAG, and authenticated MCP access to company data.',
+        'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I am combining frontend and product engineering with a reusable layer, source-backed RAG, and authenticated MCP access to company data.',
         'Evaluated and refined AI-assisted product design and frontend development workflows, combining coding agents, design tools, and agent orchestration across prototyping, implementation, testing, and review with explicit human verification.',
       ],
     },
@@ -123,7 +123,6 @@ export const frontendResume: Resume = {
       start: 'Mar 2020',
       end: 'Mar 2022',
       featured: true,
-      printBreakBefore: true,
       bullets: [
         "Worked on Pinterest's Experiments team, implementing and testing React UI variations in the core consumer product to support product experimentation.",
         'Developed and owned the UI layer of internal advertising reporting tools, defining their information architecture and data presentation.',
@@ -132,6 +131,7 @@ export const frontendResume: Resume = {
       ],
     },
     {
+      printBreakBefore: true,
       company: 'Mapme',
       title: 'Senior Frontend Engineer',
       location: 'Remote',

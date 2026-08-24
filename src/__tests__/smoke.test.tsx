@@ -48,7 +48,6 @@ describe('App', () => {
     render(<App resume={technicalProjectAiSystemsResume} />)
 
     expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
-    expect(screen.getByText('Technical Product, AI Systems & Delivery')).toBeInTheDocument()
     expect(
       screen.getByText('Senior Software Engineer — Technical Product & AI Systems'),
     ).toBeInTheDocument()

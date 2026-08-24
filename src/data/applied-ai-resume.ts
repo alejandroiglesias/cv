@@ -1,5 +1,6 @@
-import { sharedResumeFacts } from '@/data/frontend-resume'
 import type { Resume, Role } from '@/types/resume'
+
+import { sharedResumeFacts } from '@/data/frontend-resume'
 
 const appliedAiContacts = sharedResumeFacts.contacts.map((contact) =>
   contact.kind === 'site'
@@ -7,7 +8,7 @@ const appliedAiContacts = sharedResumeFacts.contacts.map((contact) =>
         ...contact,
         href: 'https://alejandroiglesias.github.io/cv/ai/',
       }
-    : contact,
+    : contact
 )
 
 function tailorRole(role: Role): Role {
@@ -16,9 +17,9 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Applied AI',
       bullets: [
-        'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js AI assistant with Mastra and source-backed RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
-        'The knowledge-access problem identified with Juana Casa inspired an independent knowledge-intelligence product currently in development, with the goal of implementing it at the studio; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
-        'Developing Quorum, an adaptive multi-model research system built with LangGraph; implemented 14 distinct multi-model workflows across multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began exploratory evaluation with AA-Omniscience under practical cost and latency constraints.',
+        'Partnered with Juana Casa to improve access to project and operational knowledge; built an initial React/Next.js AI assistant with Mastra and source-backed RAG, then implemented specialized OpenAI Workspace Agents through Slack and WhatsApp.',
+        'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
+        'Developing an adaptive multi-model research system built with LangGraph; implemented 14 distinct multi-model workflows across multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began exploratory evaluation with AA-Omniscience under practical cost and latency constraints.',
         'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
       ],
     }
@@ -34,6 +35,18 @@ function tailorRole(role: Role): Role {
         role.bullets[0],
         role.bullets[5],
       ],
+    }
+  }
+
+  if (role.company === 'BairesDev') {
+    return {
+      ...role,
+      bullets: role.bullets.map((bullet) =>
+        bullet.replace(
+          'learning Go and implementing APIs to deliver features end to end.',
+          'learning Go and implementing APIs to deliver features.',
+        ),
+      ),
     }
   }
 
@@ -54,7 +67,7 @@ export const appliedAiResume: Resume = {
   },
   summary: [
     'Senior Software Engineer with a frontend and full-stack foundation and a product-engineering perspective, now focused on applied AI systems that connect software engineering, retrieval, integrations, and agent workflows to concrete operational problems.',
-    'I have built and investigated systems using React/Next.js, Mastra, source-backed RAG, authenticated MCP, specialized agents, and Quorum multi-model orchestration, keeping prototypes, ongoing development, and exploratory evaluation clearly distinct.',
+    'I have built and investigated systems using React/Next.js, Mastra, source-backed RAG, authenticated MCP, specialized agents, and multi-model orchestration, keeping prototypes, ongoing development, and exploratory evaluation clearly distinct.',
     'My work combines engineering judgment with product context: understanding the source data, defining useful system boundaries, making integrations reliable, and keeping AI-assisted workflows observable and human-verified.',
   ],
   interests: [

@@ -1,5 +1,6 @@
-import { sharedResumeFacts } from '@/data/frontend-resume'
 import type { Resume, Role } from '@/types/resume'
+
+import { sharedResumeFacts } from '@/data/frontend-resume'
 
 const productContacts = sharedResumeFacts.contacts.map((contact) =>
   contact.kind === 'site'
@@ -7,7 +8,7 @@ const productContacts = sharedResumeFacts.contacts.map((contact) =>
         ...contact,
         href: 'https://alejandroiglesias.github.io/cv/product/',
       }
-    : contact,
+    : contact
 )
 
 function tailorRole(role: Role): Role {
@@ -16,9 +17,8 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Product Engineer',
       bullets: [
-        "Worked directly with Juana Casa's two founding partners and studio team on product discovery, identifying where AI could improve access to project and operational knowledge, clarifying what to build, and translating those needs into an initial React/Next.js AI assistant with Mastra and RAG.",
-        'The knowledge-access problem identified with Juana Casa led me to start developing an independent knowledge-intelligence product, with the goal of implementing it at the studio; I shaped the product direction and experience while building a reusable layer with source-backed RAG and authenticated MCP access to company data.',
-        'Expanded the solution into specialized OpenAI Workspace Agents accessible through Slack and WhatsApp, adapting the experience and integrations to the ways the studio team already worked.',
+        "Worked directly with Juana Casa's two founding partners and studio team on product discovery, clarifying what to build, and translating those needs into an initial React/Next.js AI assistant with Mastra and RAG; I then implemented specialized OpenAI Workspace Agents through Slack and WhatsApp.",
+        'The knowledge-access problem identified with Juana Casa led me to start developing an independent AI knowledge-intelligence product for companies, with the studio set to serve as its first real-world implementation; I shaped the product direction and experience while building a reusable layer with source-backed RAG and authenticated MCP access to company data.',
         'Evaluated and refined AI-assisted product design and development workflows across discovery, prototyping, implementation, testing, and review, combining coding agents, design tools, and agent orchestration with explicit human verification throughout.',
       ],
     }

@@ -1,5 +1,6 @@
-import { sharedResumeFacts } from '@/data/frontend-resume'
 import type { Resume, Role } from '@/types/resume'
+
+import { sharedResumeFacts } from '@/data/frontend-resume'
 
 const technicalProjectContacts = sharedResumeFacts.contacts.map((contact) =>
   contact.kind === 'site'
@@ -7,7 +8,7 @@ const technicalProjectContacts = sharedResumeFacts.contacts.map((contact) =>
         ...contact,
         href: 'https://alejandroiglesias.github.io/cv/tpm/',
       }
-    : contact,
+    : contact
 )
 
 function tailorRole(role: Role): Role {
@@ -16,10 +17,10 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Technical Product & AI Systems',
       bullets: [
-        "Worked directly with Juana Casa's two founding partners and members of the studio team as key stakeholders, clarifying operational knowledge-access needs, defining requirements, and translating them into an initial React/Next.js AI assistant with Mastra and RAG.",
-        'The knowledge-access problem identified with Juana Casa inspired an independent knowledge-intelligence product currently in development, with the goal of implementing it at the studio; I translated that product direction into scope, system boundaries, and an integration approach spanning source-backed RAG, authenticated MCP access, and specialized Workspace Agents through Slack and WhatsApp.',
+        "Worked directly with Juana Casa's two founding partners and members of the studio team as key stakeholders, clarifying operational knowledge-access needs, defining requirements, and translating them into an initial React/Next.js AI assistant with Mastra and RAG, and specialized Workspace Agents through Slack and WhatsApp.",
+        'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I translated that product direction into scope, system boundaries, and an integration approach spanning source-backed RAG and authenticated MCP access.',
         'Drove delivery from discovery and prototyping through implementation, testing, and review, using AI-assisted workflows while keeping decisions and outputs explicitly human-verified.',
-        'Designed and carried out a staged Quorum research initiative across 14 multi-model workflows and multiple providers, balancing quality hypotheses with cost, latency, integration, and exploratory evaluation constraints.',
+        'Designed and carried out a staged multi-model research initiative across 14 workflows and multiple providers, balancing quality hypotheses with cost, latency, integration, and exploratory evaluation constraints.',
       ],
     }
   }
@@ -28,8 +29,8 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       bullets: [
-        role.bullets[0],
         role.bullets[5],
+        role.bullets[0],
         role.bullets[2],
         role.bullets[1],
         role.bullets[6],
@@ -51,10 +52,10 @@ export const technicalProjectAiSystemsResume: Resume = {
   id: 'tpm',
   ...sharedResumeFacts,
   contacts: technicalProjectContacts,
-  title: 'Senior Software Engineer | Technical Product, AI Systems & Delivery',
+  title: 'Senior Software Engineer',
   pdfPath: '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
   seo: {
-    title: 'Alejandro García Iglesias · Technical Product, AI Systems & Delivery',
+    title: 'Alejandro García Iglesias · Senior Software Engineer',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
     canonicalPath: '/cv/tpm/',
@@ -81,7 +82,6 @@ export const technicalProjectAiSystemsResume: Resume = {
     'Architecture Trade-off Analysis',
     'API & Systems Integration',
     'Process & Workflow Design',
-    'Technical Documentation',
   ],
   roles: sharedResumeFacts.roles.map(tailorRole),
 }

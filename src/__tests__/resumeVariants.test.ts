@@ -33,7 +33,7 @@ describe('resume variants', () => {
   it.each([
     [productResume, 'Senior Product Engineer', '/cv/product/', '/cv/alejandro-garcia-iglesias-product-engineer-cv.pdf'],
     [appliedAiResume, 'Senior Software Engineer — Applied AI', '/cv/ai/', '/cv/alejandro-garcia-iglesias-applied-ai-cv.pdf'],
-    [technicalProjectAiSystemsResume, 'Senior Software Engineer | Technical Product, AI Systems & Delivery', '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
+    [technicalProjectAiSystemsResume, 'Senior Software Engineer', '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
   ])('publishes the %s editorial contract', (variant, title, canonicalPath, pdfPath) => {
     expect(variant.title).toBe(title)
     expect(variant.seo.canonicalPath).toBe(canonicalPath)
@@ -109,6 +109,18 @@ describe('resume variants', () => {
         expect(role.featured).toBe(sharedRole?.featured)
 
         for (const bullet of role.bullets) {
+          if (
+            variant.id === 'applied-ai' &&
+            role.company === 'BairesDev' &&
+            bullet ===
+              'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features.'
+          ) {
+            expect(sharedRole?.bullets).toContain(
+              'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features end to end.',
+            )
+            continue
+          }
+
           expect(sharedRole?.bullets).toContain(bullet)
         }
       }
@@ -134,7 +146,7 @@ describe('resume variants', () => {
     )
     expect(JSON.stringify(productResume)).toMatch(/full-stack|end-to-end|product/i)
     expect(JSON.stringify(appliedAiResume)).toMatch(
-      /knowledge-intelligence product|Juana Casa|RAG|MCP|agents|LangGraph|Quorum|14 distinct multi-model workflows/i,
+      /knowledge-intelligence product|Juana Casa|RAG|MCP|agents|LangGraph|multi-model orchestration|14 distinct multi-model workflows/i,
     )
     expect(JSON.stringify(technicalProjectAiSystemsResume)).toMatch(
       /business|technical|system design|cross-functional|delivery/i,
@@ -164,7 +176,15 @@ describe('resume variants', () => {
     expect(productIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
 
     expect(appliedAiIndependent.bullets.join(' ')).toMatch(
-      /independent knowledge-intelligence product|source-backed RAG|MCP|Quorum|LangGraph|14 distinct multi-model workflows/i,
+      /independent (?:AI )?knowledge-intelligence product|source-backed RAG|MCP|LangGraph|14 distinct multi-model workflows/i,
+    )
+    expect(
+      appliedAiResume.roles.find((role) => role.company === 'BairesDev')?.bullets,
+    ).toContain(
+      'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features.',
+    )
+    expect(JSON.stringify(appliedAiResume)).not.toMatch(
+      /learning Go and implementing APIs to deliver features end to end/,
     )
 
     expect(tpmIndependent.company).toBe('Independent Product R&D & AI Consulting')
@@ -180,9 +200,13 @@ describe('resume variants', () => {
 
     for (const variant of variants) {
       expect(variant.roles[0].bullets.join(' ')).toMatch(
-        /independent knowledge-intelligence product.*goal of implementing it (?:at Juana Casa|at the studio|in the studio)/i,
+        /independent (?:AI )?knowledge-intelligence product.*for companies.*studio set to serve as its first real-world implementation/i,
+      )
+      expect(variant.roles[0].bullets.join(' ')).not.toMatch(
+        /goal of implementing it at the studio/i,
       )
       expect(JSON.stringify(variant)).not.toMatch(/\bGround\b/)
+      expect(JSON.stringify(variant)).not.toMatch(/\bQuorum\b/)
     }
   })
 
@@ -260,7 +284,7 @@ describe('resume variants', () => {
     const searchableContent = JSON.stringify(appliedAiResume)
 
     expect(searchableContent).toMatch(
-      /knowledge-intelligence product|Juana Casa|RAG|MCP|agents|LangGraph|Quorum/i,
+      /knowledge-intelligence product|Juana Casa|RAG|MCP|agents|LangGraph|multi-model orchestration/i,
     )
     expect(searchableContent).toContain('14 distinct multi-model workflows')
     expect(searchableContent).not.toMatch(/ML training|fine-tuning|CUDA|MLOps/i)

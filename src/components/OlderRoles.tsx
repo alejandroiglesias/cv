@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { Role } from './Role'
+
 import { ChevronDown } from './icons'
+import { Role } from './Role'
 import type { Role as RoleType } from '@/types/resume'
 import { cn } from '@/lib/utils'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useState } from 'react'
 
 interface OlderRolesProps {
   roles: RoleType[]
@@ -22,7 +23,7 @@ export function OlderRoles({ roles }: OlderRolesProps) {
       <CollapsibleTrigger
         className={cn(
           'flex w-full cursor-pointer items-center justify-center gap-2 rounded-md py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-          open && 'border-b border-border',
+          open && 'border-b border-border'
         )}
         aria-expanded={open}
       >
