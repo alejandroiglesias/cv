@@ -5,7 +5,7 @@ const technicalProjectContacts = sharedResumeFacts.contacts.map((contact) =>
   contact.kind === 'site'
     ? {
         ...contact,
-        href: 'https://alejandroiglesias.github.io/cv/technical-project-ai-systems/',
+        href: 'https://alejandroiglesias.github.io/cv/tpm/',
       }
     : contact,
 )
@@ -19,7 +19,6 @@ function tailorRole(role: Role): Role {
       bullets: [
         'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; translated those needs into an initial React/Next.js assistant with Mastra and RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
         'Extended the knowledge-access work beyond Juana Casa into a broader product direction; currently developing a reusable knowledge-intelligence layer with grounded RAG and an authenticated MCP server that gives AI assistants and agents source-backed access to company documents and structured operational data.',
-        'Designed, built, and launched <a href="https://tulanding.page/">TuLanding</a>, taking a subscription product from hypothesis through implementation and release; developed its create → preview → subscribe journey with Astro/React and Cloudflare.',
         'Evaluated and refined AI-assisted product design and development workflows across discovery, prototyping, implementation, testing, and review, combining coding agents, design tools, and agent orchestration with explicit human verification throughout.',
         'Currently developing an adaptive multi-model AI system investigating whether combining independent models can improve answer quality and factual reliability under practical cost and latency constraints; built a research lab using LangGraph, implementing 14 distinct multi-model workflows with support for multiple AI providers, validated the end-to-end pipeline on a small test run, and began an exploratory evaluation using a public factuality benchmark (AA-Omniscience).',
       ],
@@ -52,16 +51,16 @@ function tailorRole(role: Role): Role {
 }
 
 export const technicalProjectAiSystemsResume: Resume = {
-  id: 'technical-project-ai-systems',
+  id: 'tpm',
   ...sharedResumeFacts,
   contacts: technicalProjectContacts,
   title: 'Senior Software Engineer | Technical Product, AI Systems & Delivery',
-  pdfPath: '/cv/alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf',
+  pdfPath: '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
   seo: {
     title: 'Alejandro García Iglesias · Technical Product, AI Systems & Delivery',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
-    canonicalPath: '/cv/technical-project-ai-systems/',
+    canonicalPath: '/cv/tpm/',
   },
   summary: [
     'Senior Software Engineer with 19+ years of experience building and evolving web products, with a strong focus on technical leadership, product thinking, system design, and AI-assisted workflows.',
@@ -94,3 +93,6 @@ export const technicalProjectAiSystemsResume: Resume = {
   ],
   roles: sharedResumeFacts.roles.map(tailorRole),
 }
+
+/** Explicit current name; the longer export remains for legacy imports. */
+export const tpmResume = technicalProjectAiSystemsResume

@@ -1,21 +1,20 @@
 import type { Resume } from '@/types/resume'
 
 export const resume: Resume = {
-  id: 'frontend-product',
+  id: 'frontend',
   name: 'Alejandro García Iglesias',
-  title:
-    'Senior Frontend/Product Engineer | Frontend Architecture, System Design & Product Thinking',
+  title: 'Senior Frontend Engineer',
   location: 'Buenos Aires, Argentina',
   pdfPath: '/cv/alejandro-garcia-iglesias-cv.pdf',
   seo: {
-    title: 'Alejandro García Iglesias · Senior Frontend/Product Engineer',
+    title: 'Alejandro García Iglesias · Senior Frontend Engineer',
     description:
-      'Senior Frontend/Product Engineer with 19+ years of experience in frontend architecture, design systems, and cross-functional collaboration. Based in Buenos Aires, open to remote opportunities.',
+      'Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and product-focused web applications. Based in Buenos Aires, open to remote opportunities.',
     canonicalPath: '/cv/',
   },
 
   summary: [
-    'Senior Frontend/Product Engineer with 19+ years of experience building product-focused web applications, combining frontend architecture, UI systems, and product thinking to turn complex problems into clear, effective user experiences.',
+    'Senior Frontend Engineer with 19+ years of experience building product-focused web applications, combining frontend architecture, UI systems, and product proximity to turn complex problems into clear, effective user experiences.',
     'I work beyond implementation, helping define product and technical solutions, improving architecture, creating reusable UI patterns, and simplifying complexity to help teams move faster.',
     "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product, UX, and technical decisions.",
   ],
@@ -24,31 +23,32 @@ export const resume: Resume = {
     'Earlier full-stack experience across four roles building web applications end-to-end with frontend, backend, APIs, databases, and infrastructure.',
 
   interests: [
-    'Product-focused frontend engineering',
     'Frontend architecture & system design',
     'Design systems & reusable UI patterns',
-    'AI-assisted development workflows',
-    'Senior Frontend or Product Engineering roles with strong product and technical impact',
+    'Product-focused frontend engineering',
+    'Design-to-development workflows',
+    'Senior Frontend Engineering roles with strong product and technical impact',
   ],
 
   skills: [
     'Frontend Architecture',
+    'UI Architecture',
     'System Design',
     'Technical Leadership',
-    'Product Thinking',
+    'Product Proximity',
+    'Design Systems',
     'JavaScript',
     'TypeScript',
-    'AI-assisted Development & Workflows',
     'React',
     'Vue.js',
     'Angular',
     'Node.js',
-    'Design Systems',
     'CSS / Tailwind CSS',
     'Developer Experience (DX)',
     'Code Quality & Refactoring',
     'API Integration',
     'Microservices',
+    'AI-assisted Development & Workflows',
   ],
 
   contacts: [
@@ -89,15 +89,15 @@ export const resume: Resume = {
     // ─── Featured roles ──────────────────────────────────────────
     {
       company: 'Independent Product R&D & AI Consulting',
-      title: 'Senior Frontend/Product Engineer',
+      title: 'Senior Frontend Engineer',
       start: 'Apr 2026',
       end: 'Present',
       featured: true,
       bullets: [
         'Partnered with Juana Casa, an architecture studio, to identify where AI could improve access to project and operational knowledge; built an initial React/Next.js assistant with Mastra and RAG, then implemented specialized OpenAI Workspace Agents accessible through Slack and WhatsApp.',
-        'Extended the knowledge-access work beyond Juana Casa into a broader product direction; currently developing a reusable knowledge-intelligence layer with grounded RAG and an authenticated MCP server that gives AI assistants and agents source-backed access to company documents and structured operational data.',
-        'Currently developing an adaptive multi-model AI system investigating whether combining independent models can improve answer quality and factual reliability under practical cost and latency constraints; built a research lab using LangGraph, implementing 14 distinct multi-model workflows with support for multiple AI providers, validated the end-to-end pipeline on a small test run, and began an exploratory evaluation using a public factuality benchmark (AA-Omniscience).',
+        'Acted as a frontend/product engineering partner while extending that knowledge-access work into a broader product direction; currently developing a reusable knowledge-intelligence layer with grounded RAG and an authenticated MCP server that gives AI assistants and agents source-backed access to company documents and structured operational data.',
         'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
+        'Currently developing an adaptive multi-model AI system investigating whether combining independent models can improve answer quality and factual reliability under practical cost and latency constraints; built a research lab using LangGraph, implementing 14 distinct multi-model workflows with support for multiple AI providers, validated the end-to-end pipeline on a small test run, and began an exploratory evaluation using a public factuality benchmark (AA-Omniscience).',
       ],
     },
     {
@@ -237,3 +237,6 @@ export const sharedResumeFacts = {
   earlierExperienceSummary: resume.earlierExperienceSummary,
   roles: resume.roles,
 }
+
+/** Named Frontend alias for callers that prefer explicit variant names. */
+export const frontendResume = resume

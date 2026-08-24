@@ -52,12 +52,12 @@ describe('App', () => {
     expect(screen.getByText('Technical Product & AI Systems Consultant')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute(
       'href',
-      '/cv/alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf',
+      '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
     )
     expect(
       screen.getByRole('link', {
         name: 'alejandroiglesias.github.io/cv',
       }),
-    ).toHaveAttribute('href', 'https://alejandroiglesias.github.io/cv/technical-project-ai-systems/')
+    ).toHaveAttribute('href', 'https://alejandroiglesias.github.io/cv/tpm/')
   })
 })
