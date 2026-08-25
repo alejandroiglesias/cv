@@ -203,9 +203,7 @@ export const generalResume: Resume = {
     'Senior Software Engineering roles spanning Frontend, Product & Applied AI',
   ],
   skills: [
-    'Software Engineering',
     'Frontend Architecture',
-    'Product Engineering',
     'Full-stack Development',
     'React',
     'TypeScript',

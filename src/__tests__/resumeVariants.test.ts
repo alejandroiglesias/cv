@@ -264,6 +264,20 @@ describe('resume variants', () => {
       ]),
     )
 
+    expect(generalResume.skills).toEqual(
+      expect.arrayContaining([
+        'Frontend Architecture',
+        'Full-stack Development',
+        'Product & UX Collaboration',
+        'API Design & Integration',
+        'Retrieval-Augmented Generation (RAG)',
+        'AI Evaluation & Benchmarking',
+      ]),
+    )
+    expect(generalResume.skills).not.toEqual(
+      expect.arrayContaining(['Software Engineering', 'Product Engineering']),
+    )
+
     expect(appliedAiResume.skills).toEqual(
       expect.arrayContaining([
         'Mastra',
