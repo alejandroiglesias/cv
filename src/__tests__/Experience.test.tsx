@@ -55,6 +55,16 @@ describe('Experience', () => {
     expect(summaryGroup).toContainElement(linkedIn)
   })
 
+  it('gives the longer Spanish earlier-experience summary more horizontal room', () => {
+    render(<Experience resume={appliedAiEsResume} />)
+
+    const summary = screen.getByText(appliedAiEsResume.earlierExperienceSummary)
+    const summaryGroup = summary.closest('[data-print-group="experience-summary-linkedin"]')
+
+    expect(summaryGroup).toHaveClass('md:px-20', 'print:px-16')
+    expect(summaryGroup).not.toHaveClass('md:px-28')
+  })
+
   it('does not render historical roles until expanded', () => {
     render(<Experience resume={frontendResume} />)
     const historical = frontendResume.roles.filter((r) => !r.featured)

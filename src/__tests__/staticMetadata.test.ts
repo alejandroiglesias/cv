@@ -53,7 +53,7 @@ const staticPages = [
     canonical: '/ai/es/',
     title: 'Alejandro García Iglesias · Senior Software Engineer — IA Aplicada',
     description:
-      'Senior Software Engineer con más de 19 años de experiencia en ingeniería de software y especialización en IA aplicada: RAG, agentes, LangGraph y MCP.',
+      'Senior Software Engineer con más de 19 años de experiencia en desarrollo full-stack, frontend y product engineering, con foco actual en IA aplicada: RAG, agentes, LangGraph y MCP.',
   },
   {
     file: 'tpm/index.html',

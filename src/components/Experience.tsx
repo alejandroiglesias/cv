@@ -7,6 +7,7 @@ import { Role } from './Role'
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { useRevealViewport } from '@/hooks/useRevealViewport'
+import { cn } from '@/lib/utils'
 
 interface ExperienceProps {
   resume: Resume
@@ -61,7 +62,10 @@ export function Experience({ resume }: ExperienceProps) {
       </div>
 
       <div
-        className="print-experience-summary-linkedin mt-3 mb-0 px-4 text-center text-sm text-muted-foreground sm:px-16 md:px-28 print:border-b print:border-border print:px-16"
+        className={cn(
+          'print-experience-summary-linkedin mt-3 mb-0 px-4 text-center text-sm text-muted-foreground sm:px-16 print:border-b print:border-border print:px-16',
+          copy.locale === 'es' ? 'md:px-20' : 'md:px-28',
+        )}
         data-print-group="experience-summary-linkedin"
       >
         <p>{resume.earlierExperienceSummary}</p>

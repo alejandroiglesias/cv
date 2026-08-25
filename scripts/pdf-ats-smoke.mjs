@@ -51,12 +51,26 @@ const defaultContracts = [
   {
     filename: 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'IA Aplicada'],
-    firstBulletMarker: 'Trabajé con los dos socios fundadores de Juana Casa',
+    firstBulletMarker: 'Trabajé junto a los dos socios fundadores de Juana Casa',
     sections: [
       'Resumen Profesional',
       'ÁREAS DE ENFOQUE',
       'Habilidades',
       'Experiencia',
+    ],
+    historyMarkers: [
+      'Independent Product R&D & AI Consulting',
+      'abr 2026',
+      'Rotunda Software',
+      'abr 2022',
+      'BairesDev',
+      'mar 2020',
+      'Mapme',
+      'nov 2016',
+      'Deviget',
+      'dic 2013',
+      'Vulsai',
+      '2012',
     ],
   },
   {
@@ -150,7 +164,7 @@ function validateExtractedText(text, contract) {
     contract.filename,
   )
   assertExactMarkersInOrder(normalized, contract.sections ?? expectedSections, contract.filename)
-  assertMarkersInOrder(normalized, expectedHistory, contract.filename)
+  assertMarkersInOrder(normalized, contract.historyMarkers ?? expectedHistory, contract.filename)
 
   const firstBulletIndex = findMarker(normalized, contract.firstBulletMarker)
   const nextRoleIndex = findMarker(normalized, 'Rotunda Software')

@@ -17,6 +17,20 @@ const englishVariants = [
 
 const variants = [...englishVariants, appliedAiEsResume]
 
+function localizeSharedDate(date: string): string {
+  const monthTranslations: Record<string, string> = {
+    Mar: 'mar',
+    Apr: 'abr',
+    Nov: 'nov',
+    Dec: 'dic',
+  }
+
+  if (date === 'Present') return 'Actualidad'
+
+  const [month, year] = date.split(' ')
+  return year && monthTranslations[month] ? `${monthTranslations[month]} ${year}` : date
+}
+
 describe('resume variants', () => {
   it('keeps the General resume as the default and root canonical', () => {
     expect(getResumeForPath('/cv/')).toBe(generalResume)
@@ -134,7 +148,7 @@ describe('resume variants', () => {
     expect(appliedAiEsResume.name).toBe(sharedResumeFacts.name)
     expect(appliedAiEsResume.location).toBe(sharedResumeFacts.location)
     expect(appliedAiEsResume.earlierExperienceSummary).toBe(
-      'Experiencia full-stack previa en cuatro roles, construyendo aplicaciones web de punta a punta: frontend, backend, APIs, bases de datos e infraestructura.',
+      'Experiencia full-stack previa en cuatro roles, desarrollando aplicaciones web de punta a punta: frontend, backend, APIs, bases de datos e infraestructura.',
     )
     expect(appliedAiEsResume.roles.filter((role) => !role.featured).map((role) => role.company)).toEqual(
       historical.map((role) => role.company),
@@ -185,8 +199,8 @@ describe('resume variants', () => {
       expect(role.title === sharedRole?.title || role.company === 'Independent Product R&D & AI Consulting').toBe(
         true,
       )
-      expect(role.start).toBe(sharedRole?.start)
-      expect(role.end).toBe(sharedRole?.end)
+      expect(role.start).toBe(localizeSharedDate(sharedRole!.start))
+      expect(role.end).toBe(localizeSharedDate(sharedRole!.end))
       expect(role.featured).toBe(sharedRole?.featured)
     }
   })
@@ -417,16 +431,16 @@ describe('resume variants', () => {
       title: 'Senior Software Engineer — IA Aplicada',
     })
     expect(appliedAiEsResume.roles[0].bullets[0]).toMatch(/Juana Casa/)
-    expect(appliedAiEsResume.roles[0].bullets[1]).toMatch(/pgvector|hybrid retrieval|MCP/i)
+    expect(appliedAiEsResume.roles[0].bullets[1]).toMatch(/pgvector|retrieval híbrido|MCP/i)
     expect(appliedAiEsResume.roles[0].bullets[2]).toMatch(/experimental|LangGraph/i)
     expect(appliedAiEsResume.summary[0]).toMatch(/más de 19 años/)
     expect(appliedAiEsResume.summary.join(' ')).toMatch(/IA aplicada/)
     expect(appliedAiEsResume.skills.slice(0, 8)).toEqual(
       expect.arrayContaining([
-        'IA Generativa',
-        'LLM Applications',
+        'IA generativa',
+        'Aplicaciones con LLMs',
         'Retrieval-Augmented Generation (RAG)',
-        'AI Agents',
+        'Agentes de IA',
         'LangGraph',
         'Mastra',
         'Model Context Protocol (MCP)',
@@ -435,6 +449,13 @@ describe('resume variants', () => {
     expect(appliedAiEsResume.skills).not.toContain('Python')
     expect(appliedAiEsResume.skills).not.toContain('FastAPI')
     expect(appliedAiEsResume.skills).not.toContain('PyTorch')
+    const spanishContent = JSON.stringify(appliedAiEsResume)
+    expect(spanishContent).toMatch(
+      /IA generativa|aplicaciones con LLMs|RAG|embeddings|agentes|LangGraph|MCP|multi-modelo|React|Node\.js|APIs|punta a punta|Producto|Diseño|autonomía|ownership|automatización|desarrollo asistido por IA|interfaces conversacionales/i,
+    )
+    expect(spanishContent).not.toMatch(
+      /problema mal definido|inteligencia de conocimiento|workflows multi-modelo|varios providers|corrida exploratoria|AI-native|\bspec\b|coding agents|features de producto|apoyando a developers|refactors de frontend|producto consumer|reporting de advertising|rewrite completo|plataforma de advertising|cross-functional|otro engagement|Frontend developer principal|tooling moderno/i,
+    )
     expect(JSON.stringify(appliedAiEsResume)).not.toMatch(/ML training|fine-tuning|CUDA|MLOps|Education|Universidad/i)
     expect(JSON.stringify(appliedAiEsResume)).not.toMatch(/\bGround\b|\bQuorum\b|TuLanding|production AI/i)
   })

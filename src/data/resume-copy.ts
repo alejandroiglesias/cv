@@ -27,7 +27,7 @@ export const spanishResumeCopy: ResumeCopy = {
   showLess: 'Ver menos',
   showEarlierRoles: 'Ver {count} roles full-stack anteriores',
   footerLead: '¿Trabajamos juntos?',
-  footerBody: 'Estoy disponible para roles full-time o por contrato. Escribime:',
+  footerBody: 'Estoy disponible para trabajar full-time o por contrato. Escribime:',
 }
 
 export function getResumeCopy(resume: Resume): ResumeCopy {

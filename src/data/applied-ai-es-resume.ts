@@ -14,7 +14,30 @@ const appliedAiEsContacts = sharedResumeFacts.contacts.map((contact) =>
 
 function translateLocation(location: string | undefined): string | undefined {
   if (location === 'Remote') return 'Remoto'
+  if (location === 'Buenos Aires, AR') return 'Buenos Aires, Argentina'
   return location
+}
+
+function translateDate(date: string): string {
+  const monthTranslations: Record<string, string> = {
+    Jan: 'ene',
+    Feb: 'feb',
+    Mar: 'mar',
+    Apr: 'abr',
+    May: 'may',
+    Jun: 'jun',
+    Jul: 'jul',
+    Aug: 'ago',
+    Sep: 'sep',
+    Oct: 'oct',
+    Nov: 'nov',
+    Dec: 'dic',
+  }
+
+  if (date === 'Present') return 'Actualidad'
+
+  const [month, year] = date.split(' ')
+  return year && monthTranslations[month] ? `${monthTranslations[month]} ${year}` : date
 }
 
 function tailorRole(role: Role): Role {
@@ -22,11 +45,13 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       title: 'Senior Software Engineer — IA Aplicada',
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Trabajé con los dos socios fundadores de Juana Casa y el equipo del estudio para definir el problema de acceso al conocimiento operativo y de proyectos, y construí de punta a punta un asistente de IA en React/Next.js con Mastra, RAG con fuentes, agentes especializados e integraciones con Slack, WhatsApp y APIs.',
-        'A partir de ese problema real estoy construyendo una capa reutilizable de inteligencia de conocimiento para empresas, con RAG, PostgreSQL/pgvector, retrieval vectorial y full-text, hybrid retrieval, reciprocal-rank fusion, reranking, multi-hop acotado, evals y un servidor MCP autenticado para que agentes y asistentes accedan a documentos y datos operativos.',
-        'En un laboratorio experimental de investigación aplicada con LangGraph implementé 14 workflows multi-modelo entre varios providers —routing, mixture-of-agents, solver/verifier, orchestrator/worker— y evalúo factualidad, calidad, latencia y costo con benchmarks reproducibles y una corrida exploratoria con AA-Omniscience.',
-        'Refiné flujos de desarrollo AI-native en discovery, spec, implementación, testing y review, combinando coding agents (Codex, Claude Code, Cursor), agentes de diseño y orquestación, con verificación humana explícita.',
+        'Trabajé junto a los dos socios fundadores de Juana Casa y al equipo del estudio para entender y definir sus necesidades de acceso al conocimiento operativo y de proyectos. A partir de ese discovery, construí de punta a punta un asistente de IA con React/Next.js, Mastra, RAG con fuentes, agentes especializados e integraciones con Slack, WhatsApp y APIs.',
+        'A partir de esa necesidad concreta, estoy desarrollando una capa reutilizable de acceso al conocimiento empresarial con PostgreSQL/pgvector, búsqueda vectorial y full-text, retrieval híbrido con reciprocal-rank fusion, reranking, multi-hop acotado, evals y un servidor MCP autenticado para dar a agentes y asistentes acceso a documentos y datos operativos estructurados.',
+        'Estoy desarrollando un sistema experimental de investigación aplicada con LangGraph para explorar cómo distintos flujos de orquestación multi-modelo afectan la calidad y la confiabilidad factual bajo restricciones prácticas de costo y latencia. Implementé 14 flujos sobre múltiples proveedores —routing, mixture-of-agents, solver/verifier y orchestrator/worker—, validé el pipeline de punta a punta con una prueba de ingeniería acotada y comencé una evaluación exploratoria con AA-Omniscience.',
+        'Refiné flujos de desarrollo asistido por IA a lo largo de discovery, especificación, implementación, testing y review, combinando agentes de código (Codex, Claude Code, Cursor), agentes de diseño y orquestación de agentes, con verificación humana explícita.',
       ],
     }
   }
@@ -35,12 +60,14 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Trabajé sobre una arquitectura de microservicios, con un framework frontend interno, e implementé endpoints de API en Node.js y Express para sostener features de producto.',
-        'Colaboré con backend, diseño, QA y marketing para definir soluciones técnicas y de producto, identificando de forma proactiva mejoras de UX e implementación.',
-        'Fui el referente principal de frontend del equipo, apoyando a developers en decisiones e implementación de UI.',
-        'Lideré la evolución de la librería interna de UI (ModUI): mejoré APIs, simplifiqué el sistema de estilos y aumenté la consistencia.',
-        'Impulsé refactors de frontend a escala, incluyendo migraciones de varias aplicaciones y sitios de marketing.',
+        'Trabajé con una arquitectura de microservicios y un framework frontend interno; además, implementé endpoints de API con Node.js y Express para dar soporte a funcionalidades de producto.',
+        'Colaboré con backend, Diseño, QA y Marketing para definir soluciones técnicas y de producto, e identifiqué proactivamente mejoras de UX e implementación.',
+        'Fui el principal referente frontend del equipo y acompañé a otros desarrolladores en decisiones e implementación de UI.',
+        'Lideré la evolución de la librería interna de UI (ModUI): mejoré sus APIs, simplifiqué el sistema de estilos y aumenté la consistencia.',
+        'Impulsé refactorizaciones de frontend a gran escala, incluidas las migraciones de varias aplicaciones y sitios de marketing.',
       ],
     }
   }
@@ -49,11 +76,13 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'En el equipo de Experiments de Pinterest implementé y testeé variaciones de UI en React sobre el producto consumer, para soportar experimentación de producto.',
-        'Desarrollé y fui owner de la capa de UI de herramientas internas de reporting de advertising: arquitectura de información y presentación de datos.',
-        'Sumé responsabilidades de backend: aprendí Go e implementé APIs para entregar features de punta a punta.',
-        'Colaboré en equipos distribuidos, con code reviews y testing.',
+        'En el equipo de Experiments de Pinterest, implementé y probé variaciones de UI en React sobre su producto principal para habilitar experimentación de producto.',
+        'Tuve ownership de la capa de UI de herramientas internas de reporting publicitario y definí su arquitectura de información y presentación de datos.',
+        'Sumé responsabilidades de backend: aprendí Go e implementé APIs para entregar funcionalidades de punta a punta.',
+        'Trabajé en equipos distribuidos y participé en code reviews y testing.',
       ],
     }
   }
@@ -62,10 +91,12 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Colaboré de cerca con el CTO y el CEO, traduciendo necesidades de negocio en soluciones de UI prácticas y usables, a menudo sin diseños formales.',
-        'Ayudé a evaluar e introducir Vue.js para un rewrite completo del producto, y después lideré la implementación frontend de la aplicación rediseñada desde cero.',
-        'Construí una arquitectura basada en componentes con Vue y Vuex, incluyendo componentes de UI reutilizables pensados para mantenimiento y escala.',
+        'Colaboré de cerca con el CTO y el CEO, traduciendo necesidades de negocio en soluciones de UI prácticas y fáciles de usar, a menudo sin diseños formales.',
+        'Ayudé a evaluar e introducir Vue.js para una reescritura completa del producto y luego lideré desde cero la implementación frontend de la aplicación rediseñada.',
+        'Construí una arquitectura basada en componentes con Vue y Vuex, incluidos componentes de UI reutilizables diseñados para facilitar la mantenibilidad y la escalabilidad.',
       ],
     }
   }
@@ -74,13 +105,15 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Trabajé en una plataforma de advertising a gran escala (AppNexus).',
-        'Construí componentes de UI modulares con AngularJS y prácticas sólidas de testing.',
+        'Trabajé en una plataforma de publicidad a gran escala (AppNexus).',
+        'Construí componentes de UI modulares con AngularJS y buenas prácticas de testing.',
         'Contribuí a mejoras de estructura frontend y organización de CSS.',
         'Participé en el desarrollo de un Style Guide.',
-        'Colaboré en equipos distribuidos y cross-functional.',
-        'Después de AppNexus, construí una UI de administración en React para políticas de seguridad corporativa, en otro engagement.',
+        'Colaboré en equipos distribuidos y multidisciplinarios.',
+        'Después de AppNexus, en otro proyecto para un cliente, construí una UI de administración en React para políticas de seguridad corporativa.',
       ],
     }
   }
@@ -89,12 +122,14 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Frontend developer principal en varios proyectos.',
-        'Introduje tooling moderno de CSS (Sass, Less, Compass), mejorando mantenibilidad y estructura de estilos.',
+        'Fui el principal desarrollador frontend en varios proyectos.',
+        'Introduje herramientas modernas de CSS (Sass, Less, Compass), mejorando la mantenibilidad y la estructura de los estilos.',
         'Construí interfaces de visualización de datos con D3.js.',
         'Desarrollé widgets embebibles autocontenidos.',
-        'Colaboré de cerca con diseño.',
+        'Colaboré de cerca con Diseño.',
       ],
     }
   }
@@ -103,8 +138,10 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Establecí estándares de desarrollo del equipo y formé a quienes se sumaban.',
+        'Establecí estándares de desarrollo para el equipo y formé a quienes se incorporaban.',
         'Entrevisté candidatos.',
         'Desarrollé una aplicación crítica de subastas en tiempo real.',
       ],
@@ -115,9 +152,11 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
         'Trabajé con clientes locales en proyectos variados.',
-        'Desarrollé habilidades de relevamiento de requisitos, estimación y organización.',
+        'Desarrollé habilidades para relevar requisitos, estimar y organizar proyectos.',
       ],
     }
   }
@@ -126,10 +165,12 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Desarrollé backends para campañas de advertising interactivo basadas en Flash.',
+        'Desarrollé backends para campañas de publicidad interactiva basadas en Flash.',
         'Construí una plataforma reutilizable para procesamiento de contenido dinámico.',
-        'Participé en establecer estándares de desarrollo y formé a quienes se sumaban.',
+        'Participé en la definición de estándares de desarrollo y formé a quienes se incorporaban.',
       ],
     }
   }
@@ -138,9 +179,11 @@ function tailorRole(role: Role): Role {
     return {
       ...role,
       location: translateLocation(role.location),
+      start: translateDate(role.start),
+      end: translateDate(role.end),
       bullets: [
-        'Implementé mockups y sitios dinámicos.',
-        'Trabajé frontend y backend sobre un framework PHP interno.',
+        'Implementé maquetas y sitios dinámicos.',
+        'Trabajé tanto en frontend como en backend sobre un framework PHP interno.',
       ],
     }
   }
@@ -148,6 +191,8 @@ function tailorRole(role: Role): Role {
   return {
     ...role,
     location: translateLocation(role.location),
+    start: translateDate(role.start),
+    end: translateDate(role.end),
   }
 }
 
@@ -161,46 +206,46 @@ export const appliedAiEsResume: Resume = {
   seo: {
     title: 'Alejandro García Iglesias · Senior Software Engineer — IA Aplicada',
     description:
-      'Senior Software Engineer con más de 19 años de experiencia en ingeniería de software y especialización en IA aplicada: RAG, agentes, LangGraph y MCP.',
+      'Senior Software Engineer con más de 19 años de experiencia en desarrollo full-stack, frontend y product engineering, con foco actual en IA aplicada: RAG, agentes, LangGraph y MCP.',
     canonicalPath: '/cv/ai/es/',
   },
   summary: [
-    'Senior Software Engineer con más de 19 años de experiencia en ingeniería de software: empecé en desarrollo full-stack, me especialicé en profundidad en frontend y product engineering, y hoy mi foco está en sistemas de IA aplicada.',
+    'Senior Software Engineer con más de 19 años de experiencia, desde el desarrollo full-stack hasta una profunda especialización en frontend y product engineering, y con foco actual en sistemas de IA aplicada.',
     'Construyo soluciones de punta a punta combinando producto, frontend, backend, retrieval, integraciones y agentes para resolver problemas concretos.',
-    'Tomo decisiones técnicas con autonomía, trabajo codo a codo con Producto y Diseño, y llevo las soluciones desde un problema mal definido hasta una implementación usable, con evaluación y verificación humana.',
+    'Trabajo con autonomía desde la definición del problema y la experiencia hasta la implementación, evaluación e iteración de la solución, colaborando de cerca con Producto y Diseño y tomando decisiones técnicas a lo largo de todo el proceso.',
   ],
   earlierExperienceSummary:
-    'Experiencia full-stack previa en cuatro roles, construyendo aplicaciones web de punta a punta: frontend, backend, APIs, bases de datos e infraestructura.',
+    'Experiencia full-stack previa en cuatro roles, desarrollando aplicaciones web de punta a punta: frontend, backend, APIs, bases de datos e infraestructura.',
   focusAreas: [
     'Sistemas de IA aplicada e ingeniería de software',
-    'RAG, retrieval e inteligencia de conocimiento',
+    'RAG, retrieval y sistemas de conocimiento',
     'Agentes, MCP y orquestación (LangGraph, Mastra)',
     'Product engineering de punta a punta',
-    'Roles de Senior Software Engineer con foco en IA aplicada',
+    'Productos con IA, automatización e interfaces conversacionales',
   ],
   skills: [
-    'IA Generativa',
-    'LLM Applications',
+    'IA generativa',
+    'Aplicaciones con LLMs',
     'Retrieval-Augmented Generation (RAG)',
-    'AI Agents',
-    'Orquestación de Agentes',
+    'Agentes de IA',
+    'Orquestación de agentes',
     'LangGraph',
     'Mastra',
     'Model Context Protocol (MCP)',
     'Embeddings',
-    'Búsqueda Vectorial',
-    'Hybrid Retrieval & Reranking',
+    'Búsqueda vectorial',
+    'Retrieval híbrido y reranking',
     'PostgreSQL / pgvector',
-    'AI Evaluation & Benchmarking',
-    'Model Routing',
-    'Product Engineering',
+    'Evaluación de IA y benchmarking',
+    'Integración multi-modelo y model routing',
+    'Product engineering',
     'React',
     'Next.js',
     'TypeScript',
     'JavaScript',
     'Node.js',
-    'APIs & Integrations',
-    'AI-assisted Development',
+    'APIs e integraciones',
+    'Desarrollo asistido por IA',
   ],
   roles: sharedResumeFacts.roles.map(tailorRole),
 }
