@@ -211,6 +211,8 @@ export const generalResume: Resume = {
     'Design Systems',
     'System Design',
     'Product & UX Collaboration',
+    'Technical Leadership',
+    'Requirements Definition',
     'Node.js',
     'API Design & Integration',
     'Retrieval-Augmented Generation (RAG)',

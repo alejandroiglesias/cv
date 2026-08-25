@@ -269,6 +269,8 @@ describe('resume variants', () => {
         'Frontend Architecture',
         'Full-stack Development',
         'Product & UX Collaboration',
+        'Technical Leadership',
+        'Requirements Definition',
         'API Design & Integration',
         'Retrieval-Augmented Generation (RAG)',
         'AI Evaluation & Benchmarking',
