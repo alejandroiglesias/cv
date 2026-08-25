@@ -11,6 +11,7 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const publicDir = path.join(projectRoot, 'public')
 const distDir = path.join(projectRoot, 'dist')
 const host = '127.0.0.1'
+const pdfGenerationTimeoutMs = 60_000
 
 const pdfs = [
   {
@@ -72,8 +73,9 @@ async function closePreview(server) {
 async function waitForStableFile(filePath) {
   let previousSize = -1
   let stableChecks = 0
+  const startedAt = Date.now()
 
-  for (let attempt = 0; attempt < 300; attempt += 1) {
+  while (Date.now() - startedAt < pdfGenerationTimeoutMs) {
     try {
       const { size } = await stat(filePath)
       stableChecks = size > 0 && size === previousSize ? stableChecks + 1 : 0

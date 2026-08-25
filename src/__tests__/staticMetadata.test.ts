@@ -137,6 +137,8 @@ describe('static metadata and indexing', () => {
     expect(generator.match(/--print-to-pdf=/g)).toHaveLength(1)
     expect(generator).not.toContain("route: '/cv/technical-project-ai-systems/'")
     expect(generator).toContain("from './pdf-ats-smoke.mjs'")
+    expect(generator).toContain('const pdfGenerationTimeoutMs = 60_000')
+    expect(generator).toContain('Date.now() - startedAt < pdfGenerationTimeoutMs')
     expect(atsSmoke).toContain('Professional Summary')
     expect(atsSmoke).toContain('FOCUS AREAS')
     expect(atsSmoke).toContain('Resumen Profesional')

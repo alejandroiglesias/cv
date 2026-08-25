@@ -9,7 +9,7 @@ const appliedAiEsContacts = sharedResumeFacts.contacts.map((contact) =>
         ...contact,
         href: 'https://alejandroiglesias.github.io/cv/ai/es/',
       }
-    : contact,
+    : contact
 )
 
 function translateLocation(location: string | undefined): string | undefined {
@@ -48,9 +48,9 @@ function tailorRole(role: Role): Role {
       start: translateDate(role.start),
       end: translateDate(role.end),
       bullets: [
-        'Trabajé junto a los dos socios fundadores de Juana Casa y al equipo del estudio para entender y definir sus necesidades de acceso al conocimiento operativo y de proyectos. A partir de ese discovery, construí de punta a punta un asistente de IA con React/Next.js, Mastra, RAG con fuentes, agentes especializados e integraciones con Slack, WhatsApp y APIs.',
+        'Trabajé junto a los dos socios fundadores de Juana Casa y al equipo del estudio para entender y definir sus necesidades de acceso al conocimiento operativo y de proyectos. A partir de ese trabajo de discovery, construí de punta a punta un asistente de IA con React/Next.js, Mastra, RAG con fuentes, agentes especializados e integraciones con Slack, WhatsApp y APIs.',
         'A partir de esa necesidad concreta, estoy desarrollando una capa reutilizable de acceso al conocimiento empresarial con PostgreSQL/pgvector, búsqueda vectorial y full-text, retrieval híbrido con reciprocal-rank fusion, reranking, multi-hop acotado, evals y un servidor MCP autenticado para dar a agentes y asistentes acceso a documentos y datos operativos estructurados.',
-        'Estoy desarrollando un sistema experimental de investigación aplicada con LangGraph para explorar cómo distintos flujos de orquestación multi-modelo afectan la calidad y la confiabilidad factual bajo restricciones prácticas de costo y latencia. Implementé 14 flujos sobre múltiples proveedores —routing, mixture-of-agents, solver/verifier y orchestrator/worker—, validé el pipeline de punta a punta con una prueba de ingeniería acotada y comencé una evaluación exploratoria con AA-Omniscience.',
+        'Estoy desarrollando un sistema experimental de investigación aplicada con LangGraph para explorar cómo distintos flujos de orquestación multi-modelo afectan la calidad y la precisión factual de las respuestas bajo restricciones prácticas de costo y latencia. Implementé 14 flujos sobre múltiples proveedores (routing, mixture-of-agents, solver/verifier y orchestrator/worker), validé el pipeline de punta a punta con una prueba técnica acotada y comencé una evaluación exploratoria con AA-Omniscience.',
         'Refiné flujos de desarrollo asistido por IA a lo largo de discovery, especificación, implementación, testing y review, combinando agentes de código (Codex, Claude Code, Cursor), agentes de diseño y orquestación de agentes, con verificación humana explícita.',
       ],
     }
@@ -64,7 +64,7 @@ function tailorRole(role: Role): Role {
       end: translateDate(role.end),
       bullets: [
         'Trabajé con una arquitectura de microservicios y un framework frontend interno; además, implementé endpoints de API con Node.js y Express para dar soporte a funcionalidades de producto.',
-        'Colaboré con backend, Diseño, QA y Marketing para definir soluciones técnicas y de producto, e identifiqué proactivamente mejoras de UX e implementación.',
+        'Colaboré con equipos de backend, Diseño, QA y Marketing para definir soluciones técnicas y de producto, identificando además mejoras de UX e implementación.',
         'Fui el principal referente frontend del equipo y acompañé a otros desarrolladores en decisiones e implementación de UI.',
         'Lideré la evolución de la librería interna de UI (ModUI): mejoré sus APIs, simplifiqué el sistema de estilos y aumenté la consistencia.',
         'Impulsé refactorizaciones de frontend a gran escala, incluidas las migraciones de varias aplicaciones y sitios de marketing.',
@@ -81,7 +81,7 @@ function tailorRole(role: Role): Role {
       bullets: [
         'En el equipo de Experiments de Pinterest, implementé y probé variaciones de UI en React sobre su producto principal para habilitar experimentación de producto.',
         'Tuve ownership de la capa de UI de herramientas internas de reporting publicitario y definí su arquitectura de información y presentación de datos.',
-        'Sumé responsabilidades de backend: aprendí Go e implementé APIs para entregar funcionalidades de punta a punta.',
+        'Sumé responsabilidades de backend: aprendí Go e implementé APIs para desarrollar funcionalidades de punta a punta.',
         'Trabajé en equipos distribuidos y participé en code reviews y testing.',
       ],
     }
@@ -212,7 +212,7 @@ export const appliedAiEsResume: Resume = {
   summary: [
     'Senior Software Engineer con más de 19 años de experiencia, desde el desarrollo full-stack hasta una profunda especialización en frontend y product engineering, y con foco actual en sistemas de IA aplicada.',
     'Construyo soluciones de punta a punta combinando producto, frontend, backend, retrieval, integraciones y agentes para resolver problemas concretos.',
-    'Trabajo con autonomía desde la definición del problema y la experiencia hasta la implementación, evaluación e iteración de la solución, colaborando de cerca con Producto y Diseño y tomando decisiones técnicas a lo largo de todo el proceso.',
+    'Trabajo con autonomía desde la definición del problema y el diseño de la experiencia hasta la implementación, evaluación e iteración de la solución, colaborando de cerca con Producto y Diseño y tomando decisiones técnicas a lo largo de todo el proceso.',
   ],
   earlierExperienceSummary:
     'Experiencia full-stack previa en cuatro roles, desarrollando aplicaciones web de punta a punta: frontend, backend, APIs, bases de datos e infraestructura.',
