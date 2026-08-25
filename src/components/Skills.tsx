@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import type { Resume } from '@/types/resume'
+import { getResumeCopy } from '@/data/resume-copy'
 import { useRevealViewport } from '@/hooks/useRevealViewport'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
@@ -11,6 +12,7 @@ interface SkillsProps {
 export function Skills({ resume }: SkillsProps) {
   const reduced = useReducedMotion()
   const viewport = useRevealViewport()
+  const copy = getResumeCopy(resume)
 
   return (
     <motion.section
@@ -25,7 +27,7 @@ export function Skills({ resume }: SkillsProps) {
         id="skills-heading"
         className="mb-4 font-display text-3xl text-foreground"
       >
-        Skills
+        {copy.skills}
       </h2>
 
       <div className="flex flex-wrap gap-2">

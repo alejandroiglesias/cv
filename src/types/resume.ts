@@ -27,6 +27,21 @@ export interface ResumeSeo {
   canonicalPath: string
 }
 
+export interface ResumeCopy {
+  locale: 'en' | 'es'
+  professionalSummary: string
+  focusAreas: string
+  skills: string
+  experience: string
+  downloadPdf: string
+  fullHistoryOnLinkedIn: string
+  seeFullExperienceOnLinkedIn: string
+  showLess: string
+  showEarlierRoles: string
+  footerLead: string
+  footerBody: string
+}
+
 export interface Resume {
   id: string
   name: string
@@ -40,4 +55,5 @@ export interface Resume {
   skills: string[]
   contacts: ContactLink[]
   roles: Role[]
+  copy?: ResumeCopy
 }

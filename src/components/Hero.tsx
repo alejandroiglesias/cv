@@ -3,6 +3,7 @@ import { MapPin, Download } from './icons'
 import { ContactList } from './ContactList'
 import { Button } from '@/components/ui/button'
 import type { Resume } from '@/types/resume'
+import { getResumeCopy } from '@/data/resume-copy'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface HeroProps {
@@ -11,6 +12,7 @@ interface HeroProps {
 
 export function Hero({ resume }: HeroProps) {
   const reduced = useReducedMotion()
+  const copy = getResumeCopy(resume)
   const [primaryTitle, ...rest] = resume.title.split('|')
   const tagline = rest.join('|').trim()
 
@@ -46,7 +48,7 @@ export function Hero({ resume }: HeroProps) {
               {resume.name}
             </h1>
 
-            <p className="mt-2 sm:mt-4 font-mono text-sm uppercase tracking-widest text-accent">
+            <p className="mt-2 sm:mt-4 max-w-full break-words font-mono text-sm uppercase tracking-wider sm:tracking-widest text-accent">
               {primaryTitle.trim()}
             </p>
             {tagline && <p className="text-sm text-muted-foreground">{tagline}</p>}
@@ -79,7 +81,7 @@ export function Hero({ resume }: HeroProps) {
           <Button asChild size="sm" variant="outline">
             <a href={resume.pdfPath} download className="gap-2">
               <Download className="h-3.5 w-3.5" />
-              Download PDF
+              {copy.downloadPdf}
             </a>
           </Button>
         </motion.div>

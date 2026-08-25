@@ -10,9 +10,15 @@ import { useState } from 'react'
 
 interface OlderRolesProps {
   roles: RoleType[]
+  showLess?: string
+  showEarlierRoles?: string
 }
 
-export function OlderRoles({ roles }: OlderRolesProps) {
+export function OlderRoles({
+  roles,
+  showLess = 'Show less',
+  showEarlierRoles,
+}: OlderRolesProps) {
   const [open, setOpen] = useState(false)
   const reduced = useReducedMotion()
 
@@ -30,7 +36,7 @@ export function OlderRoles({ roles }: OlderRolesProps) {
         <ChevronDown
           className={cn('h-4 w-4 transition-transform duration-200', open && 'rotate-180')}
         />
-        {open ? 'Show less' : `Show ${roles.length} earlier full-stack roles`}
+        {open ? showLess : (showEarlierRoles ?? `Show ${roles.length} earlier full-stack roles`)}
       </CollapsibleTrigger>
 
       <CollapsibleContent className="overflow-hidden">

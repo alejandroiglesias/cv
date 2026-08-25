@@ -49,6 +49,13 @@ const staticPages = [
       'Senior Software Engineer with a frontend and full-stack foundation, applying retrieval, MCP, agents, and multi-model workflows to practical AI systems.',
   },
   {
+    file: 'ai/es/index.html',
+    canonical: '/ai/es/',
+    title: 'Alejandro García Iglesias · Senior Software Engineer — IA Aplicada',
+    description:
+      'Senior Software Engineer con más de 19 años de experiencia en ingeniería de software y especialización en IA aplicada: RAG, agentes, LangGraph y MCP.',
+  },
+  {
     file: 'tpm/index.html',
     canonical: '/tpm/',
     title: 'Alejandro García Iglesias · Senior Software Engineer | Technical Project Delivery',
@@ -88,7 +95,7 @@ describe('static metadata and indexing', () => {
     expect(html).not.toMatch(/noindex/i)
   })
 
-  it('publishes exactly the five canonical pages and excludes aliases', () => {
+  it('publishes the canonical pages and excludes aliases', () => {
     const sitemap = readProjectFile('public/sitemap.xml')
     const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
       ([, location]) => location,
@@ -99,13 +106,14 @@ describe('static metadata and indexing', () => {
       `${baseUrl}/frontend/`,
       `${baseUrl}/product/`,
       `${baseUrl}/ai/`,
+      `${baseUrl}/ai/es/`,
       `${baseUrl}/tpm/`,
     ])
     expect(sitemap).not.toContain('/general/')
     expect(sitemap).not.toContain('/technical-project-ai-systems/')
   })
 
-  it('generates five canonical PDFs and copies the legacy TPM filename', () => {
+  it('generates the canonical PDFs and copies the legacy TPM filename', () => {
     const generator = readProjectFile('scripts/generate-pdfs.mjs')
     const atsSmoke = readProjectFile('scripts/pdf-ats-smoke.mjs')
     const expectedPdfs = [
@@ -113,6 +121,7 @@ describe('static metadata and indexing', () => {
       ["route: '/cv/frontend/'", 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
       ["route: '/cv/product/'", 'alejandro-garcia-iglesias-product-engineer-cv.pdf'],
       ["route: '/cv/ai/'", 'alejandro-garcia-iglesias-applied-ai-cv.pdf'],
+      ["route: '/cv/ai/es/'", 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf'],
       ["route: '/cv/tpm/'", 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
     ]
 
@@ -130,6 +139,10 @@ describe('static metadata and indexing', () => {
     expect(generator).toContain("from './pdf-ats-smoke.mjs'")
     expect(atsSmoke).toContain('Professional Summary')
     expect(atsSmoke).toContain('FOCUS AREAS')
+    expect(atsSmoke).toContain('Resumen Profesional')
+    expect(atsSmoke).toContain('ÁREAS DE ENFOQUE')
+    expect(atsSmoke).toContain('Habilidades')
+    expect(atsSmoke).toContain('Experiencia')
   })
 
   it('keeps generated PDF artifacts and the legacy TPM copy in sync', () => {
@@ -138,6 +151,7 @@ describe('static metadata and indexing', () => {
       'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
       'alejandro-garcia-iglesias-product-engineer-cv.pdf',
       'alejandro-garcia-iglesias-applied-ai-cv.pdf',
+      'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
       'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
     ]
     const publicPdfs = canonicalPdfs.map((filename) => resolve(process.cwd(), 'public', filename))
@@ -153,7 +167,7 @@ describe('static metadata and indexing', () => {
     expect(readFileSync(legacyPath)).toEqual(readFileSync(tpmPath!))
   })
 
-  it('keeps all seven static HTML entries wired into Vite', () => {
+  it('keeps all eight static HTML entries wired into Vite', () => {
     const viteConfig = readProjectFile('vite.config.ts')
     for (const entry of [
       'index.html',
@@ -161,6 +175,7 @@ describe('static metadata and indexing', () => {
       'frontend/index.html',
       'product/index.html',
       'ai/index.html',
+      'ai/es/index.html',
       'tpm/index.html',
       'technical-project-ai-systems/index.html',
     ]) {

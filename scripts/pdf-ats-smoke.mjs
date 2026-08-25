@@ -49,6 +49,17 @@ const defaultContracts = [
     firstBulletMarker: 'Partnered with Juana Casa',
   },
   {
+    filename: 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
+    titleMarkers: ['Senior Software Engineer', 'IA Aplicada'],
+    firstBulletMarker: 'Trabajé con los dos socios fundadores de Juana Casa',
+    sections: [
+      'Resumen Profesional',
+      'ÁREAS DE ENFOQUE',
+      'Habilidades',
+      'Experiencia',
+    ],
+  },
+  {
     filename: 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'Technical Project Delivery'],
     firstBulletMarker: 'Worked directly with Juana Casa',
@@ -138,7 +149,7 @@ function validateExtractedText(text, contract) {
     ['Alejandro García Iglesias', ...contract.titleMarkers, 'ale.garciaiglesias@gmail.com'],
     contract.filename,
   )
-  assertExactMarkersInOrder(normalized, expectedSections, contract.filename)
+  assertExactMarkersInOrder(normalized, contract.sections ?? expectedSections, contract.filename)
   assertMarkersInOrder(normalized, expectedHistory, contract.filename)
 
   const firstBulletIndex = findMarker(normalized, contract.firstBulletMarker)
@@ -160,6 +171,7 @@ function withDefaultContract(file) {
     ...file,
     titleMarkers: file.titleMarkers ?? defaults.titleMarkers,
     firstBulletMarker: file.firstBulletMarker ?? defaults.firstBulletMarker,
+    sections: file.sections ?? defaults.sections,
   }
 }
 

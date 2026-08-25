@@ -14,6 +14,7 @@ export default defineConfig({
         frontend: path.resolve(__dirname, 'frontend/index.html'),
         product: path.resolve(__dirname, 'product/index.html'),
         ai: path.resolve(__dirname, 'ai/index.html'),
+        aiEs: path.resolve(__dirname, 'ai/es/index.html'),
         tpm: path.resolve(__dirname, 'tpm/index.html'),
         technicalProjectAiSystems: path.resolve(
           __dirname,

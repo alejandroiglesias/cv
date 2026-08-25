@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import { Experience } from '../components/Experience'
+import { appliedAiEsResume } from '../data/applied-ai-es-resume'
 import { frontendResume } from '../data/frontend-resume'
 
 vi.mock('framer-motion', () => {
@@ -73,5 +74,15 @@ describe('Experience', () => {
     for (const role of historical) {
       expect(await screen.findByText(role.company)).toBeInTheDocument()
     }
+  })
+
+  it('reveals historical roles after clicking the Spanish expand control', async () => {
+    const user = userEvent.setup()
+    render(<Experience resume={appliedAiEsResume} />)
+
+    expect(screen.queryByText('Yanma Solutions')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Ver 4 roles full-stack anteriores' }))
+    expect(await screen.findByText('Yanma Solutions')).toBeInTheDocument()
+    expect(screen.getAllByText('Fullstack Developer')).toHaveLength(4)
   })
 })

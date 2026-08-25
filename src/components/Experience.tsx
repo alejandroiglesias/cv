@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Linkedin } from './icons'
 import { OlderRoles } from './OlderRoles'
 import type { Resume } from '@/types/resume'
+import { formatEarlierRolesLabel, getResumeCopy } from '@/data/resume-copy'
 import { Role } from './Role'
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -14,6 +15,7 @@ interface ExperienceProps {
 export function Experience({ resume }: ExperienceProps) {
   const reduced = useReducedMotion()
   const viewport = useRevealViewport()
+  const copy = getResumeCopy(resume)
   const featured = resume.roles.filter((r) => r.featured)
   const historical = resume.roles.filter((r) => !r.featured)
 
@@ -28,7 +30,7 @@ export function Experience({ resume }: ExperienceProps) {
     >
       <div className="mb-6 flex items-baseline justify-between">
         <h2 id="experience-heading" className="font-display text-3xl text-foreground">
-          Experience
+          {copy.experience}
         </h2>
         <Button
           asChild
@@ -42,7 +44,7 @@ export function Experience({ resume }: ExperienceProps) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Full history on LinkedIn →
+            {copy.fullHistoryOnLinkedIn}
           </a>
         </Button>
       </div>
@@ -66,7 +68,7 @@ export function Experience({ resume }: ExperienceProps) {
         <div className="hidden py-2 text-center" data-print="only">
           <span className="inline-flex items-center gap-1.5 leading-none">
             <Linkedin className="h-3.5 w-3.5 text-foreground" aria-hidden />
-            <span>See my full experience on LinkedIn:</span>
+            <span>{copy.seeFullExperienceOnLinkedIn}</span>
             <span className="text-foreground">in/alegarciaiglesias</span>
           </span>
         </div>
@@ -74,7 +76,11 @@ export function Experience({ resume }: ExperienceProps) {
 
       {historical.length > 0 && (
         <div className="border-b border-border" data-print="hidden">
-          <OlderRoles roles={historical} />
+          <OlderRoles
+            roles={historical}
+            showLess={copy.showLess}
+            showEarlierRoles={formatEarlierRolesLabel(copy, historical.length)}
+          />
         </div>
       )}
     </motion.section>
