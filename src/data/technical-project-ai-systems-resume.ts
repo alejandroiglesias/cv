@@ -52,10 +52,10 @@ export const technicalProjectAiSystemsResume: Resume = {
   id: 'tpm',
   ...sharedResumeFacts,
   contacts: technicalProjectContacts,
-  title: 'Senior Software Engineer',
+  title: 'Senior Software Engineer | Technical Project Delivery',
   pdfPath: '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
   seo: {
-    title: 'Alejandro García Iglesias · Senior Software Engineer',
+    title: 'Alejandro García Iglesias · Senior Software Engineer | Technical Project Delivery',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
     canonicalPath: '/cv/tpm/',
@@ -65,7 +65,7 @@ export const technicalProjectAiSystemsResume: Resume = {
     'I work at the intersection of business, product, and engineering—collaborating with stakeholders, translating complex needs into practical technical solutions, identifying trade-offs, and helping cross-functional teams move from ambiguity toward execution.',
     "My recent work focuses on AI systems, workflow automation, integrations, and turning operational processes into software; I'm now seeking a Technical Project Manager opportunity where I can combine that engineering depth with product, requirements, and AI systems delivery.",
   ],
-  interests: [
+  focusAreas: [
     'Technical project and product delivery for complex software systems',
     'AI systems, workflow automation & process improvement',
     'Business-to-technical requirements translation',
@@ -73,11 +73,16 @@ export const technicalProjectAiSystemsResume: Resume = {
     'Roles combining engineering depth with project and product ownership',
   ],
   skills: [
+    'Project Management',
+    'Technical Project Delivery',
+    'Project Planning',
+    'Scope Management',
     'Business-to-Technical Translation',
     'Stakeholder Collaboration',
     'Cross-functional Coordination',
-    'Requirements Discovery & Definition',
+    'Requirements Gathering & Definition',
     'Technical Leadership',
+    'Technical Decision-Making',
     'System Design & Architecture',
     'Architecture Trade-off Analysis',
     'API & Systems Integration',

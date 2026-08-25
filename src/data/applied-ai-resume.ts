@@ -66,11 +66,11 @@ export const appliedAiResume: Resume = {
     canonicalPath: '/cv/ai/',
   },
   summary: [
-    'Senior Software Engineer with a frontend and full-stack foundation and a product-engineering perspective, now focused on applied AI systems that connect software engineering, retrieval, integrations, and agent workflows to concrete operational problems.',
+    'Senior Software Engineer with 19+ years of experience across full-stack web development, deep frontend and product engineering, and a recent specialization in Applied AI systems that connect software engineering, retrieval, integrations, and agent workflows to concrete operational problems.',
     'I have built and investigated systems using React/Next.js, Mastra, source-backed RAG, authenticated MCP, specialized agents, and multi-model orchestration, keeping prototypes, ongoing development, and exploratory evaluation clearly distinct.',
     'My work combines engineering judgment with product context: understanding the source data, defining useful system boundaries, making integrations reliable, and keeping AI-assisted workflows observable and human-verified.',
   ],
-  interests: [
+  focusAreas: [
     'Applied AI systems and software engineering',
     'RAG, document retrieval, and knowledge-intelligence workflows',
     'MCP integrations and AI agents',
@@ -78,13 +78,16 @@ export const appliedAiResume: Resume = {
     'Senior Software Engineering roles focused on applied AI',
   ],
   skills: [
+    'LLM Applications',
     'Retrieval-Augmented Generation (RAG)',
+    'Embeddings',
+    'Vector Search',
+    'Hybrid Retrieval & Reranking',
+    'PostgreSQL & pgvector',
     'Mastra',
-    'AI Agents',
-    'MCP Integrations',
+    'Agent Orchestration',
+    'Model Context Protocol (MCP)',
     'LangGraph',
-    'Model Routing & Orchestration',
-    'Multi-model Workflows',
     'AI Evaluation & Benchmarking',
     'TypeScript',
     'JavaScript',
@@ -93,7 +96,6 @@ export const appliedAiResume: Resume = {
     'Node.js',
     'API Integration',
     'Microservices',
-    'Technical Documentation',
   ],
   roles: sharedResumeFacts.roles.map(tailorRole),
 }

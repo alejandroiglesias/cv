@@ -36,7 +36,7 @@ export interface Resume {
   seo: ResumeSeo
   summary: string[]
   earlierExperienceSummary: string
-  interests: string[]
+  focusAreas: string[]
   skills: string[]
   contacts: ContactLink[]
   roles: Role[]

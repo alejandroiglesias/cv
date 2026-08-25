@@ -51,14 +51,14 @@ const staticPages = [
   {
     file: 'tpm/index.html',
     canonical: '/tpm/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer',
+    title: 'Alejandro García Iglesias · Senior Software Engineer | Technical Project Delivery',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
   },
   {
     file: 'technical-project-ai-systems/index.html',
     canonical: '/tpm/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer',
+    title: 'Alejandro García Iglesias · Senior Software Engineer | Technical Project Delivery',
     description:
       'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
   },
@@ -107,6 +107,7 @@ describe('static metadata and indexing', () => {
 
   it('generates five canonical PDFs and copies the legacy TPM filename', () => {
     const generator = readProjectFile('scripts/generate-pdfs.mjs')
+    const atsSmoke = readProjectFile('scripts/pdf-ats-smoke.mjs')
     const expectedPdfs = [
       ["route: '/cv/'", 'alejandro-garcia-iglesias-general-cv.pdf'],
       ["route: '/cv/frontend/'", 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
@@ -126,6 +127,9 @@ describe('static metadata and indexing', () => {
     expect(generator).toContain('path.join(distDir, legacyTpmFilename)')
     expect(generator.match(/--print-to-pdf=/g)).toHaveLength(1)
     expect(generator).not.toContain("route: '/cv/technical-project-ai-systems/'")
+    expect(generator).toContain("from './pdf-ats-smoke.mjs'")
+    expect(atsSmoke).toContain('Professional Summary')
+    expect(atsSmoke).toContain('FOCUS AREAS')
   })
 
   it('keeps generated PDF artifacts and the legacy TPM copy in sync', () => {

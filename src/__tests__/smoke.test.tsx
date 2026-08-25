@@ -32,7 +32,8 @@ describe('App', () => {
 
   it('renders all section headings', () => {
     render(<App />)
-    expect(screen.getByText('About')).toBeInTheDocument()
+    expect(screen.getByText('Professional Summary')).toBeInTheDocument()
+    expect(screen.getByText('Focus Areas')).toBeInTheDocument()
     expect(screen.getByText('Skills')).toBeInTheDocument()
     expect(screen.getByText('Experience')).toBeInTheDocument()
   })
@@ -59,6 +60,7 @@ describe('App', () => {
     render(<App resume={technicalProjectAiSystemsResume} />)
 
     expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
+    expect(screen.getByText('Technical Project Delivery', { selector: 'p' })).toBeInTheDocument()
     expect(
       screen.getByText('Senior Software Engineer — Technical Product & AI Systems'),
     ).toBeInTheDocument()

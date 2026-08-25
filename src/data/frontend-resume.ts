@@ -44,7 +44,7 @@ export const frontendResume: Resume = {
     'I work beyond implementation, helping define product and technical solutions, improving architecture, creating reusable UI patterns, and simplifying complexity to help teams move faster.',
     "I've often acted as a frontend reference across teams, driving refactors, improving design-to-development workflows, and contributing to product, UX, and technical decisions.",
   ],
-  interests: [
+  focusAreas: [
     'Frontend architecture & system design',
     'Design systems & reusable UI patterns',
     'Product-focused frontend engineering',
@@ -56,6 +56,7 @@ export const frontendResume: Resume = {
     'UI Engineering',
     'Component Architecture',
     'Design Systems',
+    'Next.js',
     'React',
     'TypeScript',
     'Technical Leadership',

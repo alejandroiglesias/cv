@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { preview } from 'vite'
+import { validateGeneratedPdfs } from './pdf-ats-smoke.mjs'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = path.join(projectRoot, 'public')
@@ -138,7 +139,7 @@ try {
   await mkdir(publicDir, { recursive: true })
   await mkdir(distDir, { recursive: true })
 
-  await Promise.all(
+  const generatedPdfs = await Promise.all(
     pdfs.map(async (pdf, index) => {
       const profileDir = path.join(tempDir, `profile-${index}`)
       const generatedPath = path.join(tempDir, pdf.filename)
@@ -173,13 +174,19 @@ try {
         generatedPath,
       )
 
-      await Promise.all([
-        copyFile(generatedPath, publicPath),
-        copyFile(generatedPath, distPath),
-      ])
-      console.log(`Generated ${pdf.filename}`)
+      return { ...pdf, path: generatedPath, publicPath, distPath }
     }),
   )
+
+  await validateGeneratedPdfs(generatedPdfs)
+
+  await Promise.all(
+    generatedPdfs.flatMap((pdf) => [
+      copyFile(pdf.path, pdf.publicPath),
+      copyFile(pdf.path, pdf.distPath),
+    ]),
+  )
+  for (const pdf of generatedPdfs) console.log(`Generated ${pdf.filename}`)
 
   const tpmPdf = pdfs.find((pdf) => pdf.route === '/cv/tpm/')
   if (!tpmPdf) throw new Error('TPM PDF configuration is missing.')

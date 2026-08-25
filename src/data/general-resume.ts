@@ -195,7 +195,7 @@ export const generalResume: Resume = {
   ],
   earlierExperienceSummary:
     'Earlier full-stack experience across four roles building web applications end-to-end with frontend, backend, APIs, databases, and infrastructure.',
-  interests: [
+  focusAreas: [
     'Product-focused software engineering and end-to-end ownership',
     'Frontend architecture, UI systems & design systems',
     'Applied AI products, retrieval & agent workflows',

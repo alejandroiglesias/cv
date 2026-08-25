@@ -8,6 +8,7 @@
     "build": "npm run build:web && npm run pdf:generate",
     "build:web": "tsc -b && vite build",
     "pdf:generate": "node scripts/generate-pdfs.mjs",
+    "pdf:validate": "node scripts/pdf-ats-smoke.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",

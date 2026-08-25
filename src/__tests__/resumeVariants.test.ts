@@ -39,7 +39,7 @@ describe('resume variants', () => {
   it.each([
     [productResume, 'Senior Product Engineer', '/cv/product/', '/cv/alejandro-garcia-iglesias-product-engineer-cv.pdf'],
     [appliedAiResume, 'Senior Software Engineer — Applied AI', '/cv/ai/', '/cv/alejandro-garcia-iglesias-applied-ai-cv.pdf'],
-    [technicalProjectAiSystemsResume, 'Senior Software Engineer', '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
+    [technicalProjectAiSystemsResume, 'Senior Software Engineer | Technical Project Delivery', '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
   ])('publishes the %s editorial contract', (variant, title, canonicalPath, pdfPath) => {
     expect(variant.title).toBe(title)
     expect(variant.seo.canonicalPath).toBe(canonicalPath)
@@ -244,23 +244,24 @@ describe('resume variants', () => {
         'Design Systems',
       ]),
     )
+    expect(frontendResume.skills).toContain('Next.js')
     expect(frontendResume.skills).not.toEqual(
       expect.arrayContaining(['System Design', 'Full-stack Foundations']),
     )
 
     expect(productResume.skills).toEqual(
       expect.arrayContaining([
+        'Product Engineering',
+        'End-to-End Feature Ownership',
         'Product Discovery',
         'Requirements Definition',
         'Prototyping',
         'UX & Design Collaboration',
-      ]),
-    )
-    expect(productResume.skills).not.toEqual(
-      expect.arrayContaining([
-        'Product Engineering',
-        'End-to-end Product Ownership',
-        'Product Thinking',
+        'Backend Development',
+        'API Development',
+        'SQL',
+        'PostgreSQL',
+        'Data Modeling',
       ]),
     )
 
@@ -282,9 +283,14 @@ describe('resume variants', () => {
 
     expect(appliedAiResume.skills).toEqual(
       expect.arrayContaining([
+        'LLM Applications',
         'Mastra',
         'Retrieval-Augmented Generation (RAG)',
-        'Model Routing & Orchestration',
+        'Embeddings',
+        'Vector Search',
+        'Hybrid Retrieval & Reranking',
+        'PostgreSQL & pgvector',
+        'Agent Orchestration',
         'AI Evaluation & Benchmarking',
       ]),
     )
@@ -292,17 +298,31 @@ describe('resume variants', () => {
       expect.arrayContaining([
         'Software Engineering',
         'Applied AI Systems',
-        'Python',
         'Grounded RAG',
         'System Design',
       ]),
     )
+    expect(appliedAiResume.skills).not.toContain('Technical Documentation')
+    for (const removedSkill of [
+      'Python',
+      'Tool Use & Tool Calling',
+      'AI Agents',
+      'Model Routing & Orchestration',
+      'Multi-model Workflows',
+    ]) {
+      expect(appliedAiResume.skills).not.toContain(removedSkill)
+    }
 
     expect(technicalProjectAiSystemsResume.skills).toEqual(
       expect.arrayContaining([
+        'Project Management',
+        'Technical Project Delivery',
+        'Project Planning',
+        'Scope Management',
         'Stakeholder Collaboration',
         'Cross-functional Coordination',
-        'Requirements Discovery & Definition',
+        'Requirements Gathering & Definition',
+        'Business-to-Technical Translation',
         'Architecture Trade-off Analysis',
       ]),
     )
@@ -330,6 +350,11 @@ describe('resume variants', () => {
     expect(searchableContent).toContain('14 distinct multi-model workflows')
     expect(searchableContent).not.toMatch(/ML training|fine-tuning|CUDA|MLOps/i)
     expect(searchableContent).not.toMatch(/improved accuracy|reduced hallucinations|production AI/i)
+  })
+
+  it('keeps the Applied AI opening explicit about senior software engineering experience', () => {
+    expect(appliedAiResume.summary[0]).toMatch(/19\+ years of experience/i)
+    expect(appliedAiResume.summary.join(' ')).toMatch(/recent specialization|recent focus/i)
   })
 
   it('frames TPM as a target without unsupported project-management claims', () => {

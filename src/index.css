@@ -182,6 +182,11 @@ body {
     padding-top: 0.6in !important;
   }
 
+  #skills > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   [data-print='hidden'] {
     display: none !important;
   }
