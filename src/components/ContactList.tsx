@@ -25,20 +25,20 @@ export function ContactList({ contacts, className }: ContactListProps) {
         return (
           <li
             key={c.kind}
-            className="flex max-w-full shrink-0 items-center gap-1.5 text-sm text-muted-foreground"
+            className="flex w-full min-w-0 max-w-full items-center gap-1.5 text-sm text-muted-foreground sm:w-auto"
           >
             {Icon && <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />}
             {c.kind === 'email' && c.obfuscated ? (
               <ObfuscatedEmail
                 obfuscated={c.obfuscated}
-                className="break-all transition-colors hover:text-accent"
+                className="min-w-0 break-all transition-colors hover:text-accent"
               />
             ) : (
               <a
                 href={c.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="break-all transition-colors hover:text-accent"
+                className="min-w-0 break-all transition-colors hover:text-accent"
               >
                 {c.label}
               </a>

@@ -237,6 +237,10 @@ body {
     widows: 3;
   }
 
+  #experience article li {
+    line-height: 1.25 !important;
+  }
+
   #experience [data-print='role-header'] {
     break-after: avoid;
     page-break-after: avoid;
