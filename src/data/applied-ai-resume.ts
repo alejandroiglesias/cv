@@ -17,7 +17,7 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Applied AI',
       bullets: [
-        'Partnered with Juana Casa to improve access to project and operational knowledge; built an initial React/Next.js AI assistant with Mastra and source-backed RAG, then implemented specialized OpenAI Workspace Agents through Slack and WhatsApp.',
+        'Partnered directly with Juana Casa’s two founding partners and studio team to understand and define their needs around access to project and operational knowledge. From that discovery, I built the solution end to end: an initial React/Next.js AI assistant with Mastra and source-backed RAG, followed by specialized OpenAI Workspace Agents through Slack and WhatsApp.',
         'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
         'Developing an adaptive multi-model research system built with LangGraph; implemented 14 distinct multi-model workflows across multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began exploratory evaluation with AA-Omniscience under practical cost and latency constraints.',
         'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
@@ -66,16 +66,16 @@ export const appliedAiResume: Resume = {
     canonicalPath: '/cv/ai/',
   },
   summary: [
-    'Senior Software Engineer with 19+ years of experience across full-stack web development, deep frontend and product engineering, and a recent specialization in Applied AI systems that connect software engineering, retrieval, integrations, and agent workflows to concrete operational problems.',
-    'I have built and investigated systems using React/Next.js, Mastra, source-backed RAG, authenticated MCP, specialized agents, and multi-model orchestration, keeping prototypes, ongoing development, and exploratory evaluation clearly distinct.',
-    'My work combines engineering judgment with product context: understanding the source data, defining useful system boundaries, making integrations reliable, and keeping AI-assisted workflows observable and human-verified.',
+    'Senior Software Engineer with 19+ years of experience spanning full-stack web development, deep frontend and product engineering, and a recent focus on Applied AI systems.',
+    'I build end-to-end AI products combining product thinking, frontend, backend, retrieval, integrations, and agent workflows to solve concrete operational problems.',
+    'I work autonomously from problem definition and experience design through implementation, evaluation, and iteration, applying senior engineering judgment in close collaboration with Product and Design.',
   ],
   focusAreas: [
     'Applied AI systems and software engineering',
+    'End-to-end AI product engineering',
     'RAG, document retrieval, and knowledge-intelligence workflows',
     'MCP integrations and AI agents',
     'LangGraph and multi-model orchestration',
-    'Senior Software Engineering roles focused on applied AI',
   ],
   skills: [
     'LLM Applications',
@@ -89,6 +89,7 @@ export const appliedAiResume: Resume = {
     'Model Context Protocol (MCP)',
     'LangGraph',
     'AI Evaluation & Benchmarking',
+    'Product Engineering',
     'TypeScript',
     'JavaScript',
     'React',

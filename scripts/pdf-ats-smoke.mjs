@@ -46,7 +46,7 @@ const defaultContracts = [
   {
     filename: 'alejandro-garcia-iglesias-applied-ai-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'Applied AI'],
-    firstBulletMarker: 'Partnered with Juana Casa',
+    firstBulletMarker: 'Partnered directly with Juana Casa',
   },
   {
     filename: 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
