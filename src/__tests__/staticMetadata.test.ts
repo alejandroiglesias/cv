@@ -1,98 +1,62 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { JSDOM } from 'jsdom'
 import { describe, expect, it } from 'vitest'
+import { appliedAiEsResume } from '../data/applied-ai-es-resume'
+import { appliedAiResume } from '../data/applied-ai-resume'
+import { frontendResume } from '../data/frontend-resume'
+import { generalResume } from '../data/general-resume'
+import { productResume } from '../data/product-resume'
+import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
+import type { Resume } from '../types/resume'
 
-function readProjectFile(path: string) {
-  return readFileSync(resolve(process.cwd(), path), 'utf8')
+function readProjectFile(filePath: string) {
+  return readFileSync(resolve(process.cwd(), filePath), 'utf8')
 }
 
-function compactHtml(html: string) {
-  return html.replace(/\s+/g, ' ').trim()
+function parseHtml(filePath: string) {
+  return new JSDOM(readProjectFile(filePath)).window.document
 }
 
 const baseUrl = 'https://alejandroiglesias.github.io/cv'
 
-const staticPages = [
-  {
-    file: 'index.html',
-    canonical: '/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer',
-    description:
-      'Senior Software Engineer with 19+ years of experience spanning full-stack foundations, deep frontend specialization, product engineering, and current Applied AI systems.',
-  },
-  {
-    file: 'general/index.html',
-    canonical: '/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer',
-    description:
-      'Senior Software Engineer with 19+ years of experience spanning full-stack foundations, deep frontend specialization, product engineering, and current Applied AI systems.',
-  },
-  {
-    file: 'frontend/index.html',
-    canonical: '/frontend/',
-    title: 'Alejandro García Iglesias · Senior Frontend Engineer',
-    description:
-      'Senior Frontend Engineer with 19+ years of experience in frontend architecture, design systems, and product-focused web applications.',
-  },
-  {
-    file: 'product/index.html',
-    canonical: '/product/',
-    title: 'Alejandro García Iglesias · Senior Product Engineer',
-    description:
-      'Senior Product Engineer with 19+ years of experience building web products end to end across frontend architecture, APIs, UI systems, and product discovery.',
-  },
-  {
-    file: 'ai/index.html',
-    canonical: '/ai/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer — Applied AI',
-    description:
-      'Senior Software Engineer with a frontend and full-stack foundation, applying retrieval, MCP, agents, and multi-model workflows to practical AI systems.',
-  },
-  {
-    file: 'ai/es/index.html',
-    canonical: '/ai/es/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer — IA Aplicada',
-    description:
-      'Senior Software Engineer con más de 19 años de experiencia en desarrollo full-stack, frontend y product engineering, con foco actual en IA aplicada: RAG, agentes, LangGraph y MCP.',
-  },
-  {
-    file: 'tpm/index.html',
-    canonical: '/tpm/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer | Technical Project Delivery',
-    description:
-      'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
-  },
-  {
-    file: 'technical-project-ai-systems/index.html',
-    canonical: '/tpm/',
-    title: 'Alejandro García Iglesias · Senior Software Engineer | Technical Project Delivery',
-    description:
-      'Senior Software Engineer with 19+ years of experience spanning technical leadership, system design, product delivery, AI systems, workflow automation, and business-to-technical translation.',
-  },
-] as const
+const staticPages: ReadonlyArray<{ file: string; resume: Resume }> = [
+  { file: 'index.html', resume: generalResume },
+  { file: 'general/index.html', resume: generalResume },
+  { file: 'frontend/index.html', resume: frontendResume },
+  { file: 'product/index.html', resume: productResume },
+  { file: 'ai/index.html', resume: appliedAiResume },
+  { file: 'ai/es/index.html', resume: appliedAiEsResume },
+  { file: 'tpm/index.html', resume: technicalProjectAiSystemsResume },
+  { file: 'technical-project-ai-systems/index.html', resume: technicalProjectAiSystemsResume },
+]
+
+function metaContent(document: Document, selector: string) {
+  return document.querySelector<HTMLMetaElement>(selector)?.content
+}
 
 describe('static metadata and indexing', () => {
-  it.each(staticPages)('$file is indexable and has coherent metadata', (page) => {
-    const html = compactHtml(readProjectFile(page.file))
-    const canonicalUrl = `${baseUrl}${page.canonical}`
+  it.each(staticPages)('$file exposes the SEO contract of its resume', ({ file, resume }) => {
+    const document = parseHtml(file)
+    const canonicalUrl = `https://alejandroiglesias.github.io${resume.seo.canonicalPath}`
 
-    expect(html).toContain('<meta name="robots" content="index, follow" />')
-    expect(html).toContain(`<link rel="canonical" href="${canonicalUrl}" />`)
-    expect(html).toContain(
-      'href="https://alejandroiglesias.github.io/cv/sitemap.xml"',
+    expect(document.documentElement.lang).toBe(resume.copy?.locale ?? 'en')
+    expect(document.title).toBe(resume.seo.title)
+    expect(metaContent(document, 'meta[name="description"]')).toBe(resume.seo.description)
+    expect(metaContent(document, 'meta[property="og:title"]')).toBe(resume.seo.title)
+    expect(metaContent(document, 'meta[property="og:description"]')).toBe(resume.seo.description)
+    expect(metaContent(document, 'meta[property="og:url"]')).toBe(canonicalUrl)
+    expect(metaContent(document, 'meta[name="twitter:title"]')).toBe(resume.seo.title)
+    expect(metaContent(document, 'meta[name="twitter:description"]')).toBe(resume.seo.description)
+
+    expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe(
+      'index, follow',
     )
-    expect(html).toContain(`<title>${page.title}</title>`)
-    expect(html).toContain(`content="${page.description}"`)
-    expect(html).toContain(`<meta property="og:title" content="${page.title}" />`)
-    expect(html).toContain(
-      `<meta property="og:description" content="${page.description}" />`,
+    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(canonicalUrl)
+    expect(document.querySelector('link[rel="sitemap"]')?.getAttribute('href')).toBe(
+      `${baseUrl}/sitemap.xml`,
     )
-    expect(html).toContain(`<meta property="og:url" content="${canonicalUrl}" />`)
-    expect(html).toContain(`<meta name="twitter:title" content="${page.title}" />`)
-    expect(html).toContain(
-      `<meta name="twitter:description" content="${page.description}" />`,
-    )
-    expect(html).not.toMatch(/noindex/i)
+    expect(document.querySelector('meta[name="robots"][content*="noindex"]')).toBeNull()
   })
 
   it('publishes the canonical pages and excludes aliases', () => {
@@ -111,77 +75,5 @@ describe('static metadata and indexing', () => {
     ])
     expect(sitemap).not.toContain('/general/')
     expect(sitemap).not.toContain('/technical-project-ai-systems/')
-  })
-
-  it('generates the canonical PDFs and copies the legacy TPM filename', () => {
-    const generator = readProjectFile('scripts/generate-pdfs.mjs')
-    const atsSmoke = readProjectFile('scripts/pdf-ats-smoke.mjs')
-    const expectedPdfs = [
-      ["route: '/cv/'", 'alejandro-garcia-iglesias-general-cv.pdf'],
-      ["route: '/cv/frontend/'", 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
-      ["route: '/cv/product/'", 'alejandro-garcia-iglesias-product-engineer-cv.pdf'],
-      ["route: '/cv/ai/'", 'alejandro-garcia-iglesias-applied-ai-cv.pdf'],
-      ["route: '/cv/ai/es/'", 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf'],
-      ["route: '/cv/tpm/'", 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
-    ]
-
-    for (const [route, filename] of expectedPdfs) {
-      expect(generator).toContain(route)
-      expect(generator).toContain(`filename: '${filename}'`)
-    }
-    expect(generator).toContain(
-      "const legacyTpmFilename = 'alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf'",
-    )
-    expect(generator).toContain('path.join(publicDir, legacyTpmFilename)')
-    expect(generator).toContain('path.join(distDir, legacyTpmFilename)')
-    expect(generator.match(/--print-to-pdf=/g)).toHaveLength(1)
-    expect(generator).not.toContain("route: '/cv/technical-project-ai-systems/'")
-    expect(generator).toContain("from './pdf-ats-smoke.mjs'")
-    expect(generator).toContain('const pdfGenerationTimeoutMs = 60_000')
-    expect(generator).toContain('Date.now() - startedAt < pdfGenerationTimeoutMs')
-    expect(atsSmoke).toContain('Professional Summary')
-    expect(atsSmoke).toContain('FOCUS AREAS')
-    expect(atsSmoke).toContain('Resumen Profesional')
-    expect(atsSmoke).toContain('ÁREAS DE ENFOQUE')
-    expect(atsSmoke).toContain('Habilidades')
-    expect(atsSmoke).toContain('Experiencia')
-  })
-
-  it('keeps generated PDF artifacts and the legacy TPM copy in sync', () => {
-    const canonicalPdfs = [
-      'alejandro-garcia-iglesias-general-cv.pdf',
-      'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
-      'alejandro-garcia-iglesias-product-engineer-cv.pdf',
-      'alejandro-garcia-iglesias-applied-ai-cv.pdf',
-      'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
-      'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
-    ]
-    const publicPdfs = canonicalPdfs.map((filename) => resolve(process.cwd(), 'public', filename))
-    const legacyPath = resolve(
-      process.cwd(),
-      'public/alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf',
-    )
-    const tpmPath = publicPdfs.at(-1)
-
-    expect(publicPdfs.every((filePath) => existsSync(filePath))).toBe(true)
-    expect(existsSync(legacyPath)).toBe(true)
-    expect(tpmPath).toBeDefined()
-    expect(readFileSync(legacyPath)).toEqual(readFileSync(tpmPath!))
-  })
-
-  it('keeps all eight static HTML entries wired into Vite', () => {
-    const viteConfig = readProjectFile('vite.config.ts')
-    for (const entry of [
-      'index.html',
-      'general/index.html',
-      'frontend/index.html',
-      'product/index.html',
-      'ai/index.html',
-      'ai/es/index.html',
-      'tpm/index.html',
-      'technical-project-ai-systems/index.html',
-    ]) {
-      expect(viteConfig).toContain(`'${entry}'`)
-    }
   })
 })

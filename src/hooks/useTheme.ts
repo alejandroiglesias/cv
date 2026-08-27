@@ -6,9 +6,8 @@ function getSystemTheme(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-function applyTheme(theme: Theme) {
-  const resolved = theme === 'system' ? getSystemTheme() : theme
-  document.documentElement.classList.toggle('dark', resolved === 'dark')
+function applyTheme(theme: 'light' | 'dark') {
+  document.documentElement.classList.toggle('dark', theme === 'dark')
 }
 
 function safeGetTheme(): Theme {
@@ -29,26 +28,27 @@ function safeSaveTheme(theme: Theme) {
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(safeGetTheme)
+  const [systemTheme, setSystemTheme] = useState(getSystemTheme)
+  const resolvedTheme = theme === 'system' ? systemTheme : theme
 
   useEffect(() => {
-    applyTheme(theme)
+    applyTheme(resolvedTheme)
     safeSaveTheme(theme)
-  }, [theme])
+  }, [resolvedTheme, theme])
 
   useEffect(() => {
     if (theme !== 'system') return
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const handler = () => applyTheme('system')
+    const handler = () => setSystemTheme(mq.matches ? 'dark' : 'light')
+    handler()
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [theme])
 
   const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
+    const next = resolvedTheme === 'dark' ? 'light' : 'dark'
     setTheme(next)
   }
-
-  const resolvedTheme = theme === 'system' ? getSystemTheme() : theme
 
   return { theme, resolvedTheme, setTheme, toggleTheme }
 }

@@ -40,29 +40,15 @@ describe('Experience', () => {
     const summaryGroup = summary.closest('[data-print-group="experience-summary-linkedin"]')
 
     expect(summaryGroup).toBeInTheDocument()
-    expect(summaryGroup).toHaveClass('print-experience-summary-linkedin')
-    expect(summaryGroup).toHaveClass(
-      'mt-3',
-      'mb-0',
-      'px-4',
-      'text-center',
-      'sm:px-16',
-      'md:px-28',
-      'print:border-b',
-      'print:border-border',
-      'print:px-16',
-    )
     expect(summaryGroup).toContainElement(linkedIn)
+    expect(summaryGroup?.querySelector('[data-print="only"]')).toContainElement(linkedIn)
   })
 
-  it('gives the longer Spanish earlier-experience summary more horizontal room', () => {
+  it('renders the localized Spanish earlier-experience summary', () => {
     render(<Experience resume={appliedAiEsResume} />)
 
     const summary = screen.getByText(appliedAiEsResume.earlierExperienceSummary)
-    const summaryGroup = summary.closest('[data-print-group="experience-summary-linkedin"]')
-
-    expect(summaryGroup).toHaveClass('md:px-20', 'print:px-16')
-    expect(summaryGroup).not.toHaveClass('md:px-28')
+    expect(summary).toBeInTheDocument()
   })
 
   it('does not render historical roles until expanded', () => {

@@ -1,10 +1,9 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import React from 'react'
 import { App } from '../App'
-import { appliedAiEsResume } from '../data/applied-ai-es-resume'
-import { generalResume } from '../data/general-resume'
-import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
+import { getResumeCopy } from '../data/resume-copy'
+import { resumes } from '../data/resumes'
 
 vi.mock('framer-motion', () => {
   const make = (tag: string) =>
@@ -26,72 +25,28 @@ vi.mock('framer-motion', () => {
 vi.mock('../lib/analytics', () => ({ initAnalytics: vi.fn() }))
 
 describe('App', () => {
-  it('renders the name', () => {
+  it('renders its main sections', () => {
     render(<App />)
-    expect(screen.getByText('Alejandro García Iglesias')).toBeInTheDocument()
-  })
-
-  it('renders all section headings', () => {
-    render(<App />)
-    expect(screen.getByText('Professional Summary')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Professional Summary' })).toBeInTheDocument()
     expect(screen.getByText('Focus Areas')).toBeInTheDocument()
-    expect(screen.getByText('Skills')).toBeInTheDocument()
-    expect(screen.getByText('Experience')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Skills' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Experience' })).toBeInTheDocument()
   })
 
-  it('renders all featured roles', () => {
-    render(<App />)
-    expect(screen.getByText('Rotunda Software')).toBeInTheDocument()
-    expect(screen.getByText('BairesDev')).toBeInTheDocument()
-    expect(screen.getByText('Mapme')).toBeInTheDocument()
-    expect(screen.getByText('Deviget')).toBeInTheDocument()
-  })
+  it.each(Object.values(resumes))('renders the $id variant through the App shell', (resume) => {
+    render(<App resume={resume} />)
+    const copy = getResumeCopy(resume)
+    const [primaryTitle, ...rest] = resume.title.split('|')
+    const tagline = rest.join('|').trim()
+    const hero = screen.getByRole('banner')
 
-  it('renders the General resume by default with its own PDF', () => {
-    render(<App />)
-
-    expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute(
+    expect(within(hero).getByRole('heading', { name: resume.name })).toBeInTheDocument()
+    expect(within(hero).getByText(primaryTitle.trim())).toBeInTheDocument()
+    if (tagline) expect(within(hero).getByText(tagline)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: copy.professionalSummary })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: copy.downloadPdf })).toHaveAttribute(
       'href',
-      generalResume.pdfPath,
+      resume.pdfPath,
     )
-  })
-
-  it('renders the Technical Project / AI Systems variant with its own PDF', () => {
-    render(<App resume={technicalProjectAiSystemsResume} />)
-
-    expect(screen.getByText('Senior Software Engineer')).toBeInTheDocument()
-    expect(screen.getByText('Technical Project Delivery', { selector: 'p' })).toBeInTheDocument()
-    expect(
-      screen.getByText('Senior Software Engineer — Technical Product & AI Systems'),
-    ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute(
-      'href',
-      '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
-    )
-    expect(
-      screen.getByRole('link', {
-        name: 'alejandroiglesias.github.io/cv',
-      }),
-    ).toHaveAttribute('href', 'https://alejandroiglesias.github.io/cv/tpm/')
-  })
-
-  it('renders the Spanish Applied AI variant with localized headings and its own PDF', () => {
-    render(<App resume={appliedAiEsResume} />)
-
-    expect(screen.getByText('Resumen Profesional')).toBeInTheDocument()
-    expect(screen.getByText('Áreas de Enfoque')).toBeInTheDocument()
-    expect(screen.getByText('Habilidades')).toBeInTheDocument()
-    expect(screen.getByText('Experiencia')).toBeInTheDocument()
-    expect(screen.getAllByText('Senior Software Engineer — IA Aplicada').length).toBeGreaterThan(0)
-    expect(screen.getByRole('link', { name: 'Descargar PDF' })).toHaveAttribute(
-      'href',
-      '/cv/alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
-    )
-    expect(
-      screen.getByRole('link', {
-        name: 'alejandroiglesias.github.io/cv',
-      }),
-    ).toHaveAttribute('href', 'https://alejandroiglesias.github.io/cv/ai/es/')
   })
 })

@@ -120,7 +120,10 @@ async function runChrome(chromePath, args, outputPath) {
       new Promise((resolve) => setTimeout(resolve, 2000)),
     ])
   }
-  if (child.exitCode === null) child.kill('SIGKILL')
+  if (child.exitCode === null) {
+    child.kill('SIGKILL')
+    await exitPromise
+  }
 }
 
 const chromePath = await findChrome()

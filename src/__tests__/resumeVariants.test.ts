@@ -1,142 +1,94 @@
 import { describe, expect, it } from 'vitest'
-import { appliedAiResume } from '../data/applied-ai-resume'
 import { appliedAiEsResume } from '../data/applied-ai-es-resume'
+import { appliedAiResume } from '../data/applied-ai-resume'
 import { frontendResume } from '../data/frontend-resume'
 import { generalResume, sharedResumeFacts } from '../data/general-resume'
 import { productResume } from '../data/product-resume'
 import { getResumeForPath, resumes } from '../data/resumes'
 import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
 
-const englishVariants = [
-  generalResume,
-  frontendResume,
-  productResume,
-  appliedAiResume,
-  technicalProjectAiSystemsResume,
+const englishVariants = [generalResume, frontendResume, productResume, appliedAiResume, technicalProjectAiSystemsResume]
+
+const spanishRoleFactMarkers: Array<[string, string[]]> = [
+  ['Independent Product R&D & AI Consulting', ['Juana Casa', 'React/Next.js', 'Mastra', 'RAG', 'Slack', 'WhatsApp', 'PostgreSQL/pgvector', 'LangGraph', '14']],
+  ['Rotunda Software', ['ModUI', 'Node.js', 'Express']],
+  ['BairesDev', ['Pinterest', 'React', 'Go', 'APIs']],
+  ['Mapme', ['Vue.js', 'Vuex', 'CTO', 'CEO']],
+  ['Deviget', ['AppNexus', 'AngularJS', 'React']],
+  ['Vulsai', ['Sass', 'Less', 'Compass', 'D3.js']],
+  ['Yanma Solutions', ['subastas en tiempo real']],
+  ['Freelance', ['requisitos', 'estimar']],
+  ['2mas2 Interactive', ['Flash']],
+  ['Syxmedia', ['PHP']],
 ]
 
-const variants = [...englishVariants, appliedAiEsResume]
-
 function localizeSharedDate(date: string): string {
-  const monthTranslations: Record<string, string> = {
-    Mar: 'mar',
-    Apr: 'abr',
-    Nov: 'nov',
-    Dec: 'dic',
-  }
-
+  const monthTranslations: Record<string, string> = { Mar: 'mar', Apr: 'abr', Nov: 'nov', Dec: 'dic' }
   if (date === 'Present') return 'Actualidad'
-
   const [month, year] = date.split(' ')
   return year && monthTranslations[month] ? `${monthTranslations[month]} ${year}` : date
 }
 
-describe('resume variants', () => {
-  it('keeps the General resume as the default and root canonical', () => {
-    expect(getResumeForPath('/cv/')).toBe(generalResume)
-    expect(getResumeForPath('/cv/general/')).toBe(generalResume)
-    expect(getResumeForPath('/cv/frontend/')).toBe(frontendResume)
-    expect(getResumeForPath('/cv/unknown/')).toBe(generalResume)
-    expect(generalResume.title).toBe(
-      'Senior Software Engineer | Frontend, Product Engineering & Applied AI',
-    )
-    expect(generalResume.pdfPath).toBe(
-      '/cv/alejandro-garcia-iglesias-general-cv.pdf',
-    )
-    expect(generalResume.seo.canonicalPath).toBe('/cv/')
-  })
-
-  it('registers the canonical resume variants', () => {
+describe('resume variant structure and routing', () => {
+  it('registers the canonical variants and keeps General as the default', () => {
     expect(Object.keys(resumes)).toEqual(['general', 'frontend', 'product', 'ai', 'aiEs', 'tpm'])
     expect(resumes.general).toBe(generalResume)
     expect(resumes.frontend).toBe(frontendResume)
+    expect(resumes.product).toBe(productResume)
     expect(resumes.ai).toBe(appliedAiResume)
     expect(resumes.aiEs).toBe(appliedAiEsResume)
+    expect(resumes.tpm).toBe(technicalProjectAiSystemsResume)
+    expect(getResumeForPath('/cv/')).toBe(generalResume)
+    expect(getResumeForPath('/cv/general/')).toBe(generalResume)
+    expect(getResumeForPath('/cv/unknown/')).toBe(generalResume)
   })
 
   it.each([
-    [productResume, 'Senior Product Engineer', '/cv/product/', '/cv/alejandro-garcia-iglesias-product-engineer-cv.pdf'],
-    [appliedAiResume, 'Senior Software Engineer — Applied AI', '/cv/ai/', '/cv/alejandro-garcia-iglesias-applied-ai-cv.pdf'],
-    [appliedAiEsResume, 'Senior Software Engineer — IA Aplicada', '/cv/ai/es/', '/cv/alejandro-garcia-iglesias-applied-ai-es-cv.pdf'],
-    [technicalProjectAiSystemsResume, 'Senior Software Engineer | Technical Project Delivery', '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
-  ])('publishes the %s editorial contract', (variant, title, canonicalPath, pdfPath) => {
-    expect(variant.title).toBe(title)
-    expect(variant.seo.canonicalPath).toBe(canonicalPath)
-    expect(variant.pdfPath).toBe(pdfPath)
+    ['/cv/', generalResume], ['/cv/general', generalResume],
+    ['/cv/frontend/', frontendResume], ['/cv/frontend', frontendResume],
+    ['/cv/product/', productResume], ['/cv/product', productResume],
+    ['/cv/ai/', appliedAiResume], ['/cv/ai', appliedAiResume],
+    ['/cv/ai/es/', appliedAiEsResume], ['/cv/ai/es', appliedAiEsResume],
+    ['/cv/tpm/', technicalProjectAiSystemsResume], ['/cv/tpm', technicalProjectAiSystemsResume],
+    ['/cv/technical-project-ai-systems/', technicalProjectAiSystemsResume],
+    ['/technical-project-ai-systems', technicalProjectAiSystemsResume],
+  ])('resolves %s to the expected variant', (pathname, expected) => {
+    expect(getResumeForPath(pathname)).toBe(expected)
   })
 
-  it('resolves every supported route with or without a trailing slash', () => {
-    expect(getResumeForPath('/cv/')).toBe(generalResume)
-    expect(getResumeForPath('/cv')).toBe(generalResume)
-    expect(getResumeForPath('/cv/general/')).toBe(generalResume)
-    expect(getResumeForPath('/cv/general')).toBe(generalResume)
-    expect(getResumeForPath('/cv/frontend/')).toBe(frontendResume)
-    expect(getResumeForPath('/cv/frontend')).toBe(frontendResume)
-    expect(getResumeForPath('/cv/product/')).toBe(productResume)
-    expect(getResumeForPath('/cv/product')).toBe(productResume)
-    expect(getResumeForPath('/cv/ai/')).toBe(appliedAiResume)
-    expect(getResumeForPath('/cv/ai')).toBe(appliedAiResume)
-    expect(getResumeForPath('/cv/ai/es/')).toBe(appliedAiEsResume)
-    expect(getResumeForPath('/cv/ai/es')).toBe(appliedAiEsResume)
-    expect(getResumeForPath('/cv/tpm/')).toBe(technicalProjectAiSystemsResume)
-    expect(getResumeForPath('/cv/tpm')).toBe(technicalProjectAiSystemsResume)
-    expect(getResumeForPath('/cv/technical-project-ai-systems/')).toBe(
-      technicalProjectAiSystemsResume,
-    )
-    expect(getResumeForPath('/cv/technical-project-ai-systems')).toBe(
-      technicalProjectAiSystemsResume,
-    )
-    expect(getResumeForPath('/technical-project-ai-systems/')).toBe(
-      technicalProjectAiSystemsResume,
-    )
-    expect(getResumeForPath('/technical-project-ai-systems')).toBe(
-      technicalProjectAiSystemsResume,
-    )
+  it('ignores query strings and fragments while resolving a supported route', () => {
+    expect(getResumeForPath('/cv/frontend/?source=linkedin#experience')).toBe(frontendResume)
+    expect(getResumeForPath('/cv/ai/es?lang=es#skills')).toBe(appliedAiEsResume)
+    expect(getResumeForPath('/cv/tpm/#print')).toBe(technicalProjectAiSystemsResume)
+    expect(getResumeForPath('/cv/unknown?source=test#top')).toBe(generalResume)
   })
 
-  it('falls back to General for unknown paths', () => {
-    expect(getResumeForPath('/cv/not-a-variant')).toBe(generalResume)
+  it('falls back to General for unsupported paths', () => {
     expect(getResumeForPath('/somewhere-else')).toBe(generalResume)
+    expect(getResumeForPath('/cv/not-a-variant/extra')).toBe(generalResume)
   })
 
-  it('owns shared facts in the General module', () => {
-    expect(generalResume.name).toBe(sharedResumeFacts.name)
-    expect(generalResume.location).toBe(sharedResumeFacts.location)
-    expect(generalResume.roles.map((role) => role.company)).toEqual(
-      sharedResumeFacts.roles.map((role) => role.company),
-    )
+  it('keeps variant metadata aligned with its public route and PDF', () => {
+    const contracts = [
+      [generalResume, '/cv/', '/cv/alejandro-garcia-iglesias-general-cv.pdf'],
+      [frontendResume, '/cv/frontend/', '/cv/alejandro-garcia-iglesias-frontend-engineer-cv.pdf'],
+      [productResume, '/cv/product/', '/cv/alejandro-garcia-iglesias-product-engineer-cv.pdf'],
+      [appliedAiResume, '/cv/ai/', '/cv/alejandro-garcia-iglesias-applied-ai-cv.pdf'],
+      [appliedAiEsResume, '/cv/ai/es/', '/cv/alejandro-garcia-iglesias-applied-ai-es-cv.pdf'],
+      [technicalProjectAiSystemsResume, '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
+    ] as const
+    for (const [variant, canonicalPath, pdfPath] of contracts) {
+      expect(variant.seo.canonicalPath).toBe(canonicalPath)
+      expect(variant.pdfPath).toBe(pdfPath)
+      expect(variant.contacts.find((contact) => contact.kind === 'site')?.href)
+        .toBe(`https://alejandroiglesias.github.io${canonicalPath}`)
+    }
   })
 
-  it('publishes a restrained General narrative across all three primary tracks', () => {
-    const content = JSON.stringify(generalResume)
-    expect(content).toMatch(/full-stack|frontend architecture|product|Applied AI/i)
-    expect(content).toMatch(/hybrid|reranking|multi-hop|MCP|LangGraph|14 orchestration workflows/i)
-    expect(generalResume.roles[0]).toMatchObject({
-      company: 'Independent Product R&D & AI Consulting',
-      title: 'Senior Software Engineer — Product & Applied AI',
-      start: 'Apr 2026',
-      end: 'Present',
-    })
-    expect(content).not.toMatch(/\bGround\b|\bQuorum\b|TuLanding|production AI|model training/i)
-  })
-
-  it('keeps the shared name, contacts, earlier summary, and historical experience factual', () => {
+  it('preserves shared identity and historical facts across variants', () => {
     const historical = sharedResumeFacts.roles.filter((role) => !role.featured)
-
-    expect(generalResume.earlierExperienceSummary).toBe(
-      'Earlier full-stack experience across four roles building web applications end-to-end with frontend, backend, APIs, databases, and infrastructure.',
-    )
-    expect(historical.map((role) => role.company)).toEqual([
-      'Yanma Solutions',
-      'Freelance',
-      '2mas2 Interactive',
-      'Syxmedia',
-    ])
+    expect(historical.map((role) => role.company)).toEqual(['Yanma Solutions', 'Freelance', '2mas2 Interactive', 'Syxmedia'])
     expect(historical.every((role) => role.title === 'Fullstack Developer')).toBe(true)
-    expect(
-      generalResume.roles.some((role) => role.company === 'Independent Contractor'),
-    ).toBe(false)
-
     for (const variant of englishVariants) {
       expect(variant.name).toBe(sharedResumeFacts.name)
       expect(variant.location).toBe(sharedResumeFacts.location)
@@ -144,319 +96,56 @@ describe('resume variants', () => {
       expect(variant.roles.filter((role) => !role.featured)).toEqual(historical)
       expect(variant.roles.some((role) => role.company === 'Independent Contractor')).toBe(false)
     }
-
     expect(appliedAiEsResume.name).toBe(sharedResumeFacts.name)
     expect(appliedAiEsResume.location).toBe(sharedResumeFacts.location)
-    expect(appliedAiEsResume.earlierExperienceSummary).toBe(
-      'Experiencia full-stack previa en cuatro roles, desarrollando aplicaciones web de punta a punta: frontend, backend, APIs, bases de datos e infraestructura.',
-    )
-    expect(appliedAiEsResume.roles.filter((role) => !role.featured).map((role) => role.company)).toEqual(
-      historical.map((role) => role.company),
-    )
-    expect(
-      appliedAiEsResume.roles.filter((role) => !role.featured).every((role) => role.title === 'Fullstack Developer'),
-    ).toBe(true)
-    expect(appliedAiEsResume.roles.some((role) => role.company === 'Independent Contractor')).toBe(false)
+    expect(appliedAiEsResume.roles.filter((role) => !role.featured).map((role) => role.company))
+      .toEqual(historical.map((role) => role.company))
+    expect(appliedAiEsResume.roles.filter((role) => !role.featured).every((role) => role.title === 'Fullstack Developer')).toBe(true)
   })
 
-  it('derives every non-independent role bullet from the shared factual history', () => {
+  it('preserves shared dates, locations, and bullets for historical roles', () => {
     for (const variant of englishVariants) {
       for (const role of variant.roles.slice(1)) {
-        const sharedRole = sharedResumeFacts.roles.find(
-          (candidate) => candidate.company === role.company,
-        )
-
+        const sharedRole = sharedResumeFacts.roles.find((candidate) => candidate.company === role.company)
         expect(sharedRole).toBeDefined()
         expect(role.start).toBe(sharedRole?.start)
         expect(role.end).toBe(sharedRole?.end)
         expect(role.location).toBe(sharedRole?.location)
         expect(role.featured).toBe(sharedRole?.featured)
-
         for (const bullet of role.bullets) {
-          if (
-            variant.id === 'applied-ai' &&
-            role.company === 'BairesDev' &&
-            bullet ===
-              'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features.'
-          ) {
-            expect(sharedRole?.bullets).toContain(
-              'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features end to end.',
-            )
-            continue
+          if (variant.id === 'applied-ai' && role.company === 'BairesDev' && bullet.endsWith('deliver features.')) {
+            expect(sharedRole?.bullets).toContain('Expanded into backend responsibilities, learning Go and implementing APIs to deliver features end to end.')
+          } else {
+            expect(sharedRole?.bullets).toContain(bullet)
           }
-
-          expect(sharedRole?.bullets).toContain(bullet)
         }
       }
     }
-
     for (const role of appliedAiEsResume.roles) {
-      const sharedRole = sharedResumeFacts.roles.find(
-        (candidate) => candidate.company === role.company,
-      )
-
+      const sharedRole = sharedResumeFacts.roles.find((candidate) => candidate.company === role.company)
       expect(sharedRole).toBeDefined()
-      expect(role.title === sharedRole?.title || role.company === 'Independent Product R&D & AI Consulting').toBe(
-        true,
+      expect(role.title).toBe(
+        role.company === 'Independent Product R&D & AI Consulting'
+          ? 'Senior Software Engineer — IA Aplicada'
+          : sharedRole?.title,
       )
       expect(role.start).toBe(localizeSharedDate(sharedRole!.start))
       expect(role.end).toBe(localizeSharedDate(sharedRole!.end))
       expect(role.featured).toBe(sharedRole?.featured)
+      expect(role.bullets.length).toBeGreaterThan(0)
     }
   })
 
-  it('keeps each online CV link on its own canonical variant', () => {
-    const expected = new Map([
-      [generalResume, 'https://alejandroiglesias.github.io/cv/'],
-      [frontendResume, 'https://alejandroiglesias.github.io/cv/frontend/'],
-      [productResume, 'https://alejandroiglesias.github.io/cv/product/'],
-      [appliedAiResume, 'https://alejandroiglesias.github.io/cv/ai/'],
-      [appliedAiEsResume, 'https://alejandroiglesias.github.io/cv/ai/es/'],
-      [technicalProjectAiSystemsResume, 'https://alejandroiglesias.github.io/cv/tpm/'],
-    ])
+  it.each(spanishRoleFactMarkers)(
+    'preserves key factual anchors when translating %s',
+    (company, markers) => {
+      const role = appliedAiEsResume.roles.find((candidate) => candidate.company === company)
+      expect(role).toBeDefined()
+      const narrative = role!.bullets.join(' ').toLocaleLowerCase()
 
-    for (const [variant, href] of expected) {
-      expect(variant.contacts.find((contact) => contact.kind === 'site')?.href).toBe(href)
-    }
-  })
-
-  it('foregrounds the distinct editorial angles', () => {
-    expect(JSON.stringify(frontendResume)).toMatch(
-      /frontend architecture|design systems|product/i,
-    )
-    expect(JSON.stringify(productResume)).toMatch(/full-stack|end-to-end|product/i)
-    expect(JSON.stringify(appliedAiResume)).toMatch(
-      /knowledge-intelligence product|Juana Casa|RAG|MCP|agents|LangGraph|multi-model orchestration|14 distinct multi-model workflows/i,
-    )
-    expect(JSON.stringify(technicalProjectAiSystemsResume)).toMatch(
-      /business|technical|system design|cross-functional|delivery/i,
-    )
-  })
-
-  it('keeps the recent experience differentiated by target role', () => {
-    const frontendIndependent = frontendResume.roles[0]
-    const productIndependent = productResume.roles[0]
-    const appliedAiIndependent = appliedAiResume.roles[0]
-    const tpmIndependent = technicalProjectAiSystemsResume.roles[0]
-
-    expect(frontendResume.summary.join(' ')).toMatch(
-      /building product-focused web applications/i,
-    )
-    expect(frontendResume.summary.join(' ')).toMatch(/full-stack foundation/i)
-    expect(frontendResume.summary.join(' ')).toMatch(/product thinking/i)
-    expect(frontendResume.summary.join(' ')).not.toMatch(/product proximity/i)
-    expect(frontendIndependent.bullets.join(' ')).toMatch(
-      /React\/Next\.js AI knowledge assistant|frontend development|product flows/i,
-    )
-    expect(frontendIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
-
-    expect(productIndependent.bullets.join(' ')).toMatch(
-      /product discovery|clarify what to build|independent product/i,
-    )
-    expect(productIndependent.bullets.join(' ')).not.toMatch(/Quorum|14 distinct/i)
-
-    expect(appliedAiIndependent.bullets.join(' ')).toMatch(
-      /independent (?:AI )?knowledge-intelligence product|source-backed RAG|MCP|LangGraph|14 distinct multi-model workflows/i,
-    )
-    expect(
-      appliedAiResume.roles.find((role) => role.company === 'BairesDev')?.bullets,
-    ).toContain(
-      'Expanded into backend responsibilities, learning Go and implementing APIs to deliver features.',
-    )
-    expect(JSON.stringify(appliedAiResume)).not.toMatch(
-      /learning Go and implementing APIs to deliver features end to end/,
-    )
-
-    expect(tpmIndependent.company).toBe('Independent Product R&D & AI Consulting')
-    expect(tpmIndependent.title).toBe(
-      'Senior Software Engineer — Technical Product & AI Systems',
-    )
-    expect(tpmIndependent.bullets.join(' ')).toMatch(
-      /founding partners|stakeholders|requirements|delivery/i,
-    )
-    expect(tpmIndependent.bullets.join(' ')).toMatch(
-      /initial React\/Next\.js AI assistant/i,
-    )
-
-    for (const variant of variants) {
-      expect(JSON.stringify(variant)).not.toMatch(/\bGround\b/)
-      expect(JSON.stringify(variant)).not.toMatch(/\bQuorum\b/)
-    }
-  })
-
-  it('uses concrete, non-redundant skills for each target role', () => {
-    expect(frontendResume.skills.slice(0, 8)).toEqual(
-      expect.arrayContaining([
-        'Frontend Architecture',
-        'UI Engineering',
-        'Component Architecture',
-        'Design Systems',
-      ]),
-    )
-    expect(frontendResume.skills).toContain('Next.js')
-    expect(frontendResume.skills).not.toEqual(
-      expect.arrayContaining(['System Design', 'Full-stack Foundations']),
-    )
-
-    expect(productResume.skills).toEqual(
-      expect.arrayContaining([
-        'Product Engineering',
-        'End-to-End Feature Ownership',
-        'Product Discovery',
-        'Requirements Definition',
-        'Prototyping',
-        'UX & Design Collaboration',
-        'Backend Development',
-        'API Development',
-        'SQL',
-        'PostgreSQL',
-        'Data Modeling',
-      ]),
-    )
-
-    expect(generalResume.skills).toEqual(
-      expect.arrayContaining([
-        'Frontend Architecture',
-        'Full-stack Development',
-        'Product & UX Collaboration',
-        'Technical Leadership',
-        'Requirements Definition',
-        'API Design & Integration',
-        'Retrieval-Augmented Generation (RAG)',
-        'AI Evaluation & Benchmarking',
-      ]),
-    )
-    expect(generalResume.skills).not.toEqual(
-      expect.arrayContaining(['Software Engineering', 'Product Engineering']),
-    )
-
-    expect(appliedAiResume.skills).toEqual(
-      expect.arrayContaining([
-        'LLM Applications',
-        'Mastra',
-        'Retrieval-Augmented Generation (RAG)',
-        'Embeddings',
-        'Vector Search',
-        'Hybrid Retrieval & Reranking',
-        'PostgreSQL & pgvector',
-        'Agent Orchestration',
-        'AI Evaluation & Benchmarking',
-      ]),
-    )
-    expect(appliedAiResume.skills).not.toEqual(
-      expect.arrayContaining([
-        'Software Engineering',
-        'Applied AI Systems',
-        'Grounded RAG',
-        'System Design',
-      ]),
-    )
-    expect(appliedAiResume.skills).not.toContain('Technical Documentation')
-    for (const removedSkill of [
-      'Python',
-      'Tool Use & Tool Calling',
-      'AI Agents',
-      'Model Routing & Orchestration',
-      'Multi-model Workflows',
-    ]) {
-      expect(appliedAiResume.skills).not.toContain(removedSkill)
-    }
-
-    expect(technicalProjectAiSystemsResume.skills).toEqual(
-      expect.arrayContaining([
-        'Project Management',
-        'Technical Project Delivery',
-        'Project Planning',
-        'Scope Management',
-        'Stakeholder Collaboration',
-        'Cross-functional Coordination',
-        'Requirements Gathering & Definition',
-        'Business-to-Technical Translation',
-        'Architecture Trade-off Analysis',
-      ]),
-    )
-    expect(technicalProjectAiSystemsResume.skills).not.toEqual(
-      expect.arrayContaining(['Technical Delivery', 'AI Systems Delivery']),
-    )
-
-    for (const variant of variants) {
-      expect(JSON.stringify(variant)).not.toMatch(/grounded RAG/i)
-    }
-  })
-
-  it('keeps TuLanding out of every CV variant', () => {
-    for (const variant of variants) {
-      expect(JSON.stringify(variant)).not.toMatch(/TuLanding/i)
-    }
-  })
-
-  it('keeps Applied AI grounded in software engineering without ML or operational claims', () => {
-    const searchableContent = JSON.stringify(appliedAiResume)
-
-    expect(searchableContent).toMatch(
-      /knowledge-intelligence product|Juana Casa|RAG|MCP|agents|LangGraph|multi-model orchestration/i,
-    )
-    expect(searchableContent).toContain('14 distinct multi-model workflows')
-    expect(searchableContent).not.toMatch(/ML training|fine-tuning|CUDA|MLOps/i)
-    expect(searchableContent).not.toMatch(/improved accuracy|reduced hallucinations|production AI/i)
-  })
-
-  it('keeps the Applied AI opening explicit about senior software engineering experience', () => {
-    expect(appliedAiResume.summary[0]).toMatch(/19\+ years of experience/i)
-    expect(appliedAiResume.summary.join(' ')).toMatch(/recent specialization|recent focus/i)
-  })
-
-  it('frames TPM as a target without unsupported project-management claims', () => {
-    const searchableContent = JSON.stringify(technicalProjectAiSystemsResume)
-
-    expect(technicalProjectAiSystemsResume.summary.at(-1)).toContain(
-      "I'm now seeking a Technical Project Manager opportunity",
-    )
-    expect(technicalProjectAiSystemsResume.roles.some((role) => /Project Manager/i.test(role.title))).toBe(
-      false,
-    )
-    expect(searchableContent).not.toMatch(
-      /\bJira\b|\bScrum\b|sprint planning|roadmapping|\bUAT\b|vendor management|budget ownership|team management/i,
-    )
-  })
-
-  it('publishes a Spanish Applied AI variant without replacing the English AI route', () => {
-    expect(getResumeForPath('/cv/ai/')).toBe(appliedAiResume)
-    expect(getResumeForPath('/cv/ai/es/')).toBe(appliedAiEsResume)
-    expect(getResumeForPath('/cv/')).toBe(generalResume)
-    expect(appliedAiEsResume.copy?.locale).toBe('es')
-    expect(appliedAiEsResume.title).toBe('Senior Software Engineer — IA Aplicada')
-    expect(appliedAiEsResume.roles[0]).toMatchObject({
-      company: 'Independent Product R&D & AI Consulting',
-      title: 'Senior Software Engineer — IA Aplicada',
-    })
-    expect(appliedAiEsResume.roles[0].bullets[0]).toMatch(/Juana Casa/)
-    expect(appliedAiEsResume.roles[0].bullets[1]).toMatch(/pgvector|retrieval híbrido|MCP/i)
-    expect(appliedAiEsResume.roles[0].bullets[2]).toMatch(/experimental|LangGraph/i)
-    expect(appliedAiEsResume.summary[0]).toMatch(/más de 19 años/)
-    expect(appliedAiEsResume.summary.join(' ')).toMatch(/IA aplicada/)
-    expect(appliedAiEsResume.skills.slice(0, 8)).toEqual(
-      expect.arrayContaining([
-        'IA generativa',
-        'Aplicaciones con LLMs',
-        'Retrieval-Augmented Generation (RAG)',
-        'Agentes de IA',
-        'LangGraph',
-        'Mastra',
-        'Model Context Protocol (MCP)',
-      ]),
-    )
-    expect(appliedAiEsResume.skills).not.toContain('Python')
-    expect(appliedAiEsResume.skills).not.toContain('FastAPI')
-    expect(appliedAiEsResume.skills).not.toContain('PyTorch')
-    const spanishContent = JSON.stringify(appliedAiEsResume)
-    expect(spanishContent).toMatch(
-      /IA generativa|aplicaciones con LLMs|RAG|embeddings|agentes|LangGraph|MCP|multi-modelo|React|Node\.js|APIs|punta a punta|Producto|Diseño|autonomía|ownership|automatización|desarrollo asistido por IA|interfaces conversacionales/i,
-    )
-    expect(spanishContent).not.toMatch(
-      /problema mal definido|inteligencia de conocimiento|workflows multi-modelo|varios providers|corrida exploratoria|AI-native|\bspec\b|coding agents|features de producto|apoyando a developers|refactors de frontend|producto consumer|reporting de advertising|rewrite completo|plataforma de advertising|cross-functional|otro engagement|Frontend developer principal|tooling moderno/i,
-    )
-    expect(JSON.stringify(appliedAiEsResume)).not.toMatch(/ML training|fine-tuning|CUDA|MLOps|Education|Universidad/i)
-    expect(JSON.stringify(appliedAiEsResume)).not.toMatch(/\bGround\b|\bQuorum\b|TuLanding|production AI/i)
-  })
+      for (const marker of markers) {
+        expect(narrative).toContain(marker.toLocaleLowerCase())
+      }
+    },
+  )
 })

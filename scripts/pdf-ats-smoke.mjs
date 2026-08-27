@@ -95,7 +95,7 @@ async function isExecutable(filePath) {
   }
 }
 
-async function findPdfToText() {
+export async function findPdfToText() {
   const configured = process.env.PDFTOTEXT_PATH
   if (configured && (await isExecutable(configured))) return configured
 
@@ -114,7 +114,7 @@ async function findPdfToText() {
   return null
 }
 
-async function extractPdfText(extractor, pdfPath) {
+export async function extractPdfText(extractor, pdfPath) {
   const { stdout } = await execFileAsync(extractor, ['-layout', pdfPath, '-'], {
     maxBuffer: 10 * 1024 * 1024,
   })
