@@ -74,7 +74,6 @@ export const technicalProjectAiSystemsResume: Resume = {
   ],
   skills: [
     'Project Management',
-    'Technical Project Delivery',
     'Project Planning',
     'Scope Management',
     'Business-to-Technical Translation',

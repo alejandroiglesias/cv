@@ -238,7 +238,7 @@ export const appliedAiEsResume: Resume = {
     'PostgreSQL / pgvector',
     'Evaluación de IA y benchmarking',
     'Integración multi-modelo y model routing',
-    'Product engineering',
+    'Discovery y definición de producto',
     'React',
     'Next.js',
     'TypeScript',
