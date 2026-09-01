@@ -38,7 +38,7 @@ function containsClaim(narrative: string, claim: string) {
 
 const requiredConcepts: Array<[string, Resume, string[]]> = [
   ['frontend', frontendResume, ['frontend architecture', 'design systems', 'product']],
-  ['product', productResume, ['product discovery', 'end-to-end', 'requirements']],
+  ['product', productResume, ['product discovery', 'end-to-end', 'requirements', 'Figma', 'design-to-code']],
   ['applied AI', appliedAiResume, ['source-backed RAG', 'MCP', 'LangGraph', '14 distinct multi-model workflows']],
   ['technical project delivery', technicalProjectAiSystemsResume, ['stakeholders', 'requirements', 'delivery', 'system design']],
   ['applied AI ES', appliedAiEsResume, ['IA aplicada', 'RAG', 'LangGraph', 'MCP']],

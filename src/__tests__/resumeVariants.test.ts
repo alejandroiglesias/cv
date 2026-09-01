@@ -136,6 +136,12 @@ describe('resume variant structure and routing', () => {
     }
   })
 
+  it('keeps the Rotunda Figma implementation experience visible in the Product variant', () => {
+    const rotundaRole = productResume.roles.find((role) => role.company === 'Rotunda Software')
+
+    expect(rotundaRole?.bullets.join(' ')).toContain('Figma')
+  })
+
   it.each(spanishRoleFactMarkers)(
     'preserves key factual anchors when translating %s',
     (company, markers) => {

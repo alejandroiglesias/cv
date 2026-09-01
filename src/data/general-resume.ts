@@ -61,7 +61,7 @@ const roles = [
       'Drove large-scale frontend refactors, including migrations of multiple applications and marketing sites.',
       'Built interactive documentation and standardized reusable UI patterns and styling conventions, improving onboarding, consistency, and design-to-development handoff.',
       'Improved frontend tooling and local development workflows, reducing friction for the engineering team.',
-      'Collaborated with backend, design, QA, and marketing to define technical and product solutions, proactively identifying UX and implementation improvements.',
+      'Collaborated with backend, design, QA, and marketing to define technical and product solutions, implementing features from Figma designs and proactively identifying UX and implementation improvements.',
       'Worked within a microservices-based architecture using a custom internal frontend framework, implementing Node.js and Express API endpoints to support frontend features.',
     ],
   },
