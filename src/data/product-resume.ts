@@ -70,7 +70,6 @@ export const productResume: Resume = {
     'Product discovery, design, and technical definition',
     'Frontend architecture and design systems',
     'Full-stack foundations, APIs, and integrations',
-    'Senior Product Engineering roles with meaningful product ownership',
   ],
   skills: [
     'End-to-End Feature Ownership',
