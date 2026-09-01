@@ -104,6 +104,26 @@ describe.skipIf(process.env.RUN_PDF_INTEGRATION !== '1')(
       }
     })
 
+    it('keeps every built resume parseable without executing JavaScript', () => {
+      for (const { file, resume } of builtHtml) {
+        const document = builtDocument(file)
+        const copy = getResumeCopy(resume)
+        const featuredRole = resume.roles.find((role) => role.featured)
+        const bodyText = document.body.textContent?.replace(/\s+/g, ' ').trim() ?? ''
+
+        expect(bodyText, `${file}: name`).toContain(resume.name)
+        expect(bodyText, `${file}: professional summary heading`).toContain(
+          copy.professionalSummary,
+        )
+        expect(bodyText, `${file}: professional summary`).toContain(resume.summary[0])
+        expect(bodyText, `${file}: skills heading`).toContain(copy.skills)
+        expect(bodyText, `${file}: representative skill`).toContain(resume.skills[0])
+        expect(bodyText, `${file}: experience heading`).toContain(copy.experience)
+        expect(bodyText, `${file}: featured role`).toContain(featuredRole?.company)
+        expect(document.querySelector(`a[href="${resume.pdfPath}"]`)).not.toBeNull()
+      }
+    })
+
     it('keeps the legacy TPM artifact semantically aligned with the canonical artifact', async () => {
       expect(existsSync(pdfPath(legacyTpmPdf))).toBe(true)
       const legacyText = (await pdfText(legacyTpmPdf)).trim()

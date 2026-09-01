@@ -9,7 +9,7 @@ Personal online resume — [alejandroiglesias.github.io/cv](https://alejandroigl
 | Layer | Tool |
 |---|---|
 | Framework | React 19 + TypeScript (strict) |
-| Build | Vite |
+| Build | Vite + static prerendering |
 | Styles | Tailwind CSS v4 + semantic CSS tokens |
 | Components | shadcn/ui (Radix primitives, copy-in owned) |
 | Motion | Framer Motion (entrance fades, reduced-motion aware) |
@@ -35,7 +35,7 @@ npm run dev        # http://localhost:5173/cv/
 |---|---|
 | `npm run dev` | Dev server with HMR at `/cv/` |
 | `npm run build` | Type-check + Vite build + automatic PDF generation → `dist/` |
-| `npm run build:web` | Type-check + Vite production build without regenerating PDFs |
+| `npm run build:web` | Type-check + Vite build + static HTML prerendering, without regenerating PDFs |
 | `npm run pdf:generate` | Regenerate the canonical PDFs from an existing production build |
 | `npm run preview` | Preview production build locally |
 | `npm test` | Run Vitest test suite |
@@ -49,7 +49,9 @@ npm run dev        # http://localhost:5173/cv/
 src/
 ├── data/general-resume.ts  # General CV and shared factual work history
 ├── data/resumes.ts         # URL-to-variant registry and aliases
+├── data/static-resume-routes.ts # Static entrypoints rendered during the build
 ├── data/technical-project-ai-systems-resume.ts
+├── entry-server.tsx        # Server renderer used only at build time
 ├── types/resume.ts         # TypeScript types for resume data
 ├── components/
 │   ├── ui/                 # shadcn-style primitives (Button, Badge, Collapsible)
@@ -109,6 +111,8 @@ The canonical resume pages use `index, follow`, self-referencing canonical URLs,
 - Applied AI: `/cv/ai/`
 - Applied AI (Spanish): `/cv/ai/es/`
 - Technical Product / AI Systems / Delivery: `/cv/tpm/`
+
+Every route is prerendered to complete semantic HTML during `npm run build:web` and then hydrated by React in the browser. Resume content and PDF links therefore remain parseable by crawlers, agents, and ATS-style extractors that do not execute JavaScript.
 
 The `/cv/general/` path is a root-canonical alias. The legacy `/cv/technical-project-ai-systems/` path also points canonically to `/cv/tpm/`; aliases are intentionally excluded from the sitemap. Because this project is hosted below `/cv/`, an effective `robots.txt` would need to be published by the root `alejandroiglesias.github.io` site rather than this repository.
 

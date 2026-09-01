@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 
 type Theme = 'light' | 'dark' | 'system'
+const themeChangeEvent = 'cv-theme-change'
 
 function getSystemTheme(): 'light' | 'dark' {
+  if (typeof window === 'undefined') return 'light'
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
@@ -26,24 +28,38 @@ function safeSaveTheme(theme: Theme) {
   }
 }
 
+function subscribeToTheme(onStoreChange: () => void) {
+  window.addEventListener('storage', onStoreChange)
+  window.addEventListener(themeChangeEvent, onStoreChange)
+  return () => {
+    window.removeEventListener('storage', onStoreChange)
+    window.removeEventListener(themeChangeEvent, onStoreChange)
+  }
+}
+
+function subscribeToSystemTheme(onStoreChange: () => void) {
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  mediaQuery.addEventListener('change', onStoreChange)
+  return () => mediaQuery.removeEventListener('change', onStoreChange)
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(safeGetTheme)
-  const [systemTheme, setSystemTheme] = useState(getSystemTheme)
+  const theme = useSyncExternalStore<Theme>(subscribeToTheme, safeGetTheme, () => 'system')
+  const systemTheme = useSyncExternalStore<'light' | 'dark'>(
+    subscribeToSystemTheme,
+    getSystemTheme,
+    () => 'light',
+  )
   const resolvedTheme = theme === 'system' ? systemTheme : theme
 
   useEffect(() => {
     applyTheme(resolvedTheme)
-    safeSaveTheme(theme)
-  }, [resolvedTheme, theme])
+  }, [resolvedTheme])
 
-  useEffect(() => {
-    if (theme !== 'system') return
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const handler = () => setSystemTheme(mq.matches ? 'dark' : 'light')
-    handler()
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [theme])
+  const setTheme = (nextTheme: Theme) => {
+    safeSaveTheme(nextTheme)
+    window.dispatchEvent(new Event(themeChangeEvent))
+  }
 
   const toggleTheme = () => {
     const next = resolvedTheme === 'dark' ? 'light' : 'dark'
