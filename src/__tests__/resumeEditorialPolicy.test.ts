@@ -42,14 +42,14 @@ const requiredConcepts: Array<[string, Resume, string[]]> = [
   ['frontend', frontendResume, ['frontend architecture', 'design systems', 'product']],
   ['product', productResume, ['product discovery', 'end-to-end', 'requirements', 'Figma', 'design-to-code']],
   ['applied AI', appliedAiResume, ['source-backed RAG', 'MCP', 'LangGraph', '14 distinct multi-model workflows']],
-  ['forward deployed AI', forwardDeployedResume, ['Customer Discovery', 'stakeholder collaboration', 'Hermes Agent', 'authenticated MCP', 'system integrations']],
+  ['forward deployed AI', forwardDeployedResume, ['customer-facing AI solutions', 'stakeholder collaboration', 'Hermes Agent', 'authenticated MCP', 'business-system integrations', 'end-to-end AI product delivery']],
   ['technical project delivery', technicalProjectAiSystemsResume, ['stakeholders', 'requirements', 'delivery', 'system design']],
   ['applied AI ES', appliedAiEsResume, ['IA aplicada', 'RAG', 'LangGraph', 'MCP']],
 ]
 
 const prohibitedClaims: Array<[string, Resume, string[]]> = [
   ['applied AI', appliedAiResume, ['ML training', 'fine-tuning', 'CUDA', 'MLOps', 'production AI', 'improved accuracy', 'reduced hallucinations']],
-  ['forward deployed AI', forwardDeployedResume, ['enterprise deployments', 'Kubernetes', 'Docker', 'production AI']],
+  ['forward deployed AI', forwardDeployedResume, ['enterprise deployments', 'Python', 'Kubernetes', 'Docker', 'Linux', 'Authentication & Authorization', 'production AI']],
   ['applied AI ES', appliedAiEsResume, ['TuLanding', 'Ground', 'Quorum', 'ML training', 'fine-tuning', 'CUDA', 'MLOps', 'production AI']],
   ['technical project delivery', technicalProjectAiSystemsResume, ['Jira', 'Scrum', 'sprint planning', 'roadmapping', 'UAT', 'vendor management', 'budget ownership', 'team management']],
 ]
@@ -93,6 +93,27 @@ describe('resume editorial policy', () => {
       expect(narrative).toContain('Hermes Dreaming')
       expect(narrative).toContain('https://github.com/alejandroiglesias/hermes-dreaming')
     }
+  })
+
+  it('keeps the forward-deployed skills limited to explicitly defensible capabilities', () => {
+    expect(forwardDeployedResume.skills).toEqual([
+      'TypeScript',
+      'JavaScript',
+      'Node.js',
+      'React',
+      'Next.js',
+      'REST APIs',
+      'API Design & Integration',
+      'Model Context Protocol (MCP)',
+      'Retrieval-Augmented Generation (RAG)',
+      'PostgreSQL',
+      'pgvector',
+      'Mastra',
+      'LangGraph',
+      'Hermes Agent',
+      'AI Agents & Tool Use',
+      'Git',
+    ])
   })
 
   it('keeps the Spanish variant localized and on its applied-AI track', () => {
