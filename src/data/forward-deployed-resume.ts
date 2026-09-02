@@ -18,7 +18,7 @@ function tailorRole(role: Role): Role {
       title: 'Senior Software Engineer — Applied AI & Solutions',
       bullets: [
         "Partnered directly with Juana Casa's two founding partners and studio team to discover project and operational knowledge needs, scope an appropriate solution, and translate ambiguous requirements into an end-to-end AI system.",
-        "Implemented specialized AI agents using Hermes Agent and integrated them into the studio's Slack and WhatsApp workflows, giving the team conversational access to organizational knowledge and operational data.",
+        "Implemented specialized AI agents using Hermes Agent and integrated them into the studio's Slack and WhatsApp workflows, enabling conversational access to organizational knowledge and supporting operational workflows.",
         'Developing a reusable source-backed RAG and authenticated MCP integration layer that connects AI assistants and agents with company documents and structured operational data.',
         'Iterated directly with stakeholders on requirements, workflows, integrations, and product behavior as the solution evolved from prototype toward operational use.',
         'Built and maintain <a href="https://github.com/alejandroiglesias/hermes-dreaming">Hermes Dreaming</a>, an open-source memory-consolidation plugin for Hermes Agent, using AI-assisted engineering to work with its plugin and tool APIs, scheduled execution, persistent state, and configurable memory operations.',
