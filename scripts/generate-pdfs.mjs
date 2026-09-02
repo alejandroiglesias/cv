@@ -12,6 +12,7 @@ const publicDir = path.join(projectRoot, 'public')
 const distDir = path.join(projectRoot, 'dist')
 const host = '127.0.0.1'
 const pdfGenerationTimeoutMs = 60_000
+const maxConcurrentChromeProcesses = 2
 
 const pdfs = [
   {
@@ -148,44 +149,50 @@ try {
   await mkdir(publicDir, { recursive: true })
   await mkdir(distDir, { recursive: true })
 
-  const generatedPdfs = await Promise.all(
-    pdfs.map(async (pdf, index) => {
-      const profileDir = path.join(tempDir, `profile-${index}`)
-      const generatedPath = path.join(tempDir, pdf.filename)
-      await mkdir(profileDir, { recursive: true })
+  const generatedPdfs = []
+  for (let batchStart = 0; batchStart < pdfs.length; batchStart += maxConcurrentChromeProcesses) {
+    const batch = pdfs.slice(batchStart, batchStart + maxConcurrentChromeProcesses)
+    const batchPdfs = await Promise.all(
+      batch.map(async (pdf, batchIndex) => {
+        const index = batchStart + batchIndex
+        const profileDir = path.join(tempDir, `profile-${index}`)
+        const generatedPath = path.join(tempDir, pdf.filename)
+        await mkdir(profileDir, { recursive: true })
 
-      const publicPath = path.join(publicDir, pdf.filename)
-      const distPath = path.join(distDir, pdf.filename)
-      const url = `http://${host}:${previewPort}${pdf.route}`
+        const publicPath = path.join(publicDir, pdf.filename)
+        const distPath = path.join(distDir, pdf.filename)
+        const url = `http://${host}:${previewPort}${pdf.route}`
 
-      console.log(`Generating ${pdf.filename} from ${pdf.route}`)
+        console.log(`Generating ${pdf.filename} from ${pdf.route}`)
 
-      await runChrome(
-        chromePath,
-        [
-          '--headless=new',
-          '--disable-background-networking',
-          '--disable-background-mode',
-          '--disable-component-update',
-          '--disable-default-apps',
-          '--disable-extensions',
-          '--disable-gpu',
-          '--disable-sync',
-          '--metrics-recording-only',
-          '--no-first-run',
-          '--no-pdf-header-footer',
-          '--run-all-compositor-stages-before-draw',
-          '--virtual-time-budget=1500',
-          `--user-data-dir=${profileDir}`,
-          `--print-to-pdf=${generatedPath}`,
-          url,
-        ],
-        generatedPath,
-      )
+        await runChrome(
+          chromePath,
+          [
+            '--headless=new',
+            '--disable-background-networking',
+            '--disable-background-mode',
+            '--disable-component-update',
+            '--disable-default-apps',
+            '--disable-extensions',
+            '--disable-gpu',
+            '--disable-sync',
+            '--metrics-recording-only',
+            '--no-first-run',
+            '--no-pdf-header-footer',
+            '--run-all-compositor-stages-before-draw',
+            '--virtual-time-budget=1500',
+            `--user-data-dir=${profileDir}`,
+            `--print-to-pdf=${generatedPath}`,
+            url,
+          ],
+          generatedPath,
+        )
 
-      return { ...pdf, path: generatedPath, publicPath, distPath }
-    }),
-  )
+        return { ...pdf, path: generatedPath, publicPath, distPath }
+      }),
+    )
+    generatedPdfs.push(...batchPdfs)
+  }
 
   await validateGeneratedPdfs(generatedPdfs)
 
@@ -215,3 +222,5 @@ try {
   if (server) await closePreview(server)
   await rm(tempDir, { recursive: true, force: true })
 }
+
+console.log('PDF generation complete.')
