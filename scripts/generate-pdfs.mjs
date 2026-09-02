@@ -36,6 +36,10 @@ const pdfs = [
     filename: 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
   },
   {
+    route: '/cv/fde/',
+    filename: 'alejandro-garcia-iglesias-forward-deployed-ai-cv.pdf',
+  },
+  {
     route: '/cv/tpm/',
     filename: 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
   },

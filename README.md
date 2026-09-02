@@ -110,6 +110,7 @@ The canonical resume pages use `index, follow`, self-referencing canonical URLs,
 - Product: `/cv/product/`
 - Applied AI: `/cv/ai/`
 - Applied AI (Spanish): `/cv/ai/es/`
+- Forward Deployed AI: `/cv/fde/`
 - Technical Product / AI Systems / Delivery: `/cv/tpm/`
 
 Every route is prerendered to complete semantic HTML during `npm run build:web` and then hydrated by React in the browser. Resume content and PDF links therefore remain parseable by crawlers, agents, and ATS-style extractors that do not execute JavaScript.
@@ -127,6 +128,7 @@ The canonical PDFs are generated automatically during `npm run build` and commit
 - Product Engineer: `alejandro-garcia-iglesias-product-engineer-cv.pdf`
 - Applied AI: `alejandro-garcia-iglesias-applied-ai-cv.pdf`
 - Applied AI (Spanish): `alejandro-garcia-iglesias-applied-ai-es-cv.pdf`
+- Forward Deployed AI: `alejandro-garcia-iglesias-forward-deployed-ai-cv.pdf`
 - Technical Project Manager: `alejandro-garcia-iglesias-technical-project-manager-cv.pdf`
 
 The legacy filename `alejandro-garcia-iglesias-technical-project-ai-systems-cv.pdf` remains available as a byte-identical copy of the Technical Project Manager PDF in both `public/` and `dist/`; it is not printed separately.

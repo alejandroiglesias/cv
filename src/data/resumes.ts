@@ -1,6 +1,7 @@
 import { appliedAiResume } from '@/data/applied-ai-resume'
 import { appliedAiEsResume } from '@/data/applied-ai-es-resume'
 import { frontendResume } from '@/data/frontend-resume'
+import { forwardDeployedResume } from '@/data/forward-deployed-resume'
 import { generalResume } from '@/data/general-resume'
 import { productResume } from '@/data/product-resume'
 import { technicalProjectAiSystemsResume } from '@/data/technical-project-ai-systems-resume'
@@ -12,6 +13,7 @@ export const resumes = {
   product: productResume,
   ai: appliedAiResume,
   aiEs: appliedAiEsResume,
+  fde: forwardDeployedResume,
   tpm: technicalProjectAiSystemsResume,
 } satisfies Record<string, Resume>
 
@@ -27,6 +29,8 @@ export function getResumeForPath(pathname: string): Resume {
       return resumes.aiEs
     case '/cv/ai':
       return resumes.ai
+    case '/cv/fde':
+      return resumes.fde
     case '/cv/tpm':
     case '/cv/technical-project-ai-systems':
     case '/technical-project-ai-systems':

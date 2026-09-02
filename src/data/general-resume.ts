@@ -42,10 +42,10 @@ const roles = [
     end: 'Present',
     featured: true,
     bullets: [
-      "Partnered with Juana Casa's two founding partners and studio team to translate project and operational knowledge needs into a React/Next.js AI assistant with Mastra, source-backed RAG, and specialized agents delivered through Slack and WhatsApp.",
+      "Partnered with Juana Casa's two founding partners and studio team to translate project and operational knowledge needs into a React/Next.js AI assistant with Mastra, source-backed RAG, and specialized agents built with Hermes Agent and integrated with Slack and WhatsApp.",
       'Developing an independent knowledge-intelligence layer for companies based on that real-world problem, combining vector and full-text retrieval, reciprocal-rank fusion, reranking, bounded multi-hop retrieval, evaluation, and authenticated MCP access to company documents and structured operational data.',
+      'Built and maintain <a href="https://github.com/alejandroiglesias/hermes-dreaming">Hermes Dreaming</a>, an open-source Python memory-consolidation plugin for Hermes Agent with scheduled, reviewable workflows, persistent state, and lifecycle tooling.',
       'Built an experimental LangGraph research lab for multi-model inference across multiple providers, implementing 14 orchestration workflows—including mixture-of-agents, solver/verifier, routing, and orchestrator/worker patterns—and exploring factuality, quality, latency, and cost trade-offs through reproducible benchmarks.',
-      'Refined AI-native product and software development workflows across discovery, prototyping, implementation, testing, and review, combining coding and design agents with explicit human verification.',
     ],
   },
   {

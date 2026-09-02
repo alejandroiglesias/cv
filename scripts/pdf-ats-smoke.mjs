@@ -74,6 +74,11 @@ const defaultContracts = [
     ],
   },
   {
+    filename: 'alejandro-garcia-iglesias-forward-deployed-ai-cv.pdf',
+    titleMarkers: ['Senior Software Engineer', 'Forward Deployed AI'],
+    firstBulletMarker: 'Partnered directly with Juana Casa',
+  },
+  {
     filename: 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'Technical Project Delivery'],
     firstBulletMarker: 'Worked directly with Juana Casa',

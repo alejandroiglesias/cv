@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { appliedAiEsResume } from '../data/applied-ai-es-resume'
 import { appliedAiResume } from '../data/applied-ai-resume'
 import { frontendResume } from '../data/frontend-resume'
+import { forwardDeployedResume } from '../data/forward-deployed-resume'
 import { generalResume } from '../data/general-resume'
 import { productResume } from '../data/product-resume'
 import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
@@ -27,6 +28,7 @@ const staticPages: ReadonlyArray<{ file: string; resume: Resume }> = [
   { file: 'product/index.html', resume: productResume },
   { file: 'ai/index.html', resume: appliedAiResume },
   { file: 'ai/es/index.html', resume: appliedAiEsResume },
+  { file: 'fde/index.html', resume: forwardDeployedResume },
   { file: 'tpm/index.html', resume: technicalProjectAiSystemsResume },
   { file: 'technical-project-ai-systems/index.html', resume: technicalProjectAiSystemsResume },
 ]
@@ -71,6 +73,7 @@ describe('static metadata and indexing', () => {
       `${baseUrl}/product/`,
       `${baseUrl}/ai/`,
       `${baseUrl}/ai/es/`,
+      `${baseUrl}/fde/`,
       `${baseUrl}/tpm/`,
     ])
     expect(sitemap).not.toContain('/general/')

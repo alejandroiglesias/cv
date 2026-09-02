@@ -17,10 +17,11 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Applied AI',
       bullets: [
-        'Partnered directly with Juana Casa’s two founding partners and studio team to understand and define their needs around access to project and operational knowledge. From that discovery, I built the solution end to end: an initial React/Next.js AI assistant with Mastra and source-backed RAG, followed by specialized OpenAI Workspace Agents through Slack and WhatsApp.',
+        'Partnered directly with Juana Casa’s two founding partners and studio team to understand and define their needs around access to project and operational knowledge. From that discovery, I built the solution end to end: an initial React/Next.js AI assistant with Mastra and source-backed RAG, followed by specialized agents built with Hermes Agent and integrated with Slack and WhatsApp.',
         'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I am building a reusable layer with source-backed RAG and an authenticated MCP server that gives AI assistants and agents access to company documents and structured operational data.',
+        'Built and maintain <a href="https://github.com/alejandroiglesias/hermes-dreaming">Hermes Dreaming</a>, an open-source Python memory-consolidation plugin for Hermes Agent with scheduled, reviewable workflows, persistent state, tests, and lifecycle tooling.',
         'Developing an adaptive multi-model research system built with LangGraph; implemented 14 distinct multi-model workflows across multiple AI providers, validated the end-to-end pipeline on a small engineering test run, and began exploratory evaluation with AA-Omniscience under practical cost and latency constraints.',
-        'Evaluated and refined AI-assisted product design and development workflows, combining coding agents (Codex, Claude Code, Cursor), design tools (Claude Design, OpenDesign, Pen), and agent orchestration across discovery, prototyping, implementation, testing, and review, with explicit human verification throughout.',
+        'Evaluated and refined AI-assisted product design and development workflows across discovery, prototyping, implementation, testing, and review, combining coding and design agents with explicit human verification throughout.',
       ],
     }
   }

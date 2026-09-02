@@ -17,8 +17,9 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Product Engineer',
       bullets: [
-        "Worked directly with Juana Casa's two founding partners and studio team on product discovery, clarifying what to build, and translating those needs into an initial React/Next.js AI assistant with Mastra and RAG; I then implemented specialized OpenAI Workspace Agents through Slack and WhatsApp.",
+        "Worked directly with Juana Casa's two founding partners and studio team on product discovery, clarifying what to build, and translating those needs into an initial React/Next.js AI assistant with Mastra and RAG; I then implemented specialized agents with Hermes Agent and integrated them with Slack and WhatsApp.",
         'The knowledge-access problem identified with Juana Casa led me to start developing an independent AI knowledge-intelligence product for companies, with the studio set to serve as its first real-world implementation; I shaped the product direction and experience while building a reusable layer with source-backed RAG and authenticated MCP access to company data.',
+        'Built and maintain <a href="https://github.com/alejandroiglesias/hermes-dreaming">Hermes Dreaming</a>, an open-source Python plugin extending Hermes Agent with scheduled, reviewable memory-consolidation workflows and operational controls.',
         'Explored and refined AI-assisted design-to-code workflows across product discovery, interface exploration, prototyping, implementation, testing, and review, using Figma, Pen, and OpenDesign alongside coding agents and agent orchestration, with explicit human verification throughout.',
       ],
     }

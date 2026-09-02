@@ -2,12 +2,13 @@ import { describe, expect, it } from 'vitest'
 import { appliedAiEsResume } from '../data/applied-ai-es-resume'
 import { appliedAiResume } from '../data/applied-ai-resume'
 import { frontendResume } from '../data/frontend-resume'
+import { forwardDeployedResume } from '../data/forward-deployed-resume'
 import { generalResume, sharedResumeFacts } from '../data/general-resume'
 import { productResume } from '../data/product-resume'
 import { getResumeForPath, resumes } from '../data/resumes'
 import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-systems-resume'
 
-const englishVariants = [generalResume, frontendResume, productResume, appliedAiResume, technicalProjectAiSystemsResume]
+const englishVariants = [generalResume, frontendResume, productResume, appliedAiResume, forwardDeployedResume, technicalProjectAiSystemsResume]
 
 const spanishRoleFactMarkers: Array<[string, string[]]> = [
   ['Independent Product R&D & AI Consulting', ['Juana Casa', 'React/Next.js', 'Mastra', 'RAG', 'Slack', 'WhatsApp', 'PostgreSQL/pgvector', 'LangGraph', '14']],
@@ -31,12 +32,13 @@ function localizeSharedDate(date: string): string {
 
 describe('resume variant structure and routing', () => {
   it('registers the canonical variants and keeps General as the default', () => {
-    expect(Object.keys(resumes)).toEqual(['general', 'frontend', 'product', 'ai', 'aiEs', 'tpm'])
+    expect(Object.keys(resumes)).toEqual(['general', 'frontend', 'product', 'ai', 'aiEs', 'fde', 'tpm'])
     expect(resumes.general).toBe(generalResume)
     expect(resumes.frontend).toBe(frontendResume)
     expect(resumes.product).toBe(productResume)
     expect(resumes.ai).toBe(appliedAiResume)
     expect(resumes.aiEs).toBe(appliedAiEsResume)
+    expect(resumes.fde).toBe(forwardDeployedResume)
     expect(resumes.tpm).toBe(technicalProjectAiSystemsResume)
     expect(getResumeForPath('/cv/')).toBe(generalResume)
     expect(getResumeForPath('/cv/general/')).toBe(generalResume)
@@ -49,6 +51,7 @@ describe('resume variant structure and routing', () => {
     ['/cv/product/', productResume], ['/cv/product', productResume],
     ['/cv/ai/', appliedAiResume], ['/cv/ai', appliedAiResume],
     ['/cv/ai/es/', appliedAiEsResume], ['/cv/ai/es', appliedAiEsResume],
+    ['/cv/fde/', forwardDeployedResume], ['/cv/fde', forwardDeployedResume],
     ['/cv/tpm/', technicalProjectAiSystemsResume], ['/cv/tpm', technicalProjectAiSystemsResume],
     ['/cv/technical-project-ai-systems/', technicalProjectAiSystemsResume],
     ['/technical-project-ai-systems', technicalProjectAiSystemsResume],
@@ -59,6 +62,7 @@ describe('resume variant structure and routing', () => {
   it('ignores query strings and fragments while resolving a supported route', () => {
     expect(getResumeForPath('/cv/frontend/?source=linkedin#experience')).toBe(frontendResume)
     expect(getResumeForPath('/cv/ai/es?lang=es#skills')).toBe(appliedAiEsResume)
+    expect(getResumeForPath('/cv/fde/?source=nous#experience')).toBe(forwardDeployedResume)
     expect(getResumeForPath('/cv/tpm/#print')).toBe(technicalProjectAiSystemsResume)
     expect(getResumeForPath('/cv/unknown?source=test#top')).toBe(generalResume)
   })
@@ -68,6 +72,15 @@ describe('resume variant structure and routing', () => {
     expect(getResumeForPath('/cv/not-a-variant/extra')).toBe(generalResume)
   })
 
+  it('keeps Forward Deployed AI separate from the Applied AI product-builder track', () => {
+    const forwardDeployedResume = getResumeForPath('/cv/fde/')
+
+    expect(forwardDeployedResume.id).toBe('fde')
+    expect(forwardDeployedResume).not.toBe(appliedAiResume)
+    expect(forwardDeployedResume.focusAreas.join(' ')).toMatch(/customer|stakeholder/i)
+    expect(appliedAiResume.focusAreas).toContain('End-to-end AI product engineering')
+  })
+
   it('keeps variant metadata aligned with its public route and PDF', () => {
     const contracts = [
       [generalResume, '/cv/', '/cv/alejandro-garcia-iglesias-general-cv.pdf'],
@@ -75,6 +88,7 @@ describe('resume variant structure and routing', () => {
       [productResume, '/cv/product/', '/cv/alejandro-garcia-iglesias-product-engineer-cv.pdf'],
       [appliedAiResume, '/cv/ai/', '/cv/alejandro-garcia-iglesias-applied-ai-cv.pdf'],
       [appliedAiEsResume, '/cv/ai/es/', '/cv/alejandro-garcia-iglesias-applied-ai-es-cv.pdf'],
+      [forwardDeployedResume, '/cv/fde/', '/cv/alejandro-garcia-iglesias-forward-deployed-ai-cv.pdf'],
       [technicalProjectAiSystemsResume, '/cv/tpm/', '/cv/alejandro-garcia-iglesias-technical-project-manager-cv.pdf'],
     ] as const
     for (const [variant, canonicalPath, pdfPath] of contracts) {

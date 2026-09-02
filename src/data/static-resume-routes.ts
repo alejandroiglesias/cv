@@ -25,6 +25,7 @@ export const staticResumeRoutes = [
     output: 'ai/es/index.html',
     pathname: '/cv/ai/es/',
   },
+  { input: 'fde', source: 'fde/index.html', output: 'fde/index.html', pathname: '/cv/fde/' },
   { input: 'tpm', source: 'tpm/index.html', output: 'tpm/index.html', pathname: '/cv/tpm/' },
   {
     input: 'technicalProjectAiSystems',
