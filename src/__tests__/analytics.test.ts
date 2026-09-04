@@ -36,7 +36,9 @@ describe('initAnalytics', () => {
 
     expect(document.querySelector('script[src="https://www.googletagmanager.com/gtag/js?id=G-W53LE90EMV"]')).toBeInTheDocument()
     expect(window.dataLayer).toHaveLength(2)
-    expect(window.dataLayer[1]).toEqual(['config', 'G-W53LE90EMV'])
+    expect(Object.prototype.toString.call(window.dataLayer[0])).toBe('[object Arguments]')
+    expect(Array.from(window.dataLayer[0] as IArguments)).toEqual(['js', expect.any(Date)])
+    expect(Array.from(window.dataLayer[1] as IArguments)).toEqual(['config', 'G-W53LE90EMV'])
   })
 
   it('does not load the Google tag more than once', async () => {

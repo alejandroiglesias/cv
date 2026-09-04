@@ -23,17 +23,19 @@ export function initAnalytics() {
       return
     }
 
+    window.dataLayer = window.dataLayer ?? []
+    window.gtag = function () {
+      // gtag.js consumes the native Arguments object from its bootstrap queue.
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments)
+    }
+    window.gtag('js', new Date())
+    window.gtag('config', GA4_ID)
+
     const script = document.createElement('script')
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`
     script.async = true
     document.head.appendChild(script)
-
-    window.dataLayer = window.dataLayer ?? []
-    window.gtag = function (...args) {
-      window.dataLayer.push(args)
-    }
-    window.gtag('js', new Date())
-    window.gtag('config', GA4_ID)
     loadScheduled = false
   }
 
