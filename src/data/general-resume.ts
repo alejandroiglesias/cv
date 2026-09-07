@@ -88,7 +88,7 @@ const roles = [
     end: 'Dec 2019',
     featured: true,
     bullets: [
-      'Helped evaluate and introduce Vue.js for a full product rewrite, then led the frontend implementation of the redesigned application from scratch.',
+      'Helped evaluate and introduce Vue.js for a full rewrite of a Mapbox GL map-based product, then led the frontend implementation of the redesigned application from scratch.',
       'Built a component-based architecture with Vue and Vuex, including reusable UI components designed for maintainability and scalability.',
       'Collaborated closely with the CTO and CEO, translating business needs into practical, user-friendly UI solutions, often without formal designs.',
     ],

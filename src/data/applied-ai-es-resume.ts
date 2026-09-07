@@ -95,7 +95,7 @@ function tailorRole(role: Role): Role {
       end: translateDate(role.end),
       bullets: [
         'Colaboré de cerca con el CTO y el CEO, traduciendo necesidades de negocio en soluciones de UI prácticas y fáciles de usar, a menudo sin diseños formales.',
-        'Ayudé a evaluar e introducir Vue.js para una reescritura completa del producto y luego lideré desde cero la implementación frontend de la aplicación rediseñada.',
+        'Ayudé a evaluar e introducir Vue.js para una reescritura completa de un producto basado en mapas con Mapbox GL y luego lideré desde cero la implementación frontend de la aplicación rediseñada.',
         'Construí una arquitectura basada en componentes con Vue y Vuex, incluidos componentes de UI reutilizables diseñados para facilitar la mantenibilidad y la escalabilidad.',
       ],
     }

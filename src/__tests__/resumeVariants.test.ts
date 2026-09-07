@@ -14,7 +14,7 @@ const spanishRoleFactMarkers: Array<[string, string[]]> = [
   ['Independent Product R&D & AI Consulting', ['Juana Casa', 'React/Next.js', 'Mastra', 'RAG', 'Slack', 'WhatsApp', 'PostgreSQL/pgvector', 'LangGraph', '14']],
   ['Rotunda Software', ['ModUI', 'Node.js', 'Express']],
   ['BairesDev', ['Pinterest', 'React', 'Go', 'APIs']],
-  ['Mapme', ['Vue.js', 'Vuex', 'CTO', 'CEO']],
+  ['Mapme', ['Vue.js', 'Vuex', 'Mapbox GL', 'mapas', 'CTO', 'CEO']],
   ['Deviget', ['AppNexus', 'AngularJS', 'React']],
   ['Vulsai', ['Sass', 'Less', 'Compass', 'D3.js']],
   ['Yanma Solutions', ['subastas en tiempo real']],
