@@ -66,7 +66,6 @@ export const frontendResume: Resume = {
     'Frontend Tooling & DX',
     'Testing & Code Quality',
     'Vue.js',
-    'Mapbox GL',
     'Angular',
     'CSS / Tailwind CSS',
     'API Integration',
