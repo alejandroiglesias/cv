@@ -11,7 +11,7 @@ import { technicalProjectAiSystemsResume } from '../data/technical-project-ai-sy
 const englishVariants = [generalResume, frontendResume, productResume, appliedAiResume, forwardDeployedResume, technicalProjectAiSystemsResume]
 
 const spanishRoleFactMarkers: Array<[string, string[]]> = [
-  ['Independent Product R&D & AI Consulting', ['Juana Casa', 'React/Next.js', 'Mastra', 'RAG', 'Slack', 'WhatsApp', 'PostgreSQL/pgvector', 'LangGraph', '14']],
+  ['Independent Product R&D & AI Consulting', ['React/Next.js', 'Mastra', 'RAG', 'Slack', 'WhatsApp', 'PostgreSQL/pgvector', 'LangGraph', '14']],
   ['Rotunda Software', ['ModUI', 'Node.js', 'Express']],
   ['BairesDev', ['Pinterest', 'React', 'Go', 'APIs']],
   ['Mapme', ['Vue.js', 'Vuex', 'Mapbox GL', 'mapas', 'CTO', 'CEO']],
@@ -31,6 +31,10 @@ function localizeSharedDate(date: string): string {
 }
 
 describe('resume variant structure and routing', () => {
+  it.each(Object.values(resumes))('keeps the architecture studio anonymous in $id', (resume) => {
+    expect(JSON.stringify(resume)).not.toMatch(/juana\s*casa/i)
+  })
+
   it('registers the canonical variants and keeps General as the default', () => {
     expect(Object.keys(resumes)).toEqual(['general', 'frontend', 'product', 'ai', 'aiEs', 'fde', 'tpm'])
     expect(resumes.general).toBe(generalResume)

@@ -17,8 +17,8 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Technical Product & AI Systems',
       bullets: [
-        "Worked directly with Juana Casa's two founding partners and members of the studio team as key stakeholders, clarifying operational knowledge-access needs, defining requirements, and translating them into an initial React/Next.js AI assistant with Mastra and RAG, and specialized Workspace Agents through Slack and WhatsApp.",
-        'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I translated that product direction into scope, system boundaries, and an integration approach spanning source-backed RAG and authenticated MCP access.',
+        "Worked directly with the two founding partners and team members of an architecture studio as key stakeholders, clarifying operational knowledge-access needs, defining requirements, and translating them into an initial React/Next.js AI assistant with Mastra and RAG, and specialized Workspace Agents through Slack and WhatsApp.",
+        'This work inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation. I translated that product direction into scope, system boundaries, and an integration approach spanning source-backed RAG and authenticated MCP access.',
         'Drove delivery from discovery and prototyping through implementation, testing, and review, using AI-assisted workflows while keeping decisions and outputs explicitly human-verified.',
         'Designed and carried out a staged multi-model research initiative across 14 workflows and multiple providers, balancing quality hypotheses with cost, latency, integration, and exploratory evaluation constraints.',
       ],

@@ -17,7 +17,7 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Software Engineer — Applied AI & Solutions',
       bullets: [
-        "Partnered directly with Juana Casa's two founding partners and studio team to discover project and operational knowledge needs, scope an appropriate solution, and translate ambiguous requirements into an end-to-end AI system.",
+        "Partnered directly with the two founding partners and team of an architecture studio to discover project and operational knowledge needs, scope an appropriate solution, and translate ambiguous requirements into an end-to-end AI system.",
         "Implemented specialized AI agents using Hermes Agent and integrated them into the studio's Slack and WhatsApp workflows, enabling conversational access to organizational knowledge and supporting operational workflows.",
         'Developing a reusable source-backed RAG and authenticated MCP integration layer that connects AI assistants and agents with company documents and structured operational data.',
         'Iterated directly with stakeholders on requirements, workflows, integrations, and product behavior as the solution evolved from prototype toward operational use.',

@@ -17,8 +17,8 @@ function tailorRole(role: Role): Role {
       ...role,
       title: 'Senior Frontend Engineer',
       bullets: [
-        "Built and iterated a React/Next.js AI knowledge assistant for Juana Casa, working directly with the studio's two founding partners and team members to translate project and operational knowledge needs into clear product flows backed by Mastra and RAG.",
-        'The knowledge-access problem identified with Juana Casa inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation; I am combining frontend and product engineering with a reusable layer, source-backed RAG, and authenticated MCP access to company data.',
+        "Built and iterated a React/Next.js AI knowledge assistant for an architecture studio, working directly with the studio's two founding partners and team members to translate project and operational knowledge needs into clear product flows backed by Mastra and RAG.",
+        'This work inspired an independent AI knowledge-intelligence product I am developing for companies, with the studio set to serve as its first real-world implementation. I am combining frontend and product engineering with a reusable layer, source-backed RAG, and authenticated MCP access to company data.',
         'Evaluated and refined AI-assisted product design and frontend development workflows, combining coding agents, design tools, and agent orchestration across prototyping, implementation, testing, and review with explicit human verification.',
       ],
     }

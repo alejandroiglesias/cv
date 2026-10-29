@@ -31,7 +31,7 @@ const defaultContracts = [
   {
     filename: 'alejandro-garcia-iglesias-general-cv.pdf',
     titleMarkers: ['Senior Software Engineer'],
-    firstBulletMarker: 'Partnered with Juana Casa',
+    firstBulletMarker: 'Partnered with the two founding partners',
   },
   {
     filename: 'alejandro-garcia-iglesias-frontend-engineer-cv.pdf',
@@ -41,17 +41,17 @@ const defaultContracts = [
   {
     filename: 'alejandro-garcia-iglesias-product-engineer-cv.pdf',
     titleMarkers: ['Senior Product Engineer'],
-    firstBulletMarker: 'Worked directly with Juana Casa',
+    firstBulletMarker: 'Worked directly with the two founding partners',
   },
   {
     filename: 'alejandro-garcia-iglesias-applied-ai-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'Applied AI'],
-    firstBulletMarker: 'Partnered directly with Juana Casa',
+    firstBulletMarker: 'Partnered directly with the two founding partners',
   },
   {
     filename: 'alejandro-garcia-iglesias-applied-ai-es-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'IA Aplicada'],
-    firstBulletMarker: 'Trabajé junto a los dos socios fundadores de Juana Casa',
+    firstBulletMarker: 'Trabajé junto a los dos socios fundadores',
     sections: [
       'Resumen Profesional',
       'ÁREAS DE ENFOQUE',
@@ -76,12 +76,12 @@ const defaultContracts = [
   {
     filename: 'alejandro-garcia-iglesias-forward-deployed-ai-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'Forward Deployed AI'],
-    firstBulletMarker: 'Partnered directly with Juana Casa',
+    firstBulletMarker: 'Partnered directly with the two founding partners',
   },
   {
     filename: 'alejandro-garcia-iglesias-technical-project-manager-cv.pdf',
     titleMarkers: ['Senior Software Engineer', 'Technical Project Delivery'],
-    firstBulletMarker: 'Worked directly with Juana Casa',
+    firstBulletMarker: 'Worked directly with the two founding partners',
   },
 ]
 
